@@ -25,7 +25,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users,email',
             'password' => 'required|min:4',
             'password_confirmation' => 'required|same:password'
-        ],[
+        ], [
             'email.required' => 'El email es requerido.',
             'email.unique' => 'El email ya está en uso.',
         ]);
@@ -53,6 +53,13 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('dashboard');
         }
+
         return back()->withErrors(['invalid_credentials' => 'Usuario o contraseña no válidos'])->withInput();
+    }
+
+    public function signOut(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success','session cerrada correctamente');
     }
 }

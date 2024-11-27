@@ -13,11 +13,12 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'loginVerify'])->name('login.verify');
     Route::get('register', [AuthController::class, 'register'])->name('register');
     Route::post('register', [AuthController::class, 'registerVerify']);
+    Route::post('signOut', [AuthController::class, 'signOut'])->name('signOut');
 });
 
 // PROTECTED ROUTES
 Route::middleware('auth')->group(function() {
     Route::get('dashboard', function() {
-        return 'Aquí Ary va a hacer su dashboard todo lindo y bonito :D';
+        return view('dashboard.index');
     })->name('dashboard');
 });

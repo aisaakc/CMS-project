@@ -13,19 +13,28 @@
         body {
             background-color: rgba(0, 0, 0, 0.9);
         }
-
         .container {
             height: 100vh;
         }
-
         .w-form {
             width: 40%;
         }
     </style>
     <div class="container d-flex">
-        <form action="{{route('login.verify')}}" method="POST" class="m-auto bg-white p-5 rounded-sm shadow-lg w-form">
+        <form action="{{ route('login.verify') }}" method="POST" class="m-auto bg-white p-5 rounded-sm shadow-lg w-form">
             @csrf
-            <h2 class="text-center">Inicio de seccion</h2>
+            <h2 class="text-center">Inicio de sesión</h2>
+
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <small>
+                    {{ session('success') }}
+                </small>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
 
             @error('invalid_credentials')
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,27 +42,27 @@
                     {{ $message }}
                 </small>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             @enderror
+
             <div class="form-group mb-3">
                 <label for="examplexdd">Email</label>
-                <input name="email" type="email" value="{{old('email')}}" class="form-control" id="examplexdd" aria-describedby="emailHelp" placeholder="Enter email">
+                <input name="email" type="email" value="{{ old('email') }}" class="form-control" id="examplexdd" aria-describedby="emailHelp" placeholder="Enter email">
                 @error('email')
                 <small class="text-danger mt-1">
-                    <strong> {{$message}} </strong>
+                    <strong>{{ $message }}</strong>
                 </small>
                 @enderror
             </div>
-           
 
             <div class="form-group mb-3">
                 <label for="passwordxdd">Password</label>
                 <input name="password" type="password" class="form-control" id="passwordxdd" placeholder="Password">
                 @error('password')
                 <small class="text-danger mt-1">
-                    <strong> {{$message}} </strong>
+                    <strong>{{ $message }}</strong>
                 </small>
                 @enderror
             </div>
@@ -62,7 +71,7 @@
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </div>
             <div class="mt-3 text-center">
-                <a href="{{ route('register')}}">registrarme</a>
+                <a href="{{ route('register') }}">Registrarme</a>
             </div>
         </form>
     </div>
