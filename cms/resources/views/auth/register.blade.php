@@ -19,42 +19,59 @@
                     <div class="divide-y divide-gray-200">
                         
                         <!-- Paso 1 -->
-                        <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7" id="step-1">
-                            <h2 class="text-xl text-center  m-2 border-b-2  border-indigo-500 font-semibold mb-8">Paso 1</h2>
+                        <div class="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7" id="step-1">
+                        
+                            <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-8">Paso 1</h2>
+                            
+                            <!-- Formulario de nombres y apellidos -->
                             <div class="grid gap-8 md:grid-cols-2">
-                                <div class="w-full">
-                                    <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
-                                    <input type="text" id="first_name" name="first_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Nombre" required />
-                                </div>
-                                <div class="w-full">
-                                    <label for="last_name" class="block mb-2 text-sm font-medium text-slate-700">Apellidos</label>
-                                    <input type="text" id="last_name" name="last_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Apellido" required />
-                                </div>
+                              <div class="w-full">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
+                                <input type="text" id="first_name" name="first_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Nombre" required />
+                              </div>
+                              <div class="w-full">
+                                <label for="last_name" class="block mb-2 text-sm font-medium text-slate-700">Apellidos</label>
+                                <input type="text" id="last_name" name="last_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Apellido" required />
+                              </div>
                             </div>
-
-                            <div class="grid gap-8 md:grid-cols-2 mt-6">
-                                <div class="w-full">
-                                    <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula</label>
-                                    <input type="number" id="cedula" name="cedula" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="12345678" required />
+                          
+                            <div class="w-full">
+                                <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
+                                <div class="flex items-center space-x-4">
+                                  <!-- Select Dropdown (Código de país) -->
+                                  <select id="countries" class="w-24 text-gray-900 text-sm rounded-lg block h-10 px-4 focus:outline-none border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
+                                    <option value="IN" selected>V</option>
+                                    <option value="CA">E</option>
+                                  </select>
+                                  <input type="number" id="cedula" name="cedula" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="12345678" required />
                                 </div>
-                                <div class="w-full">
-                                    <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
-                                    <input type="date" id="date_of_birth" name="date_of_birth" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" required min="1900-01-01" />
-                                </div>
-                            </div>
-
+                              </div>
+                              
+                                
+                              <div class="grid gap-8 md:grid-cols-2">
                             <div class="mt-6">
-                                <div class="w-full">
-                                    <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
-                                    <select name="nationality" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
-                                        <option selected>Selecciona Nacionalidad</option>
-                                        <option>Venezolana</option>
-                                        <option>Colombiana</option>
-                                        <option>Peruana</option>
-                                    </select>
-                                </div>
+                              <div class="w-full">
+                                <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
+                                <input type="date" id="date_of_birth" name="date_of_birth" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" required min="1900-01-01" />
+                              </div>
+                            </div>
+                          
+                            <div class="mt-6">
+                              <div class="w-full">
+                                <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
+                                <select name="nationality" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
+                                  <option selected>Selecciona Nacionalidad</option>
+                                </select>
+                              </div>
                             </div>
                         </div>
+
+
+                        </div>
+                        
+                          
+                          
+                          
 
                         <!-- Paso 2 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7" id="step-2">
