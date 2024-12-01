@@ -1,6 +1,11 @@
 @extends('auth.layout')
 
 @section('content')
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
 <div class="min-h-screen bg-gradient-to-r from-cyan-500 to-sky-500 py-6 flex flex-col justify-center sm:py-12">
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
         <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-xl transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
@@ -48,19 +53,31 @@
                                 @enderror
                             </div>
 
-                            <div class="relative">
+                            <div class="relative w-full">
+                                <!-- Campo de contraseña -->
                                 <input autocomplete="off" id="password" name="password" type="password" 
                                     class="peer placeholder-transparent h-12 w-full border-b-2 
                                     @error('password') border-red-500 @else border-gray-300 @enderror 
                                     text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200" 
                                     placeholder="Contraseña" />
+                                
+                                <!-- Etiqueta -->
                                 <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
                                     Contraseña
                                 </label>
+                                
+                                <!-- Botón para mostrar/ocultar contraseña -->
+                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-2 sm:right-3 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
+                                    <i id="eye-icon" class="fas fa-eye-slash"></i> <!-- Icono de ojo cerrado por defecto -->
+                                </button>
+                                
+                                <!-- Error del campo -->
                                 @error('password')
                                 <small class="text-red-500 mt-1"><strong>{{ $message }}</strong></small>
                                 @enderror
                             </div>
+                            
+                            
 
                             <div class="flex items-center justify-between mt-6">
                                 
@@ -83,5 +100,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text"; // Mostrar la contraseña
+        eyeIcon.classList.replace("fa-eye-slash", "fa-eye"); // Cambiar a ícono de ojo abierto
+    } else {
+        passwordField.type = "password"; // Ocultar la contraseña
+        eyeIcon.classList.replace("fa-eye", "fa-eye-slash"); // Cambiar a ícono de ojo cerrado
+    }
+});
+
+
+</script>
 
 @endsection
