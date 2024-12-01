@@ -3,13 +3,13 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-r from-cyan-500 to-sky-500 py-6 flex flex-col justify-center sm:py-12">
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-         <div class="relative px-6 py-10 bg-white shadow-2xl sm:rounded-3xl sm:p-20">
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-xl transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div class="relative px-6 py-10 bg-white shadow-xl sm:rounded-3xl sm:p-16">
             <form action="{{ route('login.verify') }}" method="POST">
                 @csrf
                 <div class="max-w-md mx-auto">
                     <div class="text-center mb-6">
-                        <h1 class="text-3xl font-semibold text-gray-800">Login</h1>
+                        <h1 class="text-4xl font-semibold text-gray-800">Iniciar sesión</h1>
                     </div>
 
                     @if(session('success'))
@@ -47,6 +47,7 @@
                                 <small class="text-red-500 mt-1"><strong>{{ $message }}</strong></small>
                                 @enderror
                             </div>
+
                             <div class="relative">
                                 <input autocomplete="off" id="password" name="password" type="password" 
                                     class="peer placeholder-transparent h-12 w-full border-b-2 
@@ -61,6 +62,11 @@
                                 @enderror
                             </div>
 
+                            <div class="flex items-center justify-between mt-6">
+                                
+                                <a href="/" class="text-sm text-cyan-600 hover:text-cyan-700">¿Olvidaste tu contraseña?</a>
+                            </div>
+
                             <div class="relative mt-6">
                                 <button type="submit" class="w-full py-3 bg-cyan-600 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-700 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105">
                                     Ingresar
@@ -69,8 +75,13 @@
                         </div>
                     </div>
                 </div>
+                <p class="mt-6 text-center text-neutral-800 ">
+                    ¿No tienes cuenta?
+                    <a href="{{route('register')}}" class="text-cyan-600 hover:text-cyan-700 focus:text-cyan-700">Regístrate</a>
+                </p>
             </form>
         </div>
     </div>
 </div>
+
 @endsection

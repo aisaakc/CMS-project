@@ -15,6 +15,7 @@
                     <div class="divide-y divide-gray-200">
                         <!-- Paso 1 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-1">
+                            <h2 class="text-lg text-center m-2 border-b-2 border-indigo-500 font-semibold mb-4">Paso 1</h2>
                             <div class="grid gap-6 md:grid-cols-2">
                                 <div class="w-full">
                                     <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
@@ -52,6 +53,7 @@
 
                         <!-- Paso 2 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-2">
+                            <h2 class="text-lg text-center m-2 border-b-2 border-indigo-500 font-semibold mb-4">Paso 2</h2>
                             <div class="grid gap-6 md:grid-cols-2">
                                 <div class="w-full">
                                     <label for="direccion" class="block mb-2 text-sm font-medium text-slate-700">Dirección</label>
@@ -62,7 +64,6 @@
                                     <input type="email" id="correo" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Correo Electrónico" required />
                                 </div>
                             </div>
-
                             <div class="grid gap-6 md:grid-cols-2 mt-6">
                                 <div class="w-full">
                                     <label for="password" class="block mb-2 text-sm font-medium text-slate-700">Contraseña</label>
@@ -77,35 +78,55 @@
 
                         <!-- Paso 3 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-3">
+                            <h2 class="text-lg text-center m-2 border-b-2 border-indigo-500 font-semibold mb-4">Paso 3</h2>
                             <div class="grid gap-6 md:grid-cols-2">
                                 <div class="w-full">
-                                    <label for="pregunta1" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1: ¿Dónde naciste?</label>
-                                    <input type="text" id="pregunta1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <label for="pregunta-1" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1: ¿Dónde naciste?</label>
+                                    <input type="text" id="pregunta-1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
                                 </div>
                                 <div class="w-full">
-                                    <label for="pregunta2" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 2: ¿Comida favorita?</label>
-                                    <input type="text" id="pregunta2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <label for="pregunta-2" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 2: ¿Comida favorita?</label>
+                                    <input type="text" id="pregunta-2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
                                 </div>
                             </div>
 
                             <div class="grid gap-6 md:grid-cols-2 mt-6">
                                 <div class="w-full">
-                                    <label for="pregunta3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3: ¿Anime favorito?</label>
-                                    <input type="text" id="pregunta3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3: ¿Anime favorito?</label>
+                                    <input type="text" id="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
                                 </div>
                                 <div class="w-full">
-                                    <label for="pregunta4" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4: ¿Equipo favorito?</label>
-                                    <input type="text" id="pregunta4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <label for="pregunta-4" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4: ¿Equipo favorito?</label>
+                                    <input type="text" id="pregunta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
                                 </div>
                             </div>
                         </div>
 
                         <!-- Paso 4 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-4">
-                         
+                            <h2 class="text-lg text-center m-2 border-b-2 border-indigo-500 font-semibold mb-4">Paso 4</h2>
                             <div class="w-full">
-                                <label for="confirmacion" class="block mb-2 text-sm font-medium text-slate-700">Confirmación</label>
-                                <input type="text" id="confirmacion" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                <div class="grid gap-6 md:grid-cols-2">
+                                    <div class="w-full">
+                                        <label for="facebook" class="block mb-2 text-sm font-medium text-slate-700">Facebook</label>
+                                        <input type="text" id="facebook" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="x" class="block mb-2 text-sm font-medium text-slate-700">X (Antiguo twitter)</label>
+                                        <input type="text" id="x" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    </div>
+                                </div>
+    
+                                <div class="grid gap-6 md:grid-cols-2 mt-6">
+                                    <div class="w-full">
+                                        <label for="instagram" class="block mb-2 text-sm font-medium text-slate-700">Instagram</label>
+                                        <input type="text" id="instagram" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="tiktok" class="block mb-2 text-sm font-medium text-slate-700">Tik-tok</label>
+                                        <input type="text" id="tiktok" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -113,6 +134,8 @@
                         <div class="flex justify-between mt-8">
                             <button type="button" id="prevBtn" class="bg-slate-500 text-white py-2 px-4 rounded-full shadow-sm hover:bg-slate-600 hidden" onclick="prevStep()">🡰 Anterior</button>
                             <button type="button" id="nextBtn" class="bg-indigo-500 text-white py-2 px-4 rounded-full shadow-sm hover:bg-indigo-600" onclick="nextStep()">Siguiente 🡲 </button>
+                            <!-- Botón Finalizar en el paso 4 -->
+                            <button type="button" id="finishBtn" class="bg-indigo-500 text-white py-2 px-4 rounded-full shadow-sm hover:bg-indigo-600 hidden" onclick="finishRegistration()">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -130,19 +153,20 @@
             document.getElementById('step-' + i).classList.add('hidden');
         }
         
-        // Mostrar el paso actual
         document.getElementById('step-' + step).classList.remove('hidden');
 
-        // Controlar visibilidad de los botones
         if (step === 1) {
             document.getElementById('prevBtn').classList.add('hidden');
             document.getElementById('nextBtn').classList.remove('hidden');
+            document.getElementById('finishBtn').classList.add('hidden');
         } else if (step === 2 || step === 3) {
             document.getElementById('prevBtn').classList.remove('hidden');
             document.getElementById('nextBtn').classList.remove('hidden');
+            document.getElementById('finishBtn').classList.add('hidden');
         } else if (step === 4) {
             document.getElementById('prevBtn').classList.remove('hidden');
             document.getElementById('nextBtn').classList.add('hidden');
+            document.getElementById('finishBtn').classList.remove('hidden');
         }
     }
 
@@ -160,7 +184,11 @@
         }
     }
 
-    // Mostrar el primer paso al cargar
+    function finishRegistration() {
+        alert("¡Registro Finalizado!");
+        // Puedes agregar aquí lógica adicional como enviar los datos del formulario.
+    }
+
     showStep(currentStep);
 </script>
 
