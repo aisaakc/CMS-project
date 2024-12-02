@@ -34,10 +34,10 @@ class AuthController extends Controller
             'pregunta-2' => 'required|string|max:255',  
             'pregunta-3' => 'required|string|max:255',  
             'pregunta-4' => 'required|string|max:255',  
-            'facebook' => 'nullable|url',  
-            'x' => 'nullable|url',  
-            'instagram' => 'nullable|url', 
-            'tiktok' => 'nullable|url',  
+            'facebook' => 'required|nullable|url',  
+            'x' => 'required|nullable|url',  
+            'instagram' => 'required|nullable|url', 
+            'tiktok' => 'required|nullable|url',  
             'descripcion' => 'required|string|max:500',  
         ], [
             'first_name.required' => 'Los nombres son requerida.',
@@ -62,7 +62,11 @@ class AuthController extends Controller
             'pregunta-2.required' => 'La pregunta 2 es requerida.',
             'pregunta-3.required' => 'La pregunta 3 es requerida.',
             'pregunta-4.required' => 'La pregunta 4 es requerida.',
-            'date_of_birth.before' => 'Debe ser mayor de 18 años.'
+            'date_of_birth.before' => 'Debe ser mayor de 18 años.',
+            'facebook.required' => 'El Facebook es requerido',
+            'x.required' => 'El X es requerido',
+            'tiktok.required' => 'El Tik-tok es requerido',
+            'instagram.required' => 'El Instagram es requerido'
         ]);
         
     

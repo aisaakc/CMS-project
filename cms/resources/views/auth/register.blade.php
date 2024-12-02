@@ -40,10 +40,6 @@
                             <div class="w-full">
                             <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
                             <div class="flex items-center space-x-4">
-                                <select id="/" class="w-24 text-gray-900 text-sm rounded-lg block h-10 px-4 focus:outline-none border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
-                                    <option value="IN" selected>V</option>
-                                    <option value="IN" selected>E</option>
-                                </select>
                                 <input type="text" id="cedula" name="cedula" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="12345678"  oninput="validateCedula(event)" />
                                 @error('cedula')
                                 <small class="text-red-500 mt-1 text-sm">
@@ -269,6 +265,7 @@
 
         } 
     }
+    
     let currentStep = 1;
 
     function showStep(step) {
@@ -322,7 +319,6 @@
         }
     });
 
-    // Evento para el campo de confirmación de contraseña
     document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
         const confirmPasswordField = document.getElementById("confirm_password");
         const confirmEyeIcon = document.getElementById("eye-icon-confirm-password");
@@ -335,14 +331,9 @@
         }
     });
 
-      // Función para validar solo números en el campo de cédula
-    // Función para validar que no se ingrese la letra "e" ni caracteres no numéricos
     function validateCedula(event) {
         const input = event.target;
-        // Reemplaza cualquier caracter que no sea número o "e"
         input.value = input.value.replace(/[^0-9]/g, '');
-        // O si solo deseas evitar la letra "e", usa:
-        // input.value = input.value.replace(/e/gi, '');
     }
 
 </script>

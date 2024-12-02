@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('instagram');
             $table->string('x');
             $table->string('tiktok');
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
