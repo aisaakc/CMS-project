@@ -1,48 +1,61 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * 
+ * @property int $idusers
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $date_of_birth
+ * @property int|null $cedula
+ * @property string|null $address
+ * @property string|null $email
+ * @property string|null $facebook
+ * @property string|null $instagram
+ * @property string|null $x
+ * @property string|null $tiktok
+ * @property string|null $descripcion
+ * @property string|null $password
+ * @property int $nacionalidad_idnacionalidad
+ *
+ * @package App\Models
+ */
+class User extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+	protected $table = 'users';
+	protected $primaryKey = 'idusers';
+	public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'cedula' => 'int',
+		'nacionalidad_idnacionalidad' => 'int'
+	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $hidden = [
+		'password'
+	];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	protected $fillable = [
+		'first_name',
+		'last_name',
+		'date_of_birth',
+		'cedula',
+		'address',
+		'email',
+		'facebook',
+		'instagram',
+		'x',
+		'tiktok',
+		'descripcion',
+		'password',
+		'nacionalidad_idnacionalidad'
+	];
 }
