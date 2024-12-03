@@ -41,7 +41,6 @@ class AuthController extends Controller
             'descripcion' => 'required|string|max:500',  
         ], [
             'first_name.required' => 'Los nombres son requerida.',
-            'first_name.regex' => 'Nombre no válido.',
             'last_name.required' => 'Los apelldidos son requerida.',
             'last_name.regex' => 'Apellido no válido.',
             'date_of_birth.required'=>'La fecha de nacimiento es requerida.',
