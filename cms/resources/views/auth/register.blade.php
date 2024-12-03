@@ -259,18 +259,28 @@
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-4">
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Paso 4</h2>
                             <div class="grid gap-8 md:grid-cols-2">
+                
                                 <div class="w-full">
                                     <label for="facebook" class="block mb-2 text-sm font-medium text-slate-700">Facebook</label>
-                                    <input type="text" id="facebook" name="facebook" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <input type="text" id="facebook" name="facebook" 
+                                           class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
+                                                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
+                                                  ease-in-out hover:bg-gray-50 
+                                                  @error('facebook') border-red-500 @else border-slate-300 @enderror">
                                     @error('facebook')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
+                        
                                 <div class="w-full">
-                                    <label for="x" class="block mb-2 text-sm font-medium text-slate-700">X (Antiguo twitter)</label>
-                                    <input type="text" id="x" name="x" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <label for="x" class="block mb-2 text-sm font-medium text-slate-700">X (Antiguo Twitter)</label>
+                                    <input type="text" id="x" name="x" 
+                                           class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
+                                                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
+                                                  ease-in-out hover:bg-gray-50 
+                                                  @error('x') border-red-500 @else border-slate-300 @enderror">
                                     @error('x')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
@@ -278,20 +288,30 @@
                                     @enderror
                                 </div>
                             </div>
+                            
 
                             <div class="grid gap-8 md:grid-cols-2 mt-6">
                                 <div class="w-full">
                                     <label for="instagram" class="block mb-2 text-sm font-medium text-slate-700">Instagram</label>
-                                    <input type="text" id="instagram" name="instagram" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <input type="text" id="instagram" name="instagram" 
+                                           class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
+                                                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
+                                                  ease-in-out hover:bg-gray-50 
+                                                  @error('instagram') border-red-500 @else border-slate-300 @enderror">
                                     @error('instagram')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
+                            
                                 <div class="w-full">
                                     <label for="tiktok" class="block mb-2 text-sm font-medium text-slate-700">Tik-tok</label>
-                                    <input type="text" id="tiktok" name="tiktok" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <input type="text" id="tiktok" name="tiktok" 
+                                           class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
+                                                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
+                                                  ease-in-out hover:bg-gray-50 
+                                                  @error('tiktok') border-red-500 @else border-slate-300 @enderror">
                                     @error('tiktok')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
@@ -299,17 +319,22 @@
                                     @enderror
                                 </div>
                             </div>
+                            
                             <div>
                                 <label for="descripcion" class="block mb-2 text-sm font-medium text-slate-700">Descripción</label>
-                                <textarea id="" name="descripcion" cols="8" rows="5"
-                                    class="w-full p-4 mb-4 border border-slate-300 rounded-lg text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none transition duration-200 ease-in-out hover:bg-gray-50"
+                                <textarea id="descripcion" name="descripcion" cols="8" rows="5"
+                                    class="w-full p-4 mb-4 border rounded-lg text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                    focus:border-blue-500 resize-none transition duration-200 ease-in-out hover:bg-gray-50
+                                    @error('descripcion') border-red-500 @else border-slate-300 @enderror"
                                     placeholder="Escribe una breve descripción..."></textarea>
+                                
                                 @error('descripcion')
                                 <small class="text-red-500 mt-1 text-sm">
                                     <strong>{{ $message }}</strong>
                                 </small>
                                 @enderror
                             </div>
+                            
                         </div>
                     </div>
 
