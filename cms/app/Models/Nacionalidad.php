@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nacionalidad extends Model
 {
-	protected $table = 'nacionalidad';
+	protected $table = 'nacionalidades';
 	protected $primaryKey = 'idnacionalidad';
 	public $timestamps = false;
 

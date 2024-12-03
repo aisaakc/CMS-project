@@ -79,17 +79,23 @@
                                     <div class="w-full">
                                         <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
                                         <select name="nationality" id="nationality" 
-                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                            @error('nationality') border-red-500 @else border-slate-300 @enderror">
-                                            <option selected>Selecciona Nacionalidad</option>
-                                            <option value="v">Venezuela</option>
-                                            <option value="e">Extranjera</option>
-                                        </select>
-                                        @error('nationality')
-                                        <small class="text-red-500 mt-1 text-sm">
-                                            <strong>{{ $message }}</strong>
-                                        </small>
-                                        @enderror
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('nationality') border-red-500 @else border-slate-300 @enderror">
+                                    <option selected>Selecciona Nacionalidad</option>
+                                    @foreach ($nacionalidades as $items)
+                                        <option value="{{ $items->idnacionalidad }}" 
+                                                @if(old('nationality') == $items->idnacionalidad) selected @endif>
+                                            {{ $items->nacionalidad }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                
+                                @error('nationality')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                                
                                     </div>
                                 </div>
                             </div>
@@ -180,8 +186,11 @@
                                     <select id="pregunta-1" name="pregunta-1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                         @error('pregunta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
                                         <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
-                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                        @foreach ($preguntas as $items)
+                                            <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                        @endforeach
                                     </select>
+
                                     <input type="text" id="respuesta-1" name="respuesta-1" 
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                         @error('respuesta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
@@ -203,52 +212,85 @@
                                     <select id="pregunta-2" name="pregunta-2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                         @error('pregunta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
                                         <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
-                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                        @foreach ($preguntas as $items)
+                                            <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                        @endforeach
                                     </select>
+                                
                                     <input type="text" id="respuesta-2" name="respuesta-2" 
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                         @error('respuesta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
-                            
+                                    
                                     @error('pregunta-2')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
+                                    
                                     @error('respuesta-2')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
+                                
                             </div>
                                
                             <div class="grid gap-8 md:grid-cols-2 mt-6">
                                 <div class="w-full">
                                     <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3</label>
-                                    <select type="text" id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
+                                    <select id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
+                                        @error('pregunta-3') border-red-500 @else border-slate-300 @enderror">
                                         <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
-                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                        @foreach ($preguntas as $items)
+                                            <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                        @endforeach
                                     </select>
-                                    <input type="text" id="respuesta-3" name="respuesta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">                                   
+                                
+                                    <input type="text" id="respuesta-3" name="respuesta-3" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
+                                        @error('respuesta-3') border-red-500 @else border-slate-300 @enderror">
+                                
                                     @error('pregunta-3')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
-                                </div>
-                                <div class="w-full">
-                                    <label for="pregunta-4" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4: ¿Equipo favorito?</label>
-                                    <select type="text" id="pregunta-4" name="pregunta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
-                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
-                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
-                                    </select>
-                                    <input type="text" id="respuesta-4" name="respuesta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
-                                    @error('pregunta-4')
+                                
+                                    @error('respuesta-3')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
+                                
+                                <div class="w-full">
+                                    <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3</label>
+                                    <select id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
+                                        @error('pregunta-3') border-red-500 @else border-slate-300 @enderror">
+                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
+                                        @foreach ($preguntas as $items)
+                                            <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                        @endforeach
+                                    </select>
+                                
+                                    <input type="text" id="respuesta-3" name="respuesta-3" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
+                                        @error('respuesta-3') border-red-500 @else border-slate-300 @enderror">
+                                
+                                    @error('pregunta-3')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
+                                
+                                    @error('respuesta-3')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
+                                </div>
+                                
                             </div>
                         </div>
                         
