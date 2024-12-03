@@ -49,29 +49,36 @@
                                 @enderror
                             </div>
 
-                            <div class="relative w-full">
-                                <!-- Campo de contraseña -->
+                            <div class="w-full relative">
                                 <input autocomplete="off" id="password" name="password" type="password" 
                                     class="peer placeholder-transparent h-12 w-full border-b-2 
                                     @error('password') border-red-500 @else border-gray-300 @enderror 
                                     text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200" 
                                     placeholder="Contraseña" />
                                 
-                                <!-- Etiqueta -->
-                                <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                                <!-- Label que se mueve cuando hay foco o cuando el placeholder está vacío -->
+                                <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm 
+                                    peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
+                                    peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
                                     Contraseña
                                 </label>
                                 
-                                <!-- Botón para mostrar/ocultar contraseña -->
-                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-2 sm:right-3 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
-                                    <i id="eye-icon" class="fas fa-eye-slash"></i> <!-- Icono de ojo cerrado por defecto -->
-                                </button>
+                                <!-- Contenedor para el ícono del ojo que se mantiene centrado -->
+                                <div class="absolute inset-y-0 right-2 sm:right-3 flex items-center z-20 px-3">
+                                    <button type="button" id="togglePassword" class="cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
+                                        <i id="eye-icon" class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
                                 
-                                <!-- Error del campo -->
+                                <!-- Mensaje de error debajo del input -->
                                 @error('password')
-                                <small class="text-red-500 mt-1"><strong>{{ $message }}</strong></small>
+                                <small class="text-red-500 mt-2 text-sm block">
+                                    <strong>{{ $message }}</strong>
+                                </small>
                                 @enderror
                             </div>
+                            
+                            
                             
                             
 

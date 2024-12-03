@@ -17,43 +17,57 @@
                         <!-- Paso 1 -->
                         <div class="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7" id="step-1">
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-8">Paso 1</h2>
-
-                            <div class="grid gap-8 md:grid-cols-2"> 
-                                <div class="w-full"> <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label> 
-                                    <input type="text" id="first_name" name="first_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Nombre" oninput="validateName(this)" /> 
-                                    @error('first_name') 
-                                    <small class="text-red-500 mt-1 text-sm"> 
-                                        <strong>{{ $message }}</strong> 
-                                    </small> @enderror 
-                                </div> 
-                                <div class="w-full"> 
-                                    <label for="last_name" class="block mb-2 text-sm font-medium text-slate-700">Apellidos</label> 
-                                    <input type="text" id="last_name" name="last_name" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Apellido" oninput="validateName(this)" />
-                                     @error('last_name') 
-                                     <small class="text-red-500 mt-1 text-sm"> 
+                        
+                            <div class="grid gap-8 md:grid-cols-2">
+                                <div class="w-full">
+                                    <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
+                                    <input type="text" id="first_name" name="first_name" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('first_name') border-red-500 @else border-slate-300 @enderror" 
+                                        placeholder="Nombre" oninput="validateName(this)" />
+                                    @error('first_name')
+                                    <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
-                                     </small> 
-                                     @enderror 
-                                    </div> 
+                                    </small>
+                                    @enderror
                                 </div>
-
+                                <div class="w-full">
+                                    <label for="last_name" class="block mb-2 text-sm font-medium text-slate-700">Apellidos</label>
+                                    <input type="text" id="last_name" name="last_name" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('last_name') border-red-500 @else border-slate-300 @enderror" 
+                                        placeholder="Apellido" oninput="validateName(this)" />
+                                    @error('last_name')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
+                                </div>
+                            </div>
+                        
                             <div class="w-full">
-                            <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
-                            <div class="flex items-center space-x-4">
-                                <input type="text" id="cedula" name="cedula" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="12345678"  oninput="validateCedula(event)" />
-                                @error('cedula')
-                                <small class="text-red-500 mt-1 text-sm">
-                                    <strong>{{ $message }}</strong>
-                                </small>
-                                @enderror
+                                <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="text" id="cedula" name="cedula" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('cedula') border-red-500 @else border-slate-300 @enderror" 
+                                        placeholder="12345678" oninput="validateCedula(event)" />
+                                    @error('cedula')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
+                                </div>
                             </div>
-                            </div>
-
+                        
                             <div class="grid gap-8 md:grid-cols-2">
                                 <div class="mt-6">
                                     <div class="w-full">
                                         <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
-                                        <input type="date" id="date_of_birth" name="date_of_birth" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" min="1900-01-01"  />
+                                        <input type="date" id="date_of_birth" name="date_of_birth" 
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                            @error('date_of_birth') border-red-500 @else border-slate-300 @enderror" 
+                                            min="1900-01-01" />
                                         @error('date_of_birth')
                                         <small class="text-red-500 mt-1 text-sm">
                                             <strong>{{ $message }}</strong>
@@ -61,13 +75,15 @@
                                         @enderror
                                     </div>
                                 </div>
-
+                        
                                 <div class="mt-6">
                                     <div class="w-full">
                                         <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
-                                        <select name="nationality" id="nationality" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
-                                            <option value="">Selecciona Nacionalidad</option>
-                                            <option value="c">Venezuela</option>
+                                        <select name="nationality" id="nationality" 
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                            @error('nationality') border-red-500 @else border-slate-300 @enderror">
+                                            <option selected>Selecciona Nacionalidad</option>
+                                            <option value="v">Venezuela</option>
                                             <option value="e">Extranjera</option>
                                         </select>
                                         @error('nationality')
@@ -79,6 +95,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        
 
                         <!-- Paso 2 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7" id="step-2">
@@ -86,17 +104,23 @@
                             <div class="grid gap-8 md:grid-cols-2">
                                 <div class="w-full">
                                     <label for="address" class="block mb-2 text-sm font-medium text-slate-700">Dirección</label>
-                                    <input type="text" id="address" name="address" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Dirección"  />
+                                    <input type="text" id="address" name="address" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('address') border-red-500 @else border-slate-300 @enderror" 
+                                        placeholder="Dirección" />
                                     @error('address')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
-
+                            
                                 <div class="w-full">
                                     <label for="email" class="block mb-2 text-sm font-medium text-slate-700">Correo Electrónico</label>
-                                    <input type="email" id="email" name="email" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Correo Electrónico"  />
+                                    <input type="email" id="email" name="email" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('email') border-red-500 @else border-slate-300 @enderror" 
+                                        placeholder="Correo Electrónico" />
                                     @error('email')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
@@ -104,38 +128,50 @@
                                     @enderror
                                 </div>
                             </div>
+                            
 
                             <div class="grid gap-8 md:grid-cols-2 mt-6">
                                 <div class="w-full">
                                     <label for="password" class="block mb-2 text-sm font-medium text-slate-700">Contraseña</label>
                                     <div class="relative">
-                                        <input type="password" id="password" name="password" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Contraseña"  />
-                                        @error('password')
-                                        <small class="text-red-500 mt-1 text-sm">
-                                            <strong>{{ $message }}</strong>
-                                        </small>
-                                        @enderror
+                                        <input type="password" id="password" name="password" 
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                            @error('password') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50" 
+                                            placeholder="Contraseña" />
+                            
                                         <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
                                             <i id="eye-icon" class="fas fa-eye-slash"></i>
                                         </button>
                                     </div>
+                            
+                                    @error('password')
+                                    <small class="text-red-500 mt-2 text-sm block">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
                                 </div>
-
+                            
                                 <div class="w-full">
                                     <label for="confirm_password" class="block mb-2 text-sm font-medium text-slate-700">Confirmar Contraseña</label>
                                     <div class="relative">
-                                        <input type="password" id="confirm_password" name="confirm_password" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Repite tu contraseña"  />
-                                        @error('confirm_password')
-                                        <small class="text-red-500 mt-1 text-sm">
-                                            <strong>{{ $message }}</strong>
-                                        </small>
-                                        @enderror
+                                        <input type="password" id="confirm_password" name="confirm_password" 
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                            @error('confirm_password') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50" 
+                                            placeholder="Repite tu contraseña" />
+                                        
                                         <button type="button" id="toggleConfirmPassword" class="absolute inset-y-0 right-3 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
                                             <i id="eye-icon-confirm-password" class="fas fa-eye-slash"></i>
                                         </button>
                                     </div>
+                            
+                                    @error('confirm_password')
+                                    <small class="text-red-500 mt-2 text-sm block">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
                                 </div>
                             </div>
+                            
                         </div>
 
                         <!-- Paso 3 -->
@@ -143,29 +179,60 @@
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Paso 3</h2>
                             <div class="grid gap-8 md:grid-cols-2">
                                 <div class="w-full">
-                                    <label for="pregunta-1" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1: ¿Dónde naciste?</label>
-                                    <input type="text" id="pregunta-1" name="pregunta-1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <label for="pregunta-1" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1</label>
+                                    <select id="pregunta-1" name="pregunta-1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('pregunta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
+                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                    </select>
+                                    <input type="text" id="respuesta-1" name="respuesta-1" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('respuesta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                            
                                     @error('pregunta-1')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
+                                    @error('respuesta-1')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
                                 </div>
+                            
                                 <div class="w-full">
-                                    <label for="pregunta-2" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 2: ¿Comida favorita?</label>
-                                    <input type="text" id="pregunta-2" name="pregunta-2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <label for="pregunta-2" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 2</label>
+                                    <select id="pregunta-2" name="pregunta-2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('pregunta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
+                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                    </select>
+                                    <input type="text" id="respuesta-2" name="respuesta-2" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                        @error('respuesta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                            
                                     @error('pregunta-2')
+                                    <small class="text-red-500 mt-1 text-sm">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                    @enderror
+                                    @error('respuesta-2')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 </div>
                             </div>
-
+                               
                             <div class="grid gap-8 md:grid-cols-2 mt-6">
                                 <div class="w-full">
-                                    <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3: ¿Cantante favorito?</label>
-                                    <input type="text" id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50" />
+                                    <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3</label>
+                                    <select type="text" id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
+                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
+                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                    </select>
+                                    <input type="text" id="respuesta-3" name="respuesta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">                                   
                                     @error('pregunta-3')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
@@ -174,7 +241,11 @@
                                 </div>
                                 <div class="w-full">
                                     <label for="pregunta-4" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4: ¿Equipo favorito?</label>
-                                    <input type="text" id="pregunta-4" name="pregunta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50"  />
+                                    <select type="text" id="pregunta-4" name="pregunta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
+                                        <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
+                                        <option value="/" class="hover:bg-indigo-100">¿Nombre de tu primera mascota?</option>
+                                    </select>
+                                    <input type="text" id="respuesta-4" name="respuesta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50">
                                     @error('pregunta-4')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
@@ -183,7 +254,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!-- Paso 4 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden" id="step-4">
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Paso 4</h2>
@@ -306,7 +377,6 @@
 
     showStep(currentStep);
 
-    // Evento para el campo de contraseña principal
     document.getElementById("togglePassword").addEventListener("click", function() {
         const passwordField = document.getElementById("password");
         const eyeIcon = document.getElementById("eye-icon");
