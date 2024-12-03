@@ -38,4 +38,14 @@ class User extends Model
 		'password',
 		'nacionalidad_idnacionalidad'
 	];
+
+	public function nacionalidad()
+	{
+		return $this->belongsTo(Nacionalidad::class, 'idnacionalidad');
+	}
+	public function preguntas()
+	{
+		return $this->belongsToMany(Pregunta::class, 'id', '	preguntas_idpreguntas', 'users_idusers')
+			->withPivot('id', 'respuesta');
+	}
 }

@@ -30,9 +30,10 @@ class AuthController extends Controller
     public function showForm()
     {
         $nacionalidades = Nacionalidad::all();
+
         $preguntas = Pregunta::all();
 
-        return view('auth.register', compact('nacionalidades','preguntas'));
+        return view('auth.register', compact('nacionalidades', 'preguntas'));
     }
 
     public function registerVerify(Request $request)
@@ -41,7 +42,7 @@ class AuthController extends Controller
             'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
-            'date_of_birth' => 'required|date|before:today|before_or_equal:today'.now()->subYears(18)->toDateString(),
+            'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
             'nacionalidad' => 'required',
             'password' => 'required|min:8|confirmed',
             'confirm_password' => 'required',
@@ -86,45 +87,45 @@ class AuthController extends Controller
         ]);
 
         $user = new User();
-        $user -> first_name = $request->first_name;
-        $user -> last_name = $request->last_name;
-        $user -> date_of_birth = $request->date_of_birth;
-        $user -> cedula = $request->cedula;
-        $user -> address = $request->address;
-        $user -> email = $request->email;
-        $user -> facebook = $request->facebook;
-        $user -> instagram = $request->instagram;
-        $user -> x = $request->x;
-        $user -> tiktok = $request->tiktok;
-        $user -> descripcion = $request->descripcion;
-        $user -> password = bcrypt($request->password);
-		$user -> nacionalidad_idnacionalidad = $request->nacionalidad;
-        $user -> save();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->date_of_birth = $request->date_of_birth;
+        $user->cedula = $request->cedula;
+        $user->address = $request->address;
+        $user->email = $request->email;
+        $user->facebook = $request->facebook;
+        $user->instagram = $request->instagram;
+        $user->x = $request->x;
+        $user->tiktok = $request->tiktok;
+        $user->descripcion = $request->descripcion;
+        $user->password = bcrypt($request->password);
+        $user->nacionalidad_idnacionalidad = $request->nacionalidad;
+        $user->save();
 
         Respuesta::create([
             'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta-1,
-            'respuesta' => $request->respuesta-1,
+            'preguntas_idpreguntas' => $request->pregunta - 1,
+            'respuesta' => $request->respuesta - 1,
         ]);
 
         Respuesta::create([
             'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta-2,
-            'respuesta' => $request->respuesta-2,
+            'preguntas_idpreguntas' => $request->pregunta - 2,
+            'respuesta' => $request->respuesta - 2,
         ]);
 
         Respuesta::create([
             'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta-3,
-            'respuesta' => $request->respuesta-3,
+            'preguntas_idpreguntas' => $request->pregunta - 3,
+            'respuesta' => $request->respuesta - 3,
         ]);
 
         Respuesta::create([
             'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta-4,
-            'respuesta' => $request->respuesta-4,
+            'preguntas_idpreguntas' => $request->pregunta - 4,
+            'respuesta' => $request->respuesta - 4,
         ]);
-        
+
 
         return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
@@ -151,6 +152,6 @@ class AuthController extends Controller
     public function signOut(Request $request)
     {
         Auth::logout();
-        return redirect()->route('login')->with('success','session cerrada correctamente');
+        return redirect()->route('login')->with('success', 'session cerrada correctamente');
     }
 }
