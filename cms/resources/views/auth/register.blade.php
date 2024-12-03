@@ -6,7 +6,7 @@
     <div class="relative py-6 sm:max-w-xl sm:mx-auto">
         <div class="absolute inset-0 bg-gradient-to-r from-indigo-400 to-teal-500 shadow-xl transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div class="relative px-8 py-10 bg-white shadow-2xl sm:rounded-3xl sm:p-16">
-            <form action="{{ route('register') }}" method="POST">
+            <form action="" method="POST">
                 @csrf
                 <div class="max-w-md mx-auto">
                     <div class="text-center mb-8">
@@ -66,7 +66,8 @@
                                         <input type="date" id="date_of_birth" name="date_of_birth" 
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                             @error('date_of_birth') border-red-500 @else border-slate-300 @enderror" 
-                                            min="1900-01-01" />
+                                            min="1900-01-01" 
+                                            max="{{ now()->toDateString() }}" />
                                         @error('date_of_birth')
                                         <small class="text-red-500 mt-1 text-sm">
                                             <strong>{{ $message }}</strong>
@@ -78,13 +79,12 @@
                                 <div class="mt-6">
                                     <div class="w-full">
                                         <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
-                                        <select name="nationality" id="nationality" 
-                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                        @error('nationality') border-red-500 @else border-slate-300 @enderror">
-                                    <option selected>Selecciona Nacionalidad</option>
+                                        <select name="nacionalidad" id="nationality" 
+                                        class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                       <option selected>Selecciona Nacionalidad</option>
                                     @foreach ($nacionalidades as $items)
                                         <option value="{{ $items->idnacionalidad }}" 
-                                                @if(old('nationality') == $items->idnacionalidad) selected @endif>
+                                                @if(old('nacionalidad') == $items->idnacionalidad) selected @endif>
                                             {{ $items->nacionalidad }}
                                         </option>
                                     @endforeach
@@ -190,7 +190,6 @@
                                             <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
                                         @endforeach
                                     </select>
-
                                     <input type="text" id="respuesta-1" name="respuesta-1" 
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 
                                         @error('respuesta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
@@ -265,26 +264,26 @@
                                 </div>
                                 
                                 <div class="w-full">
-                                    <label for="pregunta-3" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3</label>
-                                    <select id="pregunta-3" name="pregunta-3" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('pregunta-3') border-red-500 @else border-slate-300 @enderror">
+                                    <label for="pregunta-4" class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4</label>
+                                    <select id="pregunta-4" name="pregunta-4" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
+                                        @error('pregunta-4') border-red-500 @else border-slate-300 @enderror">
                                         <option selected class="bg-gray-100">Selecciona una pregunta de seguridad</option>
                                         @foreach ($preguntas as $items)
                                             <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
                                         @endforeach
                                     </select>
                                 
-                                    <input type="text" id="respuesta-3" name="respuesta-3" 
+                                    <input type="text" id="respuesta-4" name="respuesta-4" 
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('respuesta-3') border-red-500 @else border-slate-300 @enderror">
+                                        @error('respuesta-4') border-red-500 @else border-slate-300 @enderror">
                                 
-                                    @error('pregunta-3')
+                                    @error('pregunta-4')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                     @enderror
                                 
-                                    @error('respuesta-3')
+                                    @error('respuesta-4')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>
                                     </small>
@@ -302,10 +301,10 @@
                                 <div class="w-full">
                                     <label for="facebook" class="block mb-2 text-sm font-medium text-slate-700">Facebook</label>
                                     <input type="text" id="facebook" name="facebook" 
-                                           class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
-                                                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
-                                                  ease-in-out hover:bg-gray-50 
-                                                  @error('facebook') border-red-500 @else border-slate-300 @enderror">
+                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 
+                                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 
+                                         ease-in-out hover:bg-gray-50 
+                                         @error('facebook') border-red-500 @else border-slate-300 @enderror">
                                     @error('facebook')
                                     <small class="text-red-500 mt-1 text-sm">
                                         <strong>{{ $message }}</strong>

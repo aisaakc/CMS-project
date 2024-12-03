@@ -16,10 +16,11 @@ Route::prefix('auth')->group(function () {
     Route::get('register', [AuthController::class,'showForm'])->name('register');
     Route::post('register', [AuthController::class, 'registerVerify']);
     Route::post('signOut', [AuthController::class, 'signOut'])->name('signOut');
+    Route::get('verify' , [AuthController::class, 'verify'])->name('verify');
 });
 
 // PROTECTED ROUTES
-Route::prefix('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('index', function () {
         return view('dashboard.index');
     })->name('dashboard');

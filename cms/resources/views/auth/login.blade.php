@@ -81,7 +81,7 @@
 
                             <div class="flex items-center justify-between mt-6">
                                 
-                                <a href="/" class="text-sm text-cyan-600 hover:text-cyan-700">¿Olvidaste tu contraseña?</a>
+                                <a href="{{route('verify')}}" class="text-sm text-cyan-600 hover:text-cyan-700">¿Olvidaste tu contraseña?</a>
                             </div>
 
                             <div class="relative mt-6">

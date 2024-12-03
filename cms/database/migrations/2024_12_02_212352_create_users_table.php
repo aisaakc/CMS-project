@@ -10,18 +10,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->integer('idusers', true);
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('date_of_birth')->nullable();
-            $table->integer('cedula')->nullable();
-            $table->string('address')->nullable();
-            $table->string('email')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('x')->nullable();
-            $table->string('tiktok')->nullable();
-            $table->string('descripcion')->nullable();
-            $table->string('password')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('date_of_birth');
+            $table->integer('cedula')->unique();
+            $table->string('address');
+            $table->string('email')->unique();
+            $table->string('facebook');
+            $table->string('instagram');
+            $table->string('x');
+            $table->string('tiktok');
+            $table->string('descripcion');
+            $table->string('password');
             $table->integer('nacionalidad_idnacionalidad');
         });
     }
