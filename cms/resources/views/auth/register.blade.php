@@ -17,7 +17,6 @@
                         <!-- Paso 1 -->
                         <div class="py-8 text-base leading-6 space-y-8 text-gray-700 sm:text-lg sm:leading-7" id="step-1">
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-8">Paso 1</h2>
-                        
                             <div class="grid gap-8 md:grid-cols-2">
                                 <div class="w-full">
                                     <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
@@ -96,8 +95,6 @@
                             </div>
                         </div>
                         
-                        
-
                         <!-- Paso 2 -->
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7" id="step-2">
                             <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Paso 2</h2>

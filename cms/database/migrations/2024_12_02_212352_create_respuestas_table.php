@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('respuestas', function (Blueprint $table) {
             $table->integer('id', true);
+            $table->string('respuesta');
             $table->integer('users_idusers');
             $table->integer('preguntas_idpreguntas');
         });

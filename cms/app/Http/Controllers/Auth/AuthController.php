@@ -85,8 +85,7 @@ class AuthController extends Controller
             'tiktok' => $request->tiktok,
             'descripcion' => $request->descripcion,
         ]);
-
-        // Guardar las preguntas y respuestas
+      
         for ($i = 1; $i <= 4; $i++) {
             Respuesta::create([
                 'users_idusers' => $user->idusers,
@@ -98,7 +97,6 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
 
-    
     public function loginVerify(Request $request)
     {
         $request->validate([
