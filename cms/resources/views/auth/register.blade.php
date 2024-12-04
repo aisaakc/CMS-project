@@ -201,27 +201,27 @@
                                 </h2>
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="w-full">
-                                        <label for="pregunta-1"
+                                        <label for="pregunta_1"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1</label>
-                                        <select id="pregunta-1" name="pregunta-1"
+                                        <select id="pregunta_1" name="pregunta_1"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('pregunta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        @error('pregunta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
                                             <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
                                             </option>
                                             @foreach ($preguntas as $items)
                                                 <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
                                             @endforeach
                                         </select>
-                                        <input type="text" id="respuesta-1" name="respuesta-1"
+                                        <input type="text" id="respuesta_1" name="respuesta_1"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('respuesta-1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        @error('respuesta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
 
-                                        @error('pregunta-1')
+                                        @error('pregunta_1')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
                                         @enderror
-                                        @error('respuesta-1')
+                                        @error('respuesta_1')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
@@ -229,11 +229,11 @@
                                     </div>
 
                                     <div class="w-full">
-                                        <label for="pregunta-2"
+                                        <label for="pregunta_2"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 2</label>
-                                        <select id="pregunta-2" name="pregunta-2"
+                                        <select id="pregunta_2" name="pregunta_2"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('pregunta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        @error('pregunta_2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
                                             <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
                                             </option>
                                             @foreach ($preguntas as $items)
@@ -241,17 +241,17 @@
                                             @endforeach
                                         </select>
 
-                                        <input type="text" id="respuesta-2" name="respuesta-2"
+                                        <input type="text" id="respuesta_2" name="respuesta_2"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('respuesta-2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                        @error('respuesta_2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
 
-                                        @error('pregunta-2')
+                                        @error('pregunta_2')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
                                         @enderror
 
-                                        @error('respuesta-2')
+                                        @error('respuesta_2')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
@@ -262,11 +262,11 @@
 
                                 <div class="grid gap-8 md:grid-cols-2 mt-6">
                                     <div class="w-full">
-                                        <label for="pregunta-3"
+                                        <label for="pregunta_3"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 3</label>
-                                        <select id="pregunta-3" name="pregunta-3"
+                                        <select id="pregunta_3" name="pregunta_3"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('pregunta-3') border-red-500 @else border-slate-300 @enderror">
+                                        @error('pregunta_3') border-red-500 @else border-slate-300 @enderror">
                                             <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
                                             </option>
                                             @foreach ($preguntas as $items)
@@ -274,17 +274,17 @@
                                             @endforeach
                                         </select>
 
-                                        <input type="text" id="respuesta-3" name="respuesta-3"
+                                        <input type="text" id="respuesta_3" name="respuesta_3"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('respuesta-3') border-red-500 @else border-slate-300 @enderror">
+                                        @error('respuesta_3') border-red-500 @else border-slate-300 @enderror">
 
-                                        @error('pregunta-3')
+                                        @error('pregunta_3')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
                                         @enderror
 
-                                        @error('respuesta-3')
+                                        @error('respuesta_3')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
@@ -292,11 +292,11 @@
                                     </div>
 
                                     <div class="w-full">
-                                        <label for="pregunta-4"
+                                        <label for="pregunta_4"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 4</label>
-                                        <select id="pregunta-4" name="pregunta-4"
+                                        <select id="pregunta_4" name="pregunta_4"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('pregunta-4') border-red-500 @else border-slate-300 @enderror">
+                                        @error('pregunta_4') border-red-500 @else border-slate-300 @enderror">
                                             <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
                                             </option>
                                             @foreach ($preguntas as $items)
@@ -304,17 +304,17 @@
                                             @endforeach
                                         </select>
 
-                                        <input type="text" id="respuesta-4" name="respuesta-4"
+                                        <input type="text" id="respuesta_4" name="respuesta_4"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border border-slate-300 rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out hover:bg-gray-50
-                                        @error('respuesta-4') border-red-500 @else border-slate-300 @enderror">
+                                        @error('respuesta_4') border-red-500 @else border-slate-300 @enderror">
 
-                                        @error('pregunta-4')
+                                        @error('pregunta_4')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
                                         @enderror
 
-                                        @error('respuesta-4')
+                                        @error('respuesta_4')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>

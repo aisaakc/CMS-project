@@ -50,7 +50,7 @@ return new class extends Migration
             $table->string('x', 45)->nullable();
             $table->string('tiktok', 45)->nullable();
             $table->string('descripcion', 45)->nullable();
-            $table->string('password', 45)->nullable();
+            $table->string('password', 255)->nullable();
             $table->integer('nacionalidad_idnacionalidad');
         });
         Schema::create('sessions', function (Blueprint $table) {

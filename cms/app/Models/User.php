@@ -6,10 +6,12 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Authenticatable
 {
+
 	protected $table = 'users';
 	protected $primaryKey = 'idusers';
 	public $timestamps = false;
@@ -45,7 +47,7 @@ class User extends Model
 	}
 	public function preguntas()
 	{
-		return $this->belongsToMany(Respuesta::class, 'id', '	preguntas_idpreguntas', 'users_idusers')
-			->withPivot('id', 'respuesta');
+		return $this->belongsToMany(Pregunta::class, 'respuestas')
+			->withPivot('respuesta');
 	}
 }

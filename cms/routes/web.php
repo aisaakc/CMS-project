@@ -10,11 +10,11 @@ Route::get('/', function () {
 
 // AUTH
 Route::prefix('auth')->group(function () {
+    Route::post('register/verify', [AuthController::class, 'registerVerify'])->name('register.verify');
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('login', [AuthController::class, 'loginVerify'])->name('login.verify');
     Route::get('register', [AuthController::class, 'register'])->name('register');
     Route::get('register', [AuthController::class, 'showForm'])->name('register');
-    Route::post('register', [AuthController::class, 'registerVerify'])->name('register.verify');
     Route::post('signOut', [AuthController::class, 'signOut'])->name('signOut');
     Route::get('verify', [AuthController::class, 'verify'])->name('verify');
 });

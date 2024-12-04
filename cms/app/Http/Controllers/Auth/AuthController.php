@@ -38,21 +38,25 @@ class AuthController extends Controller
 
     public function registerVerify(Request $request)
     {
-
+        dump($request);
         $request->validate([
             'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
             'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
             'nacionalidad' => 'required',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8',
             'confirm_password' => 'required',
             'address' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'pregunta-1' => 'required',
-            'pregunta-2' => 'required',
-            'pregunta-3' => 'required',
-            'pregunta-4' => 'required',
+            'pregunta_1' => 'required',
+            'pregunta_2' => 'required',
+            'pregunta_3' => 'required',
+            'pregunta_4' => 'required',
+            'respuesta_1' => 'required',
+            'respuesta_2' => 'required',
+            'respuesta_3' => 'required',
+            'respuesta_4' => 'required',
             'facebook' => 'required',
             'x' => 'required',
             'instagram' => 'required',
@@ -78,15 +82,15 @@ class AuthController extends Controller
             'descripcion.required' => 'La descripción es requerida.',
             'descripcion.max' => 'La descripción no puede tener más de 50 caracteres.',
             'pregunta-1.required' => 'La pregunta 1 es requerida.',
-            'pregunta-2.required' => 'La pregunta 2 es requerida.',
-            'pregunta-3.required' => 'La pregunta 3 es requerida.',
-            'pregunta-4.required' => 'La pregunta 4 es requerida.',
+            'pregunta_2.required' => 'La pregunta 2 es requerida.',
+            'pregunta_3.required' => 'La pregunta 3 es requerida.',
+            'pregunta_4.required' => 'La pregunta 4 es requerida.',
             'facebook.required' => 'Su cuenta de facebook es requerida.',
             'x.required' => 'Su cuenta de x es requerida.',
             'instagram.required' => 'Su cuenta de instagram es requerida.',
             'tiktok.required' => 'Su cuenta de tiktok es requerida.',
         ]);
-
+        dump($request);
         $user = new User();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -102,29 +106,36 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->nacionalidad_idnacionalidad = $request->nacionalidad;
         $user->save();
+        dump($user);
+        $usersaved = User::orderBy('idusers', 'desc')->first();
+
 
         $pregunta1 = new Respuesta();
-        $pregunta1->users_idusers = $request->idusers;
-        $pregunta1->preguntas_idpreguntas = $request->pregunta - 1;
-        $pregunta1->respuesta = $request->respuesta - 1;
+        $pregunta1->users_idusers = $usersaved->idusers;
+        $pregunta1->preguntas_idpreguntas = $request->pregunta_1;
+        $pregunta1->respuesta = $request->respuesta_1;
         $pregunta1->save();
+        dump($pregunta1);
+
         $pregunta2 = new Respuesta();
-        $pregunta2->users_idusers = $request->idusers;
-        $pregunta2->preguntas_idpreguntas = $request->pregunta - 2;
-        $pregunta2->respuesta = $request->respuesta - 2;
+        $pregunta2->users_idusers = $usersaved->idusers;
+        $pregunta2->preguntas_idpreguntas = $request->pregunta_2;
+        $pregunta2->respuesta = $request->respuesta_2;
         $pregunta2->save();
+
         $pregunta3 = new Respuesta();
-        $pregunta3->users_idusers = $request->idusers;
-        $pregunta3->preguntas_idpreguntas = $request->pregunta - 3;
-        $pregunta3->respuesta = $request->respuesta - 3;
+        $pregunta3->users_idusers = $usersaved->idusers;
+        $pregunta3->preguntas_idpreguntas = $request->pregunta_3;
+        $pregunta3->respuesta = $request->respuesta_3;
         $pregunta3->save();
+
         $pregunta4 = new Respuesta();
-        $pregunta4->users_idusers = $request->idusers;
-        $pregunta4->preguntas_idpreguntas = $request->pregunta - 4;
-        $pregunta4->respuesta = $request->respuesta - 4;
+        $pregunta4->users_idusers = $usersaved->idusers;
+        $pregunta4->preguntas_idpreguntas = $request->pregunta_4;
+        $pregunta4->respuesta = $request->respuesta_4;
         $pregunta4->save();
-        dd($user, $pregunta1, $pregunta2, $pregunta3, $pregunta4);
-        dump($user);
+
+
         return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
 
