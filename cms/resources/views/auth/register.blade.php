@@ -169,13 +169,14 @@
                                     </div>
 
                                     <div class="w-full">
-                                        <label for="confirm_password"
+                                        <label for="password_confirmation"
                                             class="block mb-2 text-sm font-medium text-slate-700">Confirmar
                                             Contraseña</label>
                                         <div class="relative">
-                                            <input type="password" id="confirm_password" name="confirm_password"
+                                            <input type="password" id="password_confirmation"
+                                                name="password_confirmation"
                                                 class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                            @error('confirm_password') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50"
+                                            @error('password_confirmation') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50"
                                                 placeholder="Repite tu contraseña" />
 
                                             <button type="button" id="toggleConfirmPassword"
@@ -184,7 +185,7 @@
                                             </button>
                                         </div>
 
-                                        @error('confirm_password')
+                                        @error('password_confirmation')
                                             <small class="text-red-500 mt-2 text-sm block">
                                                 <strong>{{ $message }}</strong>
                                             </small>
