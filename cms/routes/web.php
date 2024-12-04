@@ -16,7 +16,18 @@ Route::prefix('auth')->group(function () {
     Route::get('register', [AuthController::class, 'register'])->name('register');
     Route::get('register', [AuthController::class, 'showForm'])->name('register');
     Route::post('signOut', [AuthController::class, 'signOut'])->name('signOut');
-    Route::get('verify', [AuthController::class, 'verify'])->name('verify');
+
+    Route::post('verify', [AuthController::class, 'verify'])->name('verify');
+
+    Route::post('verify/email', [AuthController::class, 'verifyEmail'])->name('verify.email');
+
+    /* Route::post('questions', [AuthController::class, 'questions'])->name('questions'); */
+
+    Route::post('verify/questions', [AuthController::class, 'verifyQuestions'])->name('verify.questions');
+
+    Route::post('/token', [AuthController::class, 'Token'])->name('token');
+
+    Route::post('verify/token', [AuthController::class, 'verifyToken'])->name('verify.token');
 });
 
 // PROTECTED ROUTES

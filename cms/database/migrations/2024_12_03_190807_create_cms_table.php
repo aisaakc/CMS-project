@@ -80,10 +80,10 @@ return new class extends Migration
 
         Schema::create('respuestas', function (Blueprint $table) {
             $table->id('idrespuesta', true);
-            $table->foreignId('user_id') // Llave foránea a la tabla users
+            $table->foreignId('users_idusers') // Llave foránea a la tabla users
                 ->constrained('users', 'idusers')
                 ->onDelete('cascade'); // Eliminar respuestas si se elimina el usuario
-            $table->foreignId('pregunta_id') // Llave foránea a la tabla preguntas
+            $table->foreignId('preguntas_idpreguntas') // Llave foránea a la tabla preguntas
                 ->constrained('preguntas', 'idpregunta')
                 ->onDelete('cascade'); // Eliminar respuestas si se elimina la pregunta
             $table->string('respuesta'); // Almacenar la respuesta del usuario a la pregunta

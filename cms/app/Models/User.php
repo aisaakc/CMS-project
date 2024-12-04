@@ -47,7 +47,7 @@ class User extends Authenticatable
 	}
 	public function preguntas()
 	{
-		return $this->belongsToMany(Pregunta::class, 'respuestas')
+		return $this->belongsToMany(Pregunta::class, 'respuestas', 'users_idusers', 'preguntas_idpreguntas')
 			->withPivot('respuesta');
 	}
 }

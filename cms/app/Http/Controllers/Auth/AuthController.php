@@ -9,6 +9,11 @@ use App\Models\Pregunta;
 use App\Models\Respuesta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 class AuthController extends Controller
 {
@@ -38,7 +43,7 @@ class AuthController extends Controller
 
     public function registerVerify(Request $request)
     {
-        dump($request);
+
         $request->validate([
             'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
@@ -90,7 +95,7 @@ class AuthController extends Controller
             'instagram.required' => 'Su cuenta de instagram es requerida.',
             'tiktok.required' => 'Su cuenta de tiktok es requerida.',
         ]);
-        dump($request);
+
         $user = new User();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -106,7 +111,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->nacionalidad_idnacionalidad = $request->nacionalidad;
         $user->save();
-        dump($user);
+
         $usersaved = User::orderBy('idusers', 'desc')->first();
 
 
@@ -115,7 +120,7 @@ class AuthController extends Controller
         $pregunta1->preguntas_idpreguntas = $request->pregunta_1;
         $pregunta1->respuesta = $request->respuesta_1;
         $pregunta1->save();
-        dump($pregunta1);
+
 
         $pregunta2 = new Respuesta();
         $pregunta2->users_idusers = $usersaved->idusers;
@@ -157,6 +162,127 @@ class AuthController extends Controller
 
         return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
     }
+
+
+    public function verifyEmail(Request $request)
+    {
+        // Validar el correo electrónico
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+        $email = $request->email;
+
+        // Buscar el usuario por su correo electrónico
+        $thisuser = User::where('email', $email)->first();
+        $user = $thisuser->idusers;
+        if (!$thisuser) {
+            return redirect()->route('verify')->withErrors('Usuario no encontrado');
+        }
+        // Almacenar el correo en la sesión
+
+        session(['email' => $thisuser->email]);
+
+
+        // Obtener las preguntas respondidas por este usuario
+        $preguntas = $thisuser->preguntas()->get();
+
+
+
+        // Retorna los resultados a la vista
+        return view('auth.Questions', compact('preguntas'));
+    }
+
+
+
+
+    public function verifyQuestions(Request $request)
+    {
+        $request->validate([
+            'respuestas' => 'required|array',
+            'respuestas.*' => 'required|string', // Valida que cada respuesta sea una cadena no vacía
+        ]);
+
+        foreach ($request->input('respuestas') as $pregunta_id => $respuesta) {
+            $pregunta = Pregunta::find($pregunta_id);
+
+            if (!$pregunta) {
+                return back()->withErrors(["La pregunta con ID {$pregunta_id} no existe."]);
+            }
+
+            // Validar la respuesta
+            $respuestaCorrecta = Respuesta::where('pregunta_id', $pregunta_id)
+                ->where('respuesta', $respuesta)
+                ->exists();
+
+            if (!$respuestaCorrecta) {
+                return back()->withErrors(["La respuesta a la pregunta '{$pregunta->texto}' es incorrecta."]);
+            }
+        }
+        // Llamar al método para enviar el código de recuperación
+        return view('Token', compact('preguntas'));
+    }
+
+    public function Token(Request $request)
+    {
+        // Obtener el correo desde la sesión
+        $email = session('email');
+
+        if (!$email) {
+            return back()->withErrors(['email' => 'No se ha encontrado un correo válido en la sesión.']);
+        }
+
+        // Buscar el usuario por correo
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'El correo no está registrado.']);
+        }
+
+        // Generar un código único de 6 caracteres
+        $codigo = Str::random(6);
+
+        // Guardar el código y la fecha de expiración en la base de datos
+        $user->recovery_code = $codigo;
+        $user->recovery_code_expires_at = Carbon::now()->addMinutes(15); // Expira en 15 minutos
+        $user->save();
+
+        // Enviar el código al correo del usuario
+        Mail::to($user->email)->send(new \App\Mail\RecoveryCodeMail($codigo));
+
+        // Redirigir al formulario donde el usuario debe ingresar el código
+        return redirect()->route('verify.token')->with('success', 'Se ha enviado un código de recuperación a tu correo.');
+    }
+
+    public function verifyToken(Request $request)
+    {
+        // Almacenar el token en la base de datos (puedes crear una tabla para esto)
+
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now(),
+            'user_id' => $user,
+        ]);
+        // Generar un token único para el restablecimiento de la contraseña
+        $token = Str::random(60);
+        // Enviar el correo electrónico con el enlace para restablecer la contraseña
+        Mail::send('auth.emails.reset_password', ['token' => $token], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Restablecer tu contraseña');
+        });
+
+        $nacionalidades = Nacionalidad::all();
+
+        $preguntas = Pregunta::all();
+
+        return view('auth.tokenEmail', compact('nacionalidades', 'preguntas'));
+    }
+
+
+
+
+
+
 
     public function signOut(Request $request)
     {

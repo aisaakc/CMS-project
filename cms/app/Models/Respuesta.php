@@ -9,13 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Respuesta extends Model
 {
 	protected $table = 'respuestas';
-	protected $primaryKey = 'id';
+	protected $primaryKey = 'idrespuesta';
 	public $timestamps = false;
-
-	protected $casts = [
-		'users_idusers' => 'int',
-		'preguntas_idpreguntas' => 'int'
-	];
 
 	protected $fillable = [
 		'respuesta',
