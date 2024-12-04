@@ -141,7 +141,7 @@ class AuthController extends Controller
         $pregunta4->save();
 
 
-        return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
+        return redirect()->route('login', ['id' => $id])->with('success', 'Usuario registrado exitosamente.');
     }
 
     public function loginVerify(Request $request)
@@ -181,18 +181,18 @@ class AuthController extends Controller
         // Almacenar el correo en la sesión
 
         session(['email' => $thisuser->email]);
+        return redirect()->route('questions', ['id' => $user])->with('success', 'Usuario registrado exitosamente.');
+    }
 
-
+    public function questions($id)
+    {
+        $thisuser = User::where('idusers', $id)->first();
         // Obtener las preguntas respondidas por este usuario
         $preguntas = $thisuser->preguntas()->get();
-
-
 
         // Retorna los resultados a la vista
         return view('auth.Questions', compact('preguntas'));
     }
-
-
 
 
     public function verifyQuestions(Request $request)
@@ -201,7 +201,7 @@ class AuthController extends Controller
             'respuestas' => 'required|array',
             'respuestas.*' => 'required|string', // Valida que cada respuesta sea una cadena no vacía
         ]);
-
+        dd($request);
         foreach ($request->input('respuestas') as $pregunta_id => $respuesta) {
             $pregunta = Pregunta::find($pregunta_id);
 
@@ -219,7 +219,7 @@ class AuthController extends Controller
             }
         }
         // Llamar al método para enviar el código de recuperación
-        return view('Token', compact('preguntas'));
+        return view('auth.Token', compact('preguntas'));
     }
 
     public function Token(Request $request)

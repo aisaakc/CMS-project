@@ -11,23 +11,28 @@ Route::get('/', function () {
 // AUTH
 Route::prefix('auth')->group(function () {
     Route::post('register/verify', [AuthController::class, 'registerVerify'])->name('register.verify');
+
     Route::get('login', [AuthController::class, 'login'])->name('login');
+
     Route::post('login', [AuthController::class, 'loginVerify'])->name('login.verify');
+
     Route::get('register', [AuthController::class, 'register'])->name('register');
+
     Route::get('register', [AuthController::class, 'showForm'])->name('register');
+
     Route::post('signOut', [AuthController::class, 'signOut'])->name('signOut');
 
-    Route::post('verify', [AuthController::class, 'verify'])->name('verify');
+    Route::get('verify', [AuthController::class, 'verify'])->name('verify');
 
-    Route::post('verify/email', [AuthController::class, 'verifyEmail'])->name('verify.email');
+    Route::post('email', [AuthController::class, 'verifyEmail'])->name('verify.email');
 
-    /* Route::post('questions', [AuthController::class, 'questions'])->name('questions'); */
+    Route::get('questions/{id}', [AuthController::class, 'questions'])->name('questions');
 
-    Route::post('verify/questions', [AuthController::class, 'verifyQuestions'])->name('verify.questions');
-
+    Route::post('questions', [AuthController::class, 'verifyQuestions'])->name('verify.questions');
+    /*
     Route::post('/token', [AuthController::class, 'Token'])->name('token');
 
-    Route::post('verify/token', [AuthController::class, 'verifyToken'])->name('verify.token');
+    Route::post('token', [AuthController::class, 'verifyToken'])->name('verify.token'); */
 });
 
 // PROTECTED ROUTES

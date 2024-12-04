@@ -18,23 +18,34 @@
 
 
                             <!-- Paso 3 -->
-                            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 hidden"
+                            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 "
                                 id="step-3">
-                                <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Paso 3
+                                <h2 class="text-xl text-center m-2 border-b-2 border-indigo-500 font-semibold mb-6">Responda
+                                    sus preguntas de seguridad
                                 </h2>
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="w-full">
                                         <label for="pregunta_1"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1</label>
-                                        <select id="pregunta_1" name="pregunta_1"
-                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('pregunta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
-                                            <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
-                                            </option>
-                                            @foreach ($preguntas as $items)
-                                                <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
-                                            @endforeach
-                                        </select>
+
+
+
+
+                                        @foreach ($preguntas as $items)
+                                            @if ($items->idpregunta == 1)
+                                                <select id="pregunta_1" name="pregunta_1"
+                                                    class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    @error('pregunta_1') border-red-500 @else border-slate-300 @enderror
+                                                    transition duration-200 ease-in-out hover:bg-gray-50">
+                                                    <option class="form-select value="{{ $items->idpregunta }}" selected>
+                                                        {{ $items->pregunta }}</option>
+                                                </select>
+                                            @endif
+                                        @endforeach
+
+
+
+
                                         <input type="text" id="respuesta_1" name="respuesta_1"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500
                                         @error('respuesta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
