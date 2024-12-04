@@ -77,6 +77,7 @@ class AuthController extends Controller
             'password.required' => 'La contraseña es requerida.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
+            'password_confirmation.same' => 'Las contraseñas no coinciden.',
             'address.required' => 'La dirección es requerida.',
             'descripcion.required' => 'La descripción es requerida.',
             'descripcion.max' => 'La descripción no puede tener más de 50 caracteres.',
