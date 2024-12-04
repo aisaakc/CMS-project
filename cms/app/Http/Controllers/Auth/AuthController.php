@@ -86,7 +86,7 @@ class AuthController extends Controller
             'address.required' => 'La dirección es requerida.',
             'descripcion.required' => 'La descripción es requerida.',
             'descripcion.max' => 'La descripción no puede tener más de 50 caracteres.',
-            'pregunta-1.required' => 'La pregunta 1 es requerida.',
+            'pregunta_1.required' => 'La pregunta 1 es requerida.',
             'pregunta_2.required' => 'La pregunta 2 es requerida.',
             'pregunta_3.required' => 'La pregunta 3 es requerida.',
             'pregunta_4.required' => 'La pregunta 4 es requerida.',
@@ -197,29 +197,66 @@ class AuthController extends Controller
 
     public function verifyQuestions(Request $request)
     {
+
         $request->validate([
-            'respuestas' => 'required|array',
-            'respuestas.*' => 'required|string', // Valida que cada respuesta sea una cadena no vacía
+
+            'respuesta_1' => 'required',
+            'respuesta_2' => 'required',
+            'respuesta_3' => 'required',
+            'respuesta_4' => 'required',
+            // Valida que cada respuesta sea una cadena no vacía
         ]);
-        dd($request);
-        foreach ($request->input('respuestas') as $pregunta_id => $respuesta) {
-            $pregunta = Pregunta::find($pregunta_id);
 
-            if (!$pregunta) {
-                return back()->withErrors(["La pregunta con ID {$pregunta_id} no existe."]);
-            }
 
-            // Validar la respuesta
-            $respuestaCorrecta = Respuesta::where('pregunta_id', $pregunta_id)
-                ->where('respuesta', $respuesta)
-                ->exists();
 
-            if (!$respuestaCorrecta) {
-                return back()->withErrors(["La respuesta a la pregunta '{$pregunta->texto}' es incorrecta."]);
-            }
+        $idquestion1 = $request->pregunta_1;
+        $idquestion2 = $request->pregunta_2;
+        $idquestion3 = $request->pregunta_3;
+        $idquestion4 = $request->pregunta_4;
+        $idrespuesta1 = $request->respuesta_1;
+        $idrespuesta2 = $request->respuesta_2;
+        $idrespuesta3 = $request->respuesta_3;
+        $idrespuesta4 = $request->respuesta_4;
+        //validar pregunta 1
+
+        //dump($idquestion1, $idquestion2, $idquestion3, $idquestion4, $idrespuesta1, $idrespuesta2, $idrespuesta3, $idrespuesta4);
+
+        $respuestaCorrecta1 = Respuesta::where('preguntas_idpreguntas', $idquestion1)
+            ->where('respuesta', $idrespuesta1)
+            ->exists();
+
+        if (!$respuestaCorrecta1) {
+            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion1}' es incorrecta."]);
         }
+        //validar pregunta 2
+        $respuestaCorrecta2 = Respuesta::where('preguntas_idpreguntas', $idquestion2)
+            ->where('respuesta', $idrespuesta2)
+            ->exists();
+
+        if (!$respuestaCorrecta2) {
+            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion2}' es incorrecta."]);
+        }
+        //validar pregunta 3
+        $respuestaCorrecta3 = Respuesta::where('preguntas_idpreguntas', $idquestion3)
+            ->where('respuesta', $idrespuesta3)
+            ->exists();
+
+        if (!$respuestaCorrecta3) {
+            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion3}' es incorrecta."]);
+        }
+        //validar pregunta 4
+        $respuestaCorrecta4 = Respuesta::where('preguntas_idpreguntas', $idquestion4)
+            ->where('respuesta', $idrespuesta4)
+            ->exists();
+
+        if (!$respuestaCorrecta4) {
+            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion4}' es incorrecta."]);
+        }
+
+
+
         // Llamar al método para enviar el código de recuperación
-        return view('auth.Token', compact('preguntas'));
+        return view('auth.Token');
     }
 
     public function Token(Request $request)

@@ -13,7 +13,16 @@
                         <div class="text-center mb-8">
                             <h1 class="text-3xl font-semibold text-gray-800">Preguntas de Seguridad</h1>
                         </div>
-
+                        @error('invalid_questions')
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6" role="alert">
+                                <strong class="font-bold">Error:</strong>
+                                <span class="block sm:inline">{{ $message }}</span>
+                                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @enderror
                         <div class="divide-y divide-gray-200">
 
 
@@ -27,25 +36,15 @@
                                     <div class="w-full">
                                         <label for="pregunta_1"
                                             class="block mb-2 text-sm font-medium text-slate-700">Pregunta 1</label>
-
-
-
-
-                                        @foreach ($preguntas as $items)
-                                            @if ($items->idpregunta == 1)
-                                                <select id="pregunta_1" name="pregunta_1"
-                                                    class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                                    @error('pregunta_1') border-red-500 @else border-slate-300 @enderror
-                                                    transition duration-200 ease-in-out hover:bg-gray-50">
-                                                    <option class="form-select value="{{ $items->idpregunta }}" selected>
-                                                        {{ $items->pregunta }}</option>
-                                                </select>
-                                            @endif
-                                        @endforeach
-
-
-
-
+                                        <select id="pregunta_1" name="pregunta_1"
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
+                                        @error('pregunta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
+                                            <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
+                                            </option>
+                                            @foreach ($preguntas as $items)
+                                                <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                            @endforeach
+                                        </select>
                                         <input type="text" id="respuesta_1" name="respuesta_1"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500
                                         @error('respuesta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50">
