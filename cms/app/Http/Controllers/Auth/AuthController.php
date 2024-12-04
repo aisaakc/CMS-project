@@ -17,6 +17,8 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
+
+
     public function login()
     {
         return view('auth.login');
@@ -141,7 +143,7 @@ class AuthController extends Controller
         $pregunta4->save();
 
 
-        return redirect()->route('login', ['id' => $id])->with('success', 'Usuario registrado exitosamente.');
+        return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
 
     public function loginVerify(Request $request)
@@ -184,16 +186,23 @@ class AuthController extends Controller
         return redirect()->route('questions', ['id' => $user])->with('success', 'Usuario registrado exitosamente.');
     }
 
-    public function questions($id)
+    public function questions()
     {
-        $thisuser = User::where('idusers', $id)->first();
+        // Obtener el correo desde la sesión
+        $email = session('email');
+
+        if (!$email) {
+            return back()->withErrors(['email' => 'No se ha encontrado un correo válido en la sesión.']);
+        }
+
+        // Buscar el usuario por correo
+        $user = User::where('email', $email)->first();
         // Obtener las preguntas respondidas por este usuario
-        $preguntas = $thisuser->preguntas()->get();
+        $preguntas = $user->preguntas()->get();
 
         // Retorna los resultados a la vista
         return view('auth.Questions', compact('preguntas'));
     }
-
 
     public function verifyQuestions(Request $request)
     {
@@ -206,8 +215,6 @@ class AuthController extends Controller
             'respuesta_4' => 'required',
             // Valida que cada respuesta sea una cadena no vacía
         ]);
-
-
 
         $idquestion1 = $request->pregunta_1;
         $idquestion2 = $request->pregunta_2;
@@ -253,13 +260,10 @@ class AuthController extends Controller
             return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion4}' es incorrecta."]);
         }
 
-
-
-        // Llamar al método para enviar el código de recuperación
-        return view('auth.Token');
+        return redirect()->route('token')->with('success', 'Usuario registrado exitosamente.');
     }
 
-    public function Token(Request $request)
+    public function Token()
     {
         // Obtener el correo desde la sesión
         $email = session('email');
@@ -271,48 +275,65 @@ class AuthController extends Controller
         // Buscar el usuario por correo
         $user = User::where('email', $email)->first();
 
-        if (!$user) {
-            return back()->withErrors(['email' => 'El correo no está registrado.']);
-        }
-
         // Generar un código único de 6 caracteres
         $codigo = Str::random(6);
-
-        // Guardar el código y la fecha de expiración en la base de datos
-        $user->recovery_code = $codigo;
-        $user->recovery_code_expires_at = Carbon::now()->addMinutes(15); // Expira en 15 minutos
-        $user->save();
-
+        //dump($email, $codigo, $user);
         // Enviar el código al correo del usuario
         Mail::to($user->email)->send(new \App\Mail\RecoveryCodeMail($codigo));
 
+        /* try {
+            Mail::to($user->email)->send(new \App\Mail\RecoveryCodeMail($codigo));
+        } catch (\Exception $e) {
+            // Maneja el error (puedes registrar el error o mostrar un mensaje)
+            dd('Error al enviar el correo: ' . $e->getMessage());
+        } */
+
         // Redirigir al formulario donde el usuario debe ingresar el código
-        return redirect()->route('verify.token')->with('success', 'Se ha enviado un código de recuperación a tu correo.');
+
+        return view('auth.Token')->with($codigo);
     }
 
     public function verifyToken(Request $request)
     {
-        // Almacenar el token en la base de datos (puedes crear una tabla para esto)
+        // Obtiene el token de la solicitud
+        $codigouser = $request->codigo;
+        $codigosend = $request->codigosend;
 
-        DB::table('password_resets')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => now(),
-            'user_id' => $user,
+
+        // Valida si el token ingresado coincide con el guardado
+        if ($codigouser === $codigosend) {
+            return response()->json(['mensaje' => 'Token válido'], 200);
+        } else {
+            return response()->json(['mensaje' => 'Token inválido'], 401);
+        }
+
+
+        return view('NewPass');
+    }
+
+    public function NewPass(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password',
         ]);
-        // Generar un token único para el restablecimiento de la contraseña
-        $token = Str::random(60);
-        // Enviar el correo electrónico con el enlace para restablecer la contraseña
-        Mail::send('auth.emails.reset_password', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Restablecer tu contraseña');
-        });
 
-        $nacionalidades = Nacionalidad::all();
+        // Obtener el correo desde la sesión
+        $email = session('email');
 
-        $preguntas = Pregunta::all();
+        if (!$email) {
+            return back()->withErrors(['email' => 'No se ha encontrado un correo válido en la sesión.']);
+        }
 
-        return view('auth.tokenEmail', compact('nacionalidades', 'preguntas'));
+        // Buscar el usuario por correo
+        $user = User::where('email', $email)->first();
+
+        // Actualizar la contraseña
+        $user->password = Hash::make($request->password_confirmation);
+        $user->save();
+
+
+        return redirect()->route('dashboard');
     }
 
 

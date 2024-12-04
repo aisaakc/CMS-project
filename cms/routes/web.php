@@ -26,13 +26,15 @@ Route::prefix('auth')->group(function () {
 
     Route::post('email', [AuthController::class, 'verifyEmail'])->name('verify.email');
 
-    Route::get('questions/{id}', [AuthController::class, 'questions'])->name('questions');
+    Route::get('questions', [AuthController::class, 'questions'])->name('questions');
 
-    Route::post('questions', [AuthController::class, 'verifyQuestions'])->name('verify.questions');
-    /*
-    Route::post('/token', [AuthController::class, 'Token'])->name('token');
+    Route::post('questions/verify', [AuthController::class, 'verifyQuestions'])->name('verify.questions');
 
-    Route::post('token', [AuthController::class, 'verifyToken'])->name('verify.token'); */
+    Route::get('/token', [AuthController::class, 'Token'])->name('token');
+
+    Route::post('token/verify', [AuthController::class, 'verifyToken'])->name('verify.token');
+
+    Route::post('NewPass', [AuthController::class, 'NewPass'])->name('new.pass');
 });
 
 // PROTECTED ROUTES

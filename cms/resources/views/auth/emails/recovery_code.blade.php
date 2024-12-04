@@ -7,8 +7,8 @@
 
 <body>
     <h1>Restablecer tu Contraseña</h1>
-    <p>Haga clic en el siguiente enlace para restablecer su contraseña:</p>
-    <a href="{{ url('password/reset', $token) }}">Restablecer Contraseña</a>
+    <p>Tu codigo de Recuperacion es el siguiente:</p>
+    <h1>{{ $codigo }}</h1>
 </body>
 
 </html>

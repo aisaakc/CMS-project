@@ -41,7 +41,7 @@ class RecoveryCodeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.recovery_code', // Asegúrate de tener esta vista creada
+            view: 'auth.emails.recovery_code', // Asegúrate de tener esta vista creada
         );
     }
 
