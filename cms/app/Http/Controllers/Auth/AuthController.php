@@ -38,6 +38,7 @@ class AuthController extends Controller
 
     public function registerVerify(Request $request)
     {
+
         $request->validate([
             'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
             'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
@@ -102,31 +103,28 @@ class AuthController extends Controller
         $user->nacionalidad_idnacionalidad = $request->nacionalidad;
         $user->save();
 
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta - 1,
-            'respuesta' => $request->respuesta - 1,
-        ]);
-
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta - 2,
-            'respuesta' => $request->respuesta - 2,
-        ]);
-
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta - 3,
-            'respuesta' => $request->respuesta - 3,
-        ]);
-
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $request->pregunta - 4,
-            'respuesta' => $request->respuesta - 4,
-        ]);
-
-
+        $pregunta1 = new Respuesta();
+        $pregunta1->users_idusers = $request->idusers;
+        $pregunta1->preguntas_idpreguntas = $request->pregunta - 1;
+        $pregunta1->respuesta = $request->respuesta - 1;
+        $pregunta1->save();
+        $pregunta2 = new Respuesta();
+        $pregunta2->users_idusers = $request->idusers;
+        $pregunta2->preguntas_idpreguntas = $request->pregunta - 2;
+        $pregunta2->respuesta = $request->respuesta - 2;
+        $pregunta2->save();
+        $pregunta3 = new Respuesta();
+        $pregunta3->users_idusers = $request->idusers;
+        $pregunta3->preguntas_idpreguntas = $request->pregunta - 3;
+        $pregunta3->respuesta = $request->respuesta - 3;
+        $pregunta3->save();
+        $pregunta4 = new Respuesta();
+        $pregunta4->users_idusers = $request->idusers;
+        $pregunta4->preguntas_idpreguntas = $request->pregunta - 4;
+        $pregunta4->respuesta = $request->respuesta - 4;
+        $pregunta4->save();
+        dd($user, $pregunta1, $pregunta2, $pregunta3, $pregunta4);
+        dump($user);
         return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
 

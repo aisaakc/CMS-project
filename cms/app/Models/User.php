@@ -45,7 +45,7 @@ class User extends Model
 	}
 	public function preguntas()
 	{
-		return $this->belongsToMany(Pregunta::class, 'id', '	preguntas_idpreguntas', 'users_idusers')
+		return $this->belongsToMany(Respuesta::class, 'id', '	preguntas_idpreguntas', 'users_idusers')
 			->withPivot('id', 'respuesta');
 	}
 }
