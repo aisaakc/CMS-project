@@ -498,17 +498,21 @@
             }
         });
 
-        document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
-            const confirmPasswordField = document.getElementById("confirm_password");
-            const confirmEyeIcon = document.getElementById("eye-icon-confirm-password");
-            if (confirmPasswordField.type === "password") {
-                confirmPasswordField.type = "text";
-                confirmEyeIcon.classList.replace("fa-eye-slash", "fa-eye");
-            } else {
-                confirmPasswordField.type = "password";
-                confirmEyeIcon.classList.replace("fa-eye", "fa-eye-slash");
-            }
-        });
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const passwordField = document.getElementById('password_confirmation');
+        const eyeIcon = document.getElementById('eye-icon-confirm-password');
+
+        // Toggle between password and text input
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        } else {
+            passwordField.type = 'password';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        }
+    });
 
         function validateCedula(event) {
             const input = event.target;
