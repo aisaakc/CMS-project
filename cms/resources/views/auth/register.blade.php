@@ -49,28 +49,11 @@
                                     </div>
                                 </div>
 
-                                <div class="w-full">
-                                    <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de
-                                        Identidad</label>
-                                    <div class="flex items-center space-x-4">
-                                        <input type="text" id="cedula" name="cedula"
-                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('cedula') border-red-500 @else border-slate-300 @enderror"
-                                            placeholder="12345678" oninput="validateCedula(event)" />
-                                        @error('cedula')
-                                            <small class="text-red-500 mt-1 text-sm">
-                                                <strong>{{ $message }}</strong>
-                                            </small>
-                                        @enderror
-                                    </div>
-                                </div>
-
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="mt-6">
                                         <div class="w-full">
                                             <label for="date_of_birth"
-                                                class="block mb-2 text-sm font-medium text-slate-700">Fecha de
-                                                Nacimiento</label>
+                                                class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
                                             <input type="date" id="date_of_birth" name="date_of_birth"
                                                 class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
                                             @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
@@ -85,26 +68,41 @@
 
                                     <div class="mt-6">
                                         <div class="w-full">
-                                            <label for="nationality"
-                                                class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
+                                            <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
                                             <select name="nacionalidad" id="nationality"
-                                                class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                <option selected>Selecciona Nacionalidad</option>
+                                                class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
+                                                @error('nacionalidad') border-red-500 @else border-slate-300 @enderror">
+                                                <option value="" selected>Selecciona Nacionalidad</option>
                                                 @foreach ($nacionalidades as $items)
-                                                    <option value="{{ $items->idnacionalidad }}"
+                                                    <option value="{{ $items->idnacionalidad }}" 
                                                         @if (old('nacionalidad') == $items->idnacionalidad) selected @endif>
                                                         {{ $items->nacionalidad }}
                                                     </option>
                                                 @endforeach
                                             </select>
-
-                                            @error('nationality')
+                                    
+                                            @error('nacionalidad')
                                                 <small class="text-red-500 mt-1 text-sm">
                                                     <strong>{{ $message }}</strong>
                                                 </small>
                                             @enderror
-
                                         </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="w-full">
+                                    <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
+                                    <div class="flex items-center space-x-4">
+                                        <input type="text" id="cedula" name="cedula"
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
+                                        @error('cedula') border-red-500 @else border-slate-300 @enderror"
+                                            placeholder="12345678" oninput="validateCedula(event)" />
+                                        @error('cedula')
+                                            <small class="text-red-500 mt-1 text-sm">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -116,18 +114,18 @@
                                 </h2>
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="w-full">
-                                        <label for="address"
-                                            class="block mb-2 text-sm font-medium text-slate-700">Dirección</label>
-                                        <input type="text" id="address" name="address"
+                                        <label for="address" class="block mb-2 text-sm font-medium text-slate-700">Dirección</label>
+                                        <textarea id="address" name="address"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                        @error('address') border-red-500 @else border-slate-300 @enderror"
-                                            placeholder="Dirección" />
+                                            @error('address') border-red-500 @else border-slate-300 @enderror"
+                                            placeholder="Dirección"></textarea>
                                         @error('address')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>
                                         @enderror
                                     </div>
+                                    
 
                                     <div class="w-full">
                                         <label for="email" class="block mb-2 text-sm font-medium text-slate-700">Correo
