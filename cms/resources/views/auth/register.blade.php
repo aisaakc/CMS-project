@@ -59,7 +59,6 @@
                                                 name="date_of_birth"
                                                 class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
                                                     @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
-                                                required
                                                 max="{{ now()->subYears(18)->toDateString() }}" 
                                                 min="{{ now()->subYears(124)->toDateString() }}"
                                                 onchange="checkAge(this)" 
@@ -350,8 +349,7 @@
                                     </div>
 
                                     <div class="w-full">
-                                        <label for="x" class="block mb-2 text-sm font-medium text-slate-700">X
-                                            (Antiguo Twitter)</label>
+                                        <label for="x" class="block mb-2 text-sm font-medium text-slate-700">X (Antiguo Twitter)</label>
                                         <input type="text" id="x" name="x"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3
                                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200
@@ -364,7 +362,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
 
                                 <div class="grid gap-8 md:grid-cols-2 mt-6">
                                     <div class="w-full">
@@ -398,23 +395,46 @@
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label for="descripcion"
-                                        class="block mb-2 text-sm font-medium text-slate-700">Descripción</label>
-                                    <textarea id="descripcion" name="descripcion" cols="8" rows="5"
-                                        class="w-full p-4 mb-4 border rounded-lg text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                    focus:border-blue-500 resize-none transition duration-200 ease-in-out hover:bg-gray-50
-                                    @error('descripcion') border-red-500 @else border-slate-300 @enderror"
-                                        placeholder="Escribe una breve descripción..."></textarea>
-
-                                    @error('descripcion')
-                                        <small class="text-red-500 mt-1 text-sm">
-                                            <strong>{{ $message }}</strong>
-                                        </small>
-                                    @enderror
-                                </div>
-
+                                <!-- Agregar las dependencias de jQuery, Popper.js, Bootstrap y Summernote -->
+                                <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                                <!-- Agregar los estilos y scripts de Summernote -->
+                                <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+                                <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
+                            <div class="container mt-5">
+                                    <div>
+                                        <!-- Summernote editor -->
+                                        <div id="summernote" class="w-full p-4 mb-4 border rounded-lg text-slate-700 placeholder:text-slate-400"></div>
+                                        <!-- Error handling for descripcion -->
+                                        @error('descripcion')
+                                            <small class="text-red-500 mt-1 text-sm">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <!-- Campo oculto para enviar el contenido del editor -->
+                                    <input type="hidden" id="descripcion" name="descripcion">
                             </div>
+                            <!-- Script para inicializar Summernote y capturar su contenido al enviar el formulario -->
+                            <script>
+                                $(document).ready(function() {
+                                    // Inicializar Summernote en el div con id "summernote"
+                                    $('#summernote').summernote({
+                                        placeholder: 'Descripción personal',
+                                        tabsize: 2,
+                                        height: 100
+                                    });
+                                    // Cuando se envíe el formulario, colocar el contenido de Summernote en el campo oculto
+                                    $('form').on('submit', function() {
+                                        var contenido = $('#summernote').summernote('code');  // Obtener el contenido HTML del editor
+                                        $('#descripcion').val(contenido);  // Colocar el contenido en el campo oculto
+                                    });
+                                });
+                            </script>
+
+                           </div>
                         </div>
 
                         <div class="flex justify-between mt-8">

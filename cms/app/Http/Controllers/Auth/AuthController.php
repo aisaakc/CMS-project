@@ -66,7 +66,6 @@ class AuthController extends Controller
         'respuesta_2' => 'required',
         'respuesta_3' => 'required',
         'respuesta_4' => 'required',
-        'descripcion' => 'required|string|max:50',
     ], [
         // Mensajes de error personalizados (si los hay)
         'first_name.required' => 'Los nombres son requeridos.',
@@ -87,8 +86,6 @@ class AuthController extends Controller
         'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
         'password_confirmation.same' => 'Las contraseñas no coinciden.',
         'address.required' => 'La dirección es requerida.',
-        'descripcion.required' => 'La descripción es requerida.',
-        'descripcion.max' => 'La descripción no puede tener más de 50 caracteres.',
         'respuesta_1.required' => 'La pregunta 1 es requerida.',
         'respuesta_2.required' => 'La pregunta 2 es requerida.',
         'respuesta_3.required' => 'La pregunta 3 es requerida.',
