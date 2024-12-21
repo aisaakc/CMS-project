@@ -52,20 +52,26 @@
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="mt-6">
                                         <div class="w-full">
-                                            <label for="date_of_birth"
-                                                class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
-                                            <input type="date" id="date_of_birth" name="date_of_birth"
+                                            <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
+                                            <input 
+                                                type="date" 
+                                                id="date_of_birth" 
+                                                name="date_of_birth"
                                                 class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                            @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
-                                                min="1900-01-01" max="{{ now()->toDateString() }}" />
+                                                    @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
+                                                required
+                                                max="{{ now()->subYears(18)->toDateString() }}" 
+                                                min="{{ now()->subYears(124)->toDateString() }}"
+                                                onchange="checkAge(this)" 
+                                            />
                                             @error('date_of_birth')
-                                                <small class="text-red-500 mt-1 text-sm">
-                                                    <strong>{{ $message }}</strong>
-                                                </small>
+                                            <small class="text-red-500 mt-1 text-sm">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
                                             @enderror
                                         </div>
                                     </div>
-
+                                    
                                     <div class="mt-6">
                                         <div class="w-full">
                                             <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
@@ -128,8 +134,7 @@
                                     
 
                                     <div class="w-full">
-                                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700">Correo
-                                            Electrónico</label>
+                                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700">Correo Electrónico</label>
                                         <input type="email" id="email" name="email"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
                                         @error('email') border-red-500 @else border-slate-300 @enderror"
@@ -168,8 +173,7 @@
 
                                     <div class="w-full">
                                         <label for="password_confirmation"
-                                            class="block mb-2 text-sm font-medium text-slate-700">Confirmar
-                                            Contraseña</label>
+                                            class="block mb-2 text-sm font-medium text-slate-700">Confirmar Contraseña</label>
                                         <div class="relative">
                                             <input type="password" id="password_confirmation"
                                                 name="password_confirmation"
@@ -436,6 +440,21 @@
     </div>
 
     <script>
+         function checkAge(input) {
+        const selectedDate = new Date(input.value);
+        const currentDate = new Date();
+        
+        const age = currentDate.getFullYear() - selectedDate.getFullYear();
+        const month = currentDate.getMonth() - selectedDate.getMonth();
+        const day = currentDate.getDate() - selectedDate.getDate();
+
+        if (age < 18 || (age === 18 && (month < 0 || (month === 0 && day < 0)))) {
+            alert("Debes tener al menos 18 años para registrarte.");
+            input.setCustomValidity("Debes tener al menos 18 años para registrarte.");
+        } else {
+            input.setCustomValidity(""); // Si la edad es válida, se permite la selección
+        }
+    }
         function validateName(input) {
             const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/;
             if (!regex.test(input.value)) {
