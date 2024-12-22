@@ -30,6 +30,7 @@ class User extends Authenticatable
 		'last_name',
 		'date_of_birth',
 		'cedula',
+		'image',
 		'address',
 		'email',
 		'facebook',
@@ -38,6 +39,8 @@ class User extends Authenticatable
 		'tiktok',
 		'descripcion',
 		'password',
+		'role',
+		'status',
 		'nacionalidad_idnacionalidad'
 	];
 

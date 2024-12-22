@@ -42,19 +42,78 @@ return new class extends Migration
             $table->string('first_name', 45)->nullable();
             $table->string('last_name', 45)->nullable();
             $table->string('date_of_birth', 45)->nullable();
-            $table->integer('cedula')->nullable();
+            $table->integer('cedula')->nullable()->unique();
+            $table->text('image', 45)->nullable();
             $table->string('address', 45)->nullable();
-            $table->string('email', 45)->nullable();
+            $table->string('email', 45)->nullable()->unique();
             $table->string('facebook', 45)->nullable();
             $table->string('instagram', 45)->nullable();
             $table->string('x', 45)->nullable();
             $table->string('tiktok', 45)->nullable();
-            $table->string('descripcion', 45)->nullable();
+            $table->text('descripcion', 45)->nullable();
             $table->string('password', 255)->nullable();
+            $table->enum('role', ['admin', 'publisher','visitor'])->default('visitor');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('nacionalidad_idnacionalidad')
                 ->constrained('nacionalidades', 'idnacionalidad') // Referencia a la tabla nacionalidades
                 ->onDelete('cascade'); // Eliminar usuarios si se elimina la nacionalidad
         });
+
+        DB::table('users')->insert([
+            [
+                'first_name' => 'Juan',
+                'last_name' => 'Pérez',
+                'date_of_birth' => '1990-05-15',
+                'cedula' => 27192837,
+                'address' => 'Calle Ficticia 123, Ciudad Ejemplo',
+                'email' => 'juan.perez@gmail.com',
+                'descripcion' => 'Soy un desarrollador web con experiencia en Laravel y PHP.',
+                'password' => bcrypt('password12345'), 
+                'role' => 'admin',
+                'status' => 'active',
+                'nacionalidad_idnacionalidad' => 1  
+            ],
+            [
+                'first_name' => 'Ana',
+                'last_name' => 'Gómez',
+                'date_of_birth' => '1985-09-10',
+                'cedula' => 17342987,
+                'address' => 'Avenida Siempre Viva 456',
+                'email' => 'ana.gomez@gmail.com',
+                'descripcion' => 'Me encanta la fotografía y la música.',
+                'password' => bcrypt('password456'),
+                'role' => 'publisher',
+                'status' => 'active',
+                'nacionalidad_idnacionalidad' => 2 
+            ],
+            [
+                'first_name' => 'Isaac',
+                'last_name' => 'Martínez',
+                'date_of_birth' => '1995-02-20',
+                'cedula' => 19876543,
+                'address' => 'Avenida Siempre Viva 456',
+                'email' => 'isaac.martinez@gmail.com',
+                'descripcion' => 'me gusta php',
+                'password' => bcrypt('password789'),
+                'role' => 'publisher',
+                'status' => 'active',
+                'nacionalidad_idnacionalidad' => 1 
+            ],
+            [
+                'first_name' => 'Fernando',
+                'last_name' => 'García',
+                'date_of_birth' => '1992-05-15',
+                'cedula' => 23192837,
+                'address' => 'Avenida Siempre Viva 456',
+                'email' => 'fernando.garcia@gmail.com',
+                'descripcion' => 'me gusta python',
+                'password' => bcrypt('password123'),
+                'role' => 'publisher',
+                'status' => 'active',
+                'nacionalidad_idnacionalidad' => 1 
+            ],
+        ]);
+
 
 
         Schema::create('sessions', function (Blueprint $table) {
