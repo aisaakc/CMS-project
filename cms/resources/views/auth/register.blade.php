@@ -53,15 +53,15 @@
                                     <div class="mt-6">
                                         <div class="w-full">
                                             <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
-                                            <input 
-                                                type="date" 
-                                                id="date_of_birth" 
+                                            <input
+                                                type="date"
+                                                id="date_of_birth"
                                                 name="date_of_birth"
                                                 class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500
                                                     @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
-                                                max="{{ now()->subYears(18)->toDateString() }}" 
+                                                max="{{ now()->subYears(18)->toDateString() }}"
                                                 min="{{ now()->subYears(124)->toDateString() }}"
-                                                onchange="checkAge(this)" 
+                                                onchange="checkAge(this)"
                                             />
                                             @error('date_of_birth')
                                             <small class="text-red-500 mt-1 text-sm">
@@ -70,7 +70,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
+
                                     <div class="mt-6">
                                         <div class="w-full">
                                             <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
@@ -79,13 +79,13 @@
                                                 @error('nacionalidad') border-red-500 @else border-slate-300 @enderror">
                                                 <option value="" selected>Selecciona Nacionalidad</option>
                                                 @foreach ($nacionalidades as $items)
-                                                    <option value="{{ $items->idnacionalidad }}" 
+                                                    <option value="{{ $items->idnacionalidad }}"
                                                         @if (old('nacionalidad') == $items->idnacionalidad) selected @endif>
                                                         {{ $items->nacionalidad }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                    
+
                                             @error('nacionalidad')
                                                 <small class="text-red-500 mt-1 text-sm">
                                                     <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="w-full">
@@ -130,7 +130,7 @@
                                             </small>
                                         @enderror
                                     </div>
-                                    
+
 
                                     <div class="w-full">
                                         <label for="email" class="block mb-2 text-sm font-medium text-slate-700">Correo Electrónico</label>
@@ -395,44 +395,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Agregar las dependencias de jQuery, Popper.js, Bootstrap y Summernote -->
-                                <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-                                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-                                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-                                <!-- Agregar los estilos y scripts de Summernote -->
-                                <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
-                                <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
-                            <div class="container mt-5">
-                                    <div>
-                                        <!-- Summernote editor -->
-                                        <div id="summernote" class="w-full p-4 mb-4 border rounded-lg text-slate-700 placeholder:text-slate-400"></div>
-                                        <!-- Error handling for descripcion -->
-                                        @error('descripcion')
-                                            <small class="text-red-500 mt-1 text-sm">
-                                                <strong>{{ $message }}</strong>
-                                            </small>
-                                        @enderror
-                                    </div>
-                                    <!-- Campo oculto para enviar el contenido del editor -->
-                                    <input type="hidden" id="descripcion" name="descripcion">
-                            </div>
-                            <!-- Script para inicializar Summernote y capturar su contenido al enviar el formulario -->
-                            <script>
-                                $(document).ready(function() {
-                                    // Inicializar Summernote en el div con id "summernote"
-                                    $('#summernote').summernote({
-                                        placeholder: 'Descripción personal',
-                                        tabsize: 2,
-                                        height: 100
-                                    });
-                                    // Cuando se envíe el formulario, colocar el contenido de Summernote en el campo oculto
-                                    $('form').on('submit', function() {
-                                        var contenido = $('#summernote').summernote('code');  // Obtener el contenido HTML del editor
-                                        $('#descripcion').val(contenido);  // Colocar el contenido en el campo oculto
-                                    });
-                                });
-                            </script>
+                                <x-summernote />
 
                            </div>
                         </div>
@@ -463,7 +426,7 @@
          function checkAge(input) {
         const selectedDate = new Date(input.value);
         const currentDate = new Date();
-        
+
         const age = currentDate.getFullYear() - selectedDate.getFullYear();
         const month = currentDate.getMonth() - selectedDate.getMonth();
         const day = currentDate.getDate() - selectedDate.getDate();
