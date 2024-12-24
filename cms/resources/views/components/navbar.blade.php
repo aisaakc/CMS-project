@@ -17,16 +17,30 @@
         <div class="hidden md:flex space-x-8">
             <ul class="flex space-x-8">
                 <li>
-                    <a href="{{ route('HomePage') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300">HomePage</a>
+                    <a href="{{ route('HomePage') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
+                        <i class="fa-solid fa-house mr-2"></i>
+                        HomePage
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('Blog')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">
+                        <i class="fa-solid fa-book"></i>
+                        Blog
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('Blog')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">Blog</a>
+                    <a href="{{ route('SobreNosostros') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
+                        <i class="fa-solid fa-users mr-2"></i>
+                        Sobre Nosotros
+                    </a>
                 </li>
+
                 <li>
-                    <a href="{{ route('SobreNosostros')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">Sobre Nosotros</a>
-                </li>
-                <li>
-                    <a href="{{ route('Contactanos')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">Contáctanos</a>
+                    <a href="{{ route('Contactanos')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">
+                        <i class="fa-solid fa-phone"></i>
+                        Contáctanos
+                    </a>
                 </li>
             </ul>
         </div>
@@ -54,13 +68,30 @@
     <div class="bg-white w-4/5 p-6 rounded-lg shadow-lg">
         <ul class="flex flex-col space-y-4">
             <li>
-                <a href="#" class="text-gray-700 hover:text-indigo-600 transition duration-300">HomePage</a>
+                <a href="{{ route('HomePage') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
+                    <i class="fa-solid fa-house mr-2"></i>
+                    HomePage
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('Blog')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">
+                    <i class="fa-solid fa-book"></i>
+                    Blog
+                </a>
             </li>
             <li>
-                <a href="#" class="text-gray-700 hover:text-indigo-600 transition duration-300">Blog</a>
+                <a href="{{ route('SobreNosostros') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
+                    <i class="fa-solid fa-users mr-2"></i>
+                    Sobre Nosotros
+                </a>
             </li>
+
             <li>
-                <a href="#" class="text-gray-700 hover:text-indigo-600 transition duration-300">Sobre Nosotros</a>
+                <a href="{{ route('Contactanos')}}" class="text-gray-700 hover:text-indigo-600 transition duration-300">
+                    <i class="fa-solid fa-phone"></i>
+                    Contáctanos
+                </a>
             </li>
         </ul>
     </div>
