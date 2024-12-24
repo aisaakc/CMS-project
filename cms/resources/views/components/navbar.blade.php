@@ -10,9 +10,12 @@
 
 <header class="bg-white shadow-lg">
     <nav class="flex justify-between items-center max-w-screen-xl mx-auto p-6">
-        <div>
-            <h1 class="text-xl font-bold text-gray-800">Busqueda de empleo en latam</h1>
+        <div class="flex items-center">
+
+            <i class="fas fa-briefcase text-indigo-700 text-2xl mr-3"></i>
+            <h1 class="text-xl font-bold text-gray-800">Búsqueda de empleo en LATAM</h1>
         </div>
+
 
         <div class="hidden md:flex space-x-8">
             <ul class="flex space-x-8">
@@ -48,12 +51,15 @@
         <!-- Botones de autenticación -->
         <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
             <a href="{{ route('login') }}">
-                <button class="px-5 py-2 text-lg font-medium text-indigo-700 bg-white border-2 border-indigo-700 rounded-full shadow-md hover:bg-indigo-50 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-300 w-full sm:w-full">
+                <button class="px-5 py-2 text-lg font-medium text-indigo-700 bg-white border-2 border-indigo-700 rounded-full shadow-md hover:bg-indigo-50 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                    <i class="fa-solid fa-user mr-2"></i> <!-- Icono de usuario -->
                     Iniciar Sesión
                 </button>
             </a>
+
             <a href="{{ route('register') }}">
                 <button class="px-5 py-2 text-lg font-medium text-white bg-indigo-700 rounded-full shadow-md hover:bg-indigo-800 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-full">
+                    <i class="fa-solid fa-user-plus"></i>
                     Registrarse
                 </button>
             </a>

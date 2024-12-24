@@ -1,58 +1,29 @@
-<footer class="bg-gray-900 text-white py-8">
+<footer class="bg-gray-900 text-white py-6">
     <div class="max-w-screen-xl mx-auto px-6">
-        <!-- Contenido del footer: secciones -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-
-            <!-- Sección de información -->
-            <div>
-                <h3 class="text-lg font-bold mb-4">Información</h3>
-                <ul>
-                    <li><a href="{{ route('HomePage') }}" class="hover:text-indigo-400 transition duration-300">Inicio</a></li>
-                    <li><a href="{{ route('Blog') }}" class="hover:text-indigo-400 transition duration-300">Blog</a></li>
-                    <li><a href="{{ route('SobreNosostros') }}" class="hover:text-indigo-400 transition duration-300">Sobre Nosotros</a></li>
-                    <li><a href="{{ route('Contactanos') }}" class="hover:text-indigo-400 transition duration-300">Contáctanos</a></li>
-                </ul>
-            </div>
-
-            <!-- Sección de redes sociales -->
-            <div>
-                <h3 class="text-lg font-bold mb-4">Síguenos</h3>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300">
-                        <i class="fa-brands fa-facebook-f"></i>
+        <!-- Contenido del footer -->
+        <div class="flex flex-col items-center justify-center"> <!-- Centra todo el contenido en el footer -->
+            <!-- Sección de Redes Sociales -->
+            <div class="mb-4 text-center"> <!-- Asegura que la sección esté centrada -->
+                <h3 class="text-lg font-semibold mb-4 text-indigo-400">Síguenos</h3>
+                <div class="flex justify-center space-x-6"> <!-- Centra los íconos de redes sociales -->
+                    <a href="#" class="text-gray-300 hover:text-indigo-500 transition duration-300">
+                        <i class="fa-brands fa-facebook-f text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300">
-                        <i class="fa-brands fa-twitter"></i>
+                    <a href="#" class="text-gray-300 hover:text-indigo-500 transition duration-300">
+                        <i class="fa-brands fa-x text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="#" class="text-gray-300 hover:text-indigo-500 transition duration-300">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="#" class="text-gray-300 hover:text-indigo-500 transition duration-300">
+                        <i class="fa-brands fa-instagram text-xl"></i>
                     </a>
                 </div>
             </div>
-
-            <!-- Sección de contacto -->
-            <div>
-                <h3 class="text-lg font-bold mb-4">Contacto</h3>
-                <p class="text-sm">info@busquedaempleolatam.com</p>
-                <p class="text-sm">+1 234 567 890</p>
-            </div>
-
-            <!-- Sección de suscripción -->
-            <div>
-                <h3 class="text-lg font-bold mb-4">Suscríbete</h3>
-                <p class="text-sm mb-4">Recibe las últimas noticias y ofertas directamente en tu correo.</p>
-                <form action="#" method="POST" class="flex">
-                    <input type="email" placeholder="Tu correo electrónico" class="p-2 w-full rounded-l-lg text-gray-900" required>
-                    <button type="submit" class="bg-indigo-700 text-white p-2 rounded-r-lg hover:bg-indigo-800 transition duration-300">Suscribirse</button>
-                </form>
-            </div>
         </div>
 
-        <!-- Línea de separación -->
-        <div class="mt-8 border-t border-gray-700 pt-6">
+        <!-- Línea de separación y texto final -->
+        <div class="mt-6 border-t border-gray-700 pt-4">
             <p class="text-center text-sm text-gray-400">© 2025 Busqueda de Empleo LATAM. Todos los derechos reservados.</p>
         </div>
     </div>

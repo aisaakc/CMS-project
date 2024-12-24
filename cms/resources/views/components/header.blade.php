@@ -8,13 +8,16 @@
                 <li>
                     <a href="{{ route('login') }}">
                         <button class="px-5 py-2 text-lg font-medium text-indigo-700 bg-white border-2 border-indigo-700 rounded-full shadow-md hover:bg-indigo-50 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                            <i class="fa-solid fa-user mr-2"></i> <!-- Icono de usuario -->
                             Iniciar Sesión
                         </button>
                     </a>
+
                 </li>
                 <li>
                     <a href="{{ route('register') }}">
                         <button class="px-5 py-2 text-lg font-medium text-white bg-indigo-700 rounded-full shadow-md hover:bg-indigo-800 transition duration-300 ease-in-out transform hover:scale-110 focus:ring focus:ring-indigo-500">
+                            <i class="fa-solid fa-user-plus"></i>
                             Registrarse
                         </button>
                     </a>
