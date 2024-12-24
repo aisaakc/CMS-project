@@ -7,7 +7,7 @@
             <ul class="flex gap-6">
                 <li>
                     <a href="{{ route('login') }}">
-                        <button class="px-5 py-2 text-lg font-medium text-indigo-700 bg-white rounded-full shadow-md hover:bg-indigo-200 transition duration-300 ease-in-out transform hover:scale-110 focus:ring focus:ring-indigo-300">
+                        <button class="px-5 py-2 text-lg font-medium text-indigo-700 bg-white border-2 border-indigo-700 rounded-full shadow-md hover:bg-indigo-50 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-300">
                             Iniciar Sesión
                         </button>
                     </a>

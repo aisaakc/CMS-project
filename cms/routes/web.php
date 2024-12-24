@@ -1,15 +1,30 @@
 <?php
 
-use App\Models\Nacionalidad;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', function () {
-    return view('components.navbar');
-});
+    return view('cms.HomePage');
+})->name('HomePage');
+
+Route::get('Blog', function () {
+    return view('cms.Blog');
+})->name('Blog');
+
+Route::get('SobreNosostros', function () {
+    return view('cms.SobreNosostros');
+})->name('SobreNosostros');
+
+Route::get('Contactanos', function () {
+    return view('cms.Contactanos');
+})->name('Contactanos');
+
+
 
 // AUTH
 Route::prefix('auth')->group(function () {
+
     Route::post('register/verify', [AuthController::class, 'registerVerify'])->name('register.verify');
 
     Route::get('login', [AuthController::class, 'login'])->name('login');
