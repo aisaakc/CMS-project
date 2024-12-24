@@ -13,8 +13,8 @@
             <div>
                 <h1 class="w-16 ">hola</h1>
             </div>
-            <div class="absolute bg-white shadow-md rounded-lg p-4 hidden md:block  ">
-                <ul class="flex md:flex-row flex-col-reverse items-center gap-6">
+            <div class="absolute bg-white  min-h-[60vh] left-0 top-[9%]  w-full items-center px-5">
+                <ul class="flex md:flex-row flex-col-reverse md:items-center md:gap-[6] gap-6">
                     <li>
                         <a class="hover:text-gray-500" href="#">HomePage</a>
                     </li>
