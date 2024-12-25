@@ -12,7 +12,6 @@
                             Iniciar Sesión
                         </button>
                     </a>
-
                 </li>
                 <li>
                     <a href="{{ route('register') }}">

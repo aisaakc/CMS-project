@@ -74,8 +74,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -84,10 +82,26 @@
 <x-footer/>
 
 <script>
+
     function handleFormSubmit(event) {
         event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        const formData = {
+            nombre,
+            email,
+            mensaje,
+        };
+
+        localStorage.setItem('formData', JSON.stringify(formData));
+
         const successMessage = document.getElementById('successMessage');
         successMessage.classList.remove('hidden');
         successMessage.classList.add('block');
     }
 </script>
+
+
