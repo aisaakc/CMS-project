@@ -1,59 +1,93 @@
 <x-navbar/>
 
-<!-- Contenido Principal -->
 <main class="flex-grow py-10 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4">
-
-        <!-- Título de la página -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 class="text-4xl font-bold text-center mb-6 text-indigo-700">Contáctanos</h1>
+        <p class="text-lg text-center text-gray-700 mb-8">Estamos aquí para ayudarte</p>
 
-        <!-- Descripción -->
-        <p class="text-lg text-center text-gray-700 mb-8">Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto con nosotros. ¡Estamos aquí para ayudarte!</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-8 shadow-lg rounded-lg flex flex-col justify-between">
+                <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                    <div>
+                        <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Tu email" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="mensaje" class="block text-lg font-medium text-gray-700">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="6" placeholder="Tu mensaje" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit" class="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-full shadow-md hover:bg-indigo-800 transition duration-300">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+                <div id="successMessage" class="mt-4 text-green-600 font-medium text-center hidden">
+                    ¡Mensaje enviado con éxito!
+                </div>
+            </div>
 
-        <!-- Formulario de Contacto -->
-        <div class="bg-white p-8 shadow-lg rounded-lg">
-            <form action="-" >
-
-                <!-- Nombre -->
-                <div class="mb-6">
-                    <label for="name" class="block text-lg font-medium text-gray-700">Tu Nombre</label>
-                    <input type="text" id="name" name="name" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+            <div class="bg-white p-8 shadow-lg rounded-lg flex flex-col justify-between">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-full">
+                            <!-- Icono de Correo -->
+                            <i class="fas fa-envelope text-indigo-700 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Email</h4>
+                            <span class="text-gray-600">info@empresa.com</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-full">
+                            <!-- Icono de Teléfono -->
+                            <i class="fas fa-phone-alt text-indigo-700 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Teléfono</h4>
+                            <span class="text-gray-600">+58 0212 873 2535</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-full">
+                            <!-- Icono de Ubicación -->
+                            <i class="fas fa-map-marker-alt text-indigo-700 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Dirección</h4>
+                            <span class="text-gray-600">123 Calle Principal, Ciudad, País</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-full">
+                            <!-- Icono de Horario -->
+                            <i class="fas fa-clock text-indigo-700 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Horario</h4>
+                            <span class="text-gray-600">Lunes a Viernes: 9:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Correo Electrónico -->
-                <div class="mb-6">
-                    <label for="email" class="block text-lg font-medium text-gray-700">Tu Correo Electrónico</label>
-                    <input type="email" id="email" name="email" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                </div>
 
-                <!-- Mensaje -->
-                <div class="mb-6">
-                    <label for="message" class="block text-lg font-medium text-gray-700">Tu Mensaje</label>
-                    <textarea id="message" name="message" rows="6" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
-                </div>
-
-                <!-- Enviar -->
-                <div class="flex justify-center">
-                    <button type="submit" class="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-full shadow-md hover:bg-indigo-800 transition duration-300">
-                        Enviar Mensaje
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Información adicional (dirección, teléfono) -->
-        <div class="mt-10 text-center text-gray-700">
-            <h2 class="text-2xl font-semibold mb-4">Nuestra Ubicación</h2>
-            <p class="mb-4">Dirección: Calle Ficticia, 123, Ciudad, País</p>
-            <p class="mb-4">Teléfono: +1 234 567 890</p>
-
-            <!-- Mapa de Google -->
-            <div class="w-full h-64">
-                <iframe src="https://www.google.com/maps/embed/v1/place?q=loc:40.748817,-73.985428&key=YOUR_GOOGLE_MAPS_API_KEY" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe>
             </div>
         </div>
-
     </div>
 </main>
 
 <x-footer/>
+
+<script>
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const successMessage = document.getElementById('successMessage');
+        successMessage.classList.remove('hidden');
+        successMessage.classList.add('block');
+    }
+</script>

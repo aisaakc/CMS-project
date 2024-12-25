@@ -22,7 +22,7 @@
                 <li>
                     <a href="{{ route('HomePage') }}" class="text-sm text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
                         <i class="fa-solid fa-house mr-2"></i>
-                        HomePage
+                        Inicio
                     </a>
                 </li>
 
