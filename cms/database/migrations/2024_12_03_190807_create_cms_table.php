@@ -12,8 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id('idroles');
+            $table->string('rol', 45);
+        });
+
+        DB::table('roles')->insert([
+            ['rol' => 'admin'],
+            ['rol' => 'publisher'],
+        ]);
+
         Schema::create('nacionalidades', function (Blueprint $table) {
-            $table->id('idnacionalidad', true);
+            $table->id('idnacionalidad');
             $table->string('nacionalidad', 45);
         });
 
@@ -23,7 +33,7 @@ return new class extends Migration
         ]);
 
         Schema::create('preguntas', function (Blueprint $table) {
-            $table->id('idpregunta', true);
+            $table->id('idpregunta');
             $table->string('pregunta', 450);
         });
 
@@ -35,10 +45,8 @@ return new class extends Migration
             ['pregunta' => '¿Cuál es tu película favorita?'],
         ]);
 
-
-
         Schema::create('users', function (Blueprint $table) {
-            $table->id('idusers', true);
+            $table->id('idusers');
             $table->string('first_name', 45)->nullable();
             $table->string('last_name', 45)->nullable();
             $table->string('date_of_birth', 45)->nullable();
@@ -52,69 +60,30 @@ return new class extends Migration
             $table->string('tiktok', 45)->nullable();
             $table->text('descripcion', 45)->nullable();
             $table->string('password', 255)->nullable();
-            $table->enum('role', ['admin', 'publisher','visitor'])->default('visitor');
-            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('nacionalidad_idnacionalidad')
-                ->constrained('nacionalidades', 'idnacionalidad') // Referencia a la tabla nacionalidades
-                ->onDelete('cascade'); // Eliminar usuarios si se elimina la nacionalidad
+                ->constrained('nacionalidades', 'idnacionalidad')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('roles_idroles'); // Define roles_idroles como unsignedBigInteger
+            $table->foreign('roles_idroles') // Clave foránea explícita
+                ->references('idroles')
+                ->on('roles')
+                ->onDelete('cascade');
         });
 
         DB::table('users')->insert([
             [
-                'first_name' => 'Juan',
-                'last_name' => 'Pérez',
-                'date_of_birth' => '1990-05-15',
-                'cedula' => 27192837,
-                'address' => 'Calle Ficticia 123, Ciudad Ejemplo',
-                'email' => 'juan.perez@gmail.com',
-                'descripcion' => 'Soy un desarrollador web con experiencia en Laravel y PHP.',
-                'password' => bcrypt('password12345'), 
-                'role' => 'admin',
-                'status' => 'active',
-                'nacionalidad_idnacionalidad' => 1  
-            ],
-            [
-                'first_name' => 'Ana',
-                'last_name' => 'Gómez',
-                'date_of_birth' => '1985-09-10',
-                'cedula' => 17342987,
-                'address' => 'Avenida Siempre Viva 456',
-                'email' => 'ana.gomez@gmail.com',
-                'descripcion' => 'Me encanta la fotografía y la música.',
-                'password' => bcrypt('password456'),
-                'role' => 'publisher',
-                'status' => 'active',
-                'nacionalidad_idnacionalidad' => 2 
-            ],
-            [
                 'first_name' => 'Isaac',
-                'last_name' => 'Martínez',
-                'date_of_birth' => '1995-02-20',
-                'cedula' => 19876543,
-                'address' => 'Avenida Siempre Viva 456',
-                'email' => 'isaac.martinez@gmail.com',
-                'descripcion' => 'me gusta php',
-                'password' => bcrypt('password789'),
-                'role' => 'publisher',
-                'status' => 'active',
-                'nacionalidad_idnacionalidad' => 1 
-            ],
-            [
-                'first_name' => 'Fernando',
-                'last_name' => 'García',
-                'date_of_birth' => '1992-05-15',
-                'cedula' => 23192837,
-                'address' => 'Avenida Siempre Viva 456',
-                'email' => 'fernando.garcia@gmail.com',
-                'descripcion' => 'me gusta python',
-                'password' => bcrypt('password123'),
-                'role' => 'publisher',
-                'status' => 'active',
-                'nacionalidad_idnacionalidad' => 1 
+                'last_name' => 'Cattoni',
+                'date_of_birth' => '2003-31-12',
+                'cedula' => 30551898,
+                'address' => 'Calle Ficticia 123, Ciudad Ejemplo',
+                'email' => 'isaac.cattoni@gmail.com',
+                'descripcion' => 'Soy un desarrollador web con experiencia en Laravel y PHP.',
+                'password' => bcrypt('password12345'),
+                'nacionalidad_idnacionalidad' => 1,
+                'roles_idroles' => 1,
             ],
         ]);
-
-
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
@@ -125,28 +94,26 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-
-
         Schema::create('password_resets', function (Blueprint $table) {
-            $table->id(); // ID autoincremental
-            $table->string('email')->index(); // Correo electrónico del usuario
-            $table->string('token'); // Token para restablecimiento de contraseña
-            $table->timestamp('created_at')->nullable(); // Fecha de creación del token
-            $table->foreignId('user_id') // Llave foránea a la tabla users
-                ->constrained('users', 'idusers') // Referencia a la tabla users
-                ->onDelete('cascade'); // Eliminar entradas de password_resets si se elimina el usuario
+            $table->id();
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+            $table->foreignId('user_id')
+                ->constrained('users', 'idusers')
+                ->onDelete('cascade');
         });
 
         Schema::create('respuestas', function (Blueprint $table) {
-            $table->id('idrespuesta', true);
-            $table->foreignId('users_idusers') // Llave foránea a la tabla users
+            $table->id('idrespuesta');
+            $table->foreignId('users_idusers')
                 ->constrained('users', 'idusers')
-                ->onDelete('cascade'); // Eliminar respuestas si se elimina el usuario
-            $table->foreignId('preguntas_idpreguntas') // Llave foránea a la tabla preguntas
+                ->onDelete('cascade');
+            $table->foreignId('preguntas_idpreguntas')
                 ->constrained('preguntas', 'idpregunta')
-                ->onDelete('cascade'); // Eliminar respuestas si se elimina la pregunta
-            $table->string('respuesta'); // Almacenar la respuesta del usuario a la pregunta
-            $table->timestamps(); // Campos created_at y updated_at
+                ->onDelete('cascade');
+            $table->string('respuesta');
+            $table->timestamps();
         });
     }
 
@@ -155,16 +122,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-
         Schema::dropIfExists('respuestas');
-
-        Schema::dropIfExists('preguntas');
-
-        Schema::dropIfExists('nacionalidades');
-
-        Schema::dropIfExists('sessions');
-
         Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('preguntas');
+        Schema::dropIfExists('nacionalidades');
+        Schema::dropIfExists('roles');
     }
 };

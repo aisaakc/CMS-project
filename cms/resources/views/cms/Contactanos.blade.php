@@ -1,6 +1,5 @@
 <x-navbar/>
 
-<main class="flex-grow py-10 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 class="text-4xl font-bold text-center mb-6 text-indigo-700">Contáctanos</h1>
         <p class="text-lg text-center text-gray-700 mb-8">Estamos aquí para ayudarte</p>
@@ -77,7 +76,7 @@
             </div>
         </div>
     </div>
-</main>
+
 
 <x-footer/>
 
