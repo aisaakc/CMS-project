@@ -49,7 +49,7 @@ class AuthController extends Controller
 
     public function registerVerify(Request $request)
 {
-    // Validación de los campos
+
     $request->validate([
         'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
         'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
@@ -108,6 +108,7 @@ class AuthController extends Controller
     $user->descripcion = $request->descripcion;
     $user->password = bcrypt($request->password);
     $user->nacionalidad_idnacionalidad = $request->nacionalidad;
+    $user->role = 'publisher';
     $user->save();
     // Obtener el ID del usuario recién creado
     $usersaved = User::orderBy('idusers', 'desc')->first();

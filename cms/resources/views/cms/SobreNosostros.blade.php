@@ -1,18 +1,13 @@
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
-    <!-- Navbar -->
     <x-navbar/>
 
-    <!-- Contenido principal -->
     <main class="flex-grow">
         <h1 class="text-4xl font-bold text-center mt-8">Sobre Nosotros</h1>
 
-        <!-- Descripción -->
         <h2 class="text-lg text-center mt-4 text-gray-700">Bienvenidos a la página de Sobre Nosotros. Aquí encontrarás información sobre nuestra misión, visión, equipo, historia y valores, enfocados en la búsqueda de empleo en Latinoamérica.</h2>
 
-        <!-- Sección de tablas organizadas en dos columnas -->
         <section class="mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-            <!-- Misión -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="flex items-center mb-4 w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white py-3 px-4 rounded-t-lg shadow-lg">
                     <h2 class="text-2xl font-semibold flex-grow text-center">Nuestra Misión</h2> <!-- Título centrado -->
@@ -26,7 +21,6 @@
                 </h3>
             </div>
 
-            <!-- Nuestro Equipo -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="flex items-center mb-4 w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white py-3 px-4 rounded-t-lg shadow-lg">
                     <h2 class="text-2xl font-semibold flex-grow text-center">Nuestro Equipo</h2> <!-- Título centrado -->
@@ -42,10 +36,8 @@
 
         </section>
 
-        <!-- Sección de tablas debajo (Historia y Valores) con espaciado adicional -->
         <section class="mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
 
-            <!-- Nuestra Historia -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="flex items-center mb-4 w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white py-3 px-4 rounded-t-lg shadow-lg">
                     <h2 class="text-2xl font-semibold flex-grow text-center">Nuestra Historia</h2> <!-- Título centrado -->
@@ -59,7 +51,6 @@
                 </h3>
             </div>
 
-            <!-- Nuestros Valores -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="flex items-center mb-4 w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white py-3 px-4 rounded-t-lg shadow-lg">
                     <h2 class="text-2xl font-semibold flex-grow text-center">Nuestros Valores</h2> <!-- Título centrado -->
@@ -75,10 +66,8 @@
 
         </section>
 
-        <!-- Sección de Testimonios -->
         <h2 class="text-4xl font-bold text-center mt-8">Lo que dicen nuestros clientes</h2>
         <section class="mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- Testimonio 1 -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="mb-4">
                     <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>
@@ -91,7 +80,6 @@
                 </p>
             </div>
 
-            <!-- Testimonio 2 -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="mb-4">
                     <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>
@@ -104,7 +92,6 @@
                 </p>
             </div>
 
-            <!-- Testimonio 3 -->
             <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
                 <div class="mb-4">
                     <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>

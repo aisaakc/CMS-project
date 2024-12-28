@@ -12,16 +12,14 @@
 
 <header class="bg-white shadow-lg">
     <nav class="flex justify-between items-center max-w-screen-xl mx-auto p-6">
-        <!-- Logo e icono -->
+
         <div class="flex items-center">
             <i class="fas fa-briefcase text-indigo-700 text-2xl mr-3"></i>
             <h1 class="text-xl font-bold text-gray-800">Búsqueda de empleo en LATAM</h1>
         </div>
 
-        <!-- Divider para pantallas grandes -->
         <div class="hidden md:block mx-6 border-l border-gray-300 h-8"></div>
 
-        <!-- Menú principal para pantallas grandes -->
         <div class="hidden md:flex ml-10 space-x-8">
             <ul class="flex items-center space-x-4">
                 <li>
@@ -51,7 +49,6 @@
             </ul>
         </div>
 
-        <!-- Botones de sesión -->
         <div class="hidden md:flex ml-10">
             <ul class="flex gap-6">
                 <li>
@@ -73,7 +70,6 @@
             </ul>
         </div>
 
-        <!-- Botón de hamburguesa para pantallas pequeñas -->
         <div class="md:hidden flex items-center">
             <button id="hamburger" class="text-gray-700 hover:text-indigo-600">
                 <i class="fas fa-bars text-2xl"></i>
@@ -81,7 +77,6 @@
         </div>
     </nav>
 
-    <!-- Menú desplegable para móviles -->
     <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
         <ul class="space-y-4 p-6">
             <li>
@@ -126,7 +121,6 @@
     </div>
 </header>
 
-<!-- Script para el toggle del menú móvil -->
 <script>
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
