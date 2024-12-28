@@ -108,7 +108,7 @@ class AuthController extends Controller
     $user->descripcion = $request->descripcion;
     $user->password = bcrypt($request->password);
     $user->nacionalidad_idnacionalidad = $request->nacionalidad;
-    $user->role = 'publisher';
+    $user->roles_idroles = $request->idroles;
     $user->save();
     // Obtener el ID del usuario recién creado
     $usersaved = User::orderBy('idusers', 'desc')->first();

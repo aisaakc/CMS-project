@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id('idroles');
-            $table->string('rol', 45);
+            $table->string('name', 45);
         });
 
         DB::table('roles')->insert([
-            ['rol' => 'admin'],
-            ['rol' => 'publisher'],
+            ['name' => 'admin'],
+            ['name' => 'publisher'],
         ]);
 
         Schema::create('nacionalidades', function (Blueprint $table) {
