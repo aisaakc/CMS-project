@@ -55,6 +55,6 @@ Route::prefix('auth')->group(function () {
 // PROTECTED ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
-        return view('visitor.dashboard');
+        return view('vistas.dashboard');
     })->name('dashboard');
 });

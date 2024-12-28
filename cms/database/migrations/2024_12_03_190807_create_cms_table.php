@@ -63,7 +63,7 @@ return new class extends Migration
             $table->foreignId('nacionalidad_idnacionalidad')
                 ->constrained('nacionalidades', 'idnacionalidad')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('roles_idroles'); // Define roles_idroles como unsignedBigInteger
+            $table->unsignedBigInteger('roles_idroles')->default(2); // Define roles_idroles como unsignedBigInteger
             $table->foreign('roles_idroles') // Clave foránea explícita
                 ->references('idroles')
                 ->on('roles')

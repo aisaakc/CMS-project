@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Nacionalidad;
 use App\Models\Pregunta;
 use App\Models\Respuesta;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -108,7 +109,7 @@ class AuthController extends Controller
     $user->descripcion = $request->descripcion;
     $user->password = bcrypt($request->password);
     $user->nacionalidad_idnacionalidad = $request->nacionalidad;
-    $user->roles_idroles = $request->idroles;
+    $user->roles_idroles = 2;
     $user->save();
     // Obtener el ID del usuario recién creado
     $usersaved = User::orderBy('idusers', 'desc')->first();
