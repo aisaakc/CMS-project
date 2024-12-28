@@ -34,7 +34,6 @@
                 <div class="space-y-6">
                     <div class="flex items-center space-x-4">
                         <div class="bg-indigo-100 p-3 rounded-full">
-                            <!-- Icono de Correo -->
                             <i class="fas fa-envelope text-indigo-700 text-xl"></i>
                         </div>
                         <div>
@@ -44,7 +43,6 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <div class="bg-indigo-100 p-3 rounded-full">
-                            <!-- Icono de Teléfono -->
                             <i class="fas fa-phone-alt text-indigo-700 text-xl"></i>
                         </div>
                         <div>
@@ -54,7 +52,6 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <div class="bg-indigo-100 p-3 rounded-full">
-                            <!-- Icono de Ubicación -->
                             <i class="fas fa-map-marker-alt text-indigo-700 text-xl"></i>
                         </div>
                         <div>
@@ -64,7 +61,6 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <div class="bg-indigo-100 p-3 rounded-full">
-                            <!-- Icono de Horario -->
                             <i class="fas fa-clock text-indigo-700 text-xl"></i>
                         </div>
                         <div>
@@ -101,6 +97,7 @@
         successMessage.classList.remove('hidden');
         successMessage.classList.add('block');
     }
+
 </script>
 
 

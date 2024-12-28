@@ -38,11 +38,13 @@ class AuthController extends Controller
 
     public function showForm()
     {
+
         $nacionalidades = Nacionalidad::all();
 
         $preguntas = Pregunta::all();
 
         return view('auth.register', compact('nacionalidades', 'preguntas'));
+
     }
 
     public function registerVerify(Request $request)
@@ -67,7 +69,6 @@ class AuthController extends Controller
         'respuesta_3' => 'required',
         'respuesta_4' => 'required',
     ], [
-        // Mensajes de error personalizados (si los hay)
         'first_name.required' => 'Los nombres son requeridos.',
         'last_name.required' => 'Los apellidos son requeridos.',
         'last_name.regex' => 'Apellido no válido.',
@@ -108,20 +109,18 @@ class AuthController extends Controller
     $user->password = bcrypt($request->password);
     $user->nacionalidad_idnacionalidad = $request->nacionalidad;
     $user->save();
-
     // Obtener el ID del usuario recién creado
     $usersaved = User::orderBy('idusers', 'desc')->first();
-
     // Guardar las respuestas de seguridad
     $pregunta1 = new Respuesta();
     $pregunta1->users_idusers = $usersaved->idusers;
-    $pregunta1->preguntas_idpreguntas = $request->pregunta_1; // Asegúrate de que sea un ID entero válido
-    $pregunta1->respuesta = bcrypt($request->respuesta_1); // Ciframos la respuesta
+    $pregunta1->preguntas_idpreguntas = $request->pregunta_1;
+    $pregunta1->respuesta = bcrypt($request->respuesta_1);
     $pregunta1->save();
 
     $pregunta2 = new Respuesta();
     $pregunta2->users_idusers = $usersaved->idusers;
-    $pregunta2->preguntas_idpreguntas = $request->pregunta_2; // Asegúrate de que sea un ID entero válido
+    $pregunta2->preguntas_idpreguntas = $request->pregunta_2;
     $pregunta2->respuesta = bcrypt($request->respuesta_2);
     $pregunta2->save();
 
@@ -208,7 +207,7 @@ class AuthController extends Controller
             'respuesta_2' => 'required',
             'respuesta_3' => 'required',
             'respuesta_4' => 'required',
-            // Valida que cada respuesta sea una cadena no vacía
+
         ]);
 
         $idquestion1 = $request->pregunta_1;

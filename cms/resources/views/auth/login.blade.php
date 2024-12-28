@@ -36,10 +36,10 @@
                     <div class="divide-y divide-gray-200">
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                             <div class="relative">
-                                <input autocomplete="off" id="email" name="email" type="email" 
-                                    class="peer placeholder-transparent h-12 w-full border-b-2 
-                                    @error('email') border-red-500 @else border-gray-300 @enderror 
-                                    text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200" 
+                                <input autocomplete="off" id="email" name="email" type="email"
+                                    class="peer placeholder-transparent h-12 w-full border-b-2
+                                    @error('email') border-red-500 @else border-gray-300 @enderror
+                                    text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200"
                                     placeholder="Correo electrónico" value="{{ old('email') }}" />
                                 <label for="email" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
                                     Correo electrónico
@@ -50,37 +50,33 @@
                             </div>
 
                             <div class="w-full relative">
-                                <input autocomplete="off" id="password" name="password" type="password" 
-                                    class="peer placeholder-transparent h-12 w-full border-b-2 
-                                    @error('password') border-red-500 @else border-gray-300 @enderror 
-                                    text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200" 
+                                <input autocomplete="off" id="password" name="password" type="password"
+                                    class="peer placeholder-transparent h-12 w-full border-b-2
+                                    @error('password') border-red-500 @else border-gray-300 @enderror
+                                    text-gray-900 focus:outline-none focus:border-cyan-500 transition-all duration-200"
                                     placeholder="Contraseña" />
-                                
-                                <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm 
-                                    peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
+
+                                <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm
+                                    peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                                     peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
                                     Contraseña
                                 </label>
-                                
+
                                 <div class="absolute inset-y-0 right-2 sm:right-3 flex items-center z-20 px-3">
                                     <button type="button" id="togglePassword" class="cursor-pointer text-gray-400 rounded-md focus:outline-none focus:text-blue-600">
                                         <i id="eye-icon" class="fas fa-eye-slash"></i>
                                     </button>
                                 </div>
-                                
+
                                 @error('password')
                                 <small class="text-red-500 mt-2 text-sm block">
                                     <strong>{{ $message }}</strong>
                                 </small>
                                 @enderror
                             </div>
-                            
-                            
-                            
-                            
 
                             <div class="flex items-center justify-between mt-6">
-                                
+
                                 <a href="{{route('verify')}}" class="text-sm text-cyan-600 hover:text-cyan-700">¿Olvidaste tu contraseña?</a>
                             </div>
 
@@ -119,3 +115,5 @@
 </script>
 
 @endsection
+
+

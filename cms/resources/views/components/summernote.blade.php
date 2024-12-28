@@ -7,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Agregar las dependencias de jQuery, Popper.js, Bootstrap y Summernote -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -17,19 +16,16 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
 <div class="container mt-5">
         <div>
-            <!-- Summernote editor -->
             <div id="summernote" class="w-full p-4 mb-4 border rounded-lg text-slate-700 placeholder:text-slate-400"></div>
-            <!-- Error handling for descripcion -->
+
             @error('descripcion')
                 <small class="text-red-500 mt-1 text-sm">
                     <strong>{{ $message }}</strong>
                 </small>
             @enderror
         </div>
-        <!-- Campo oculto para enviar el contenido del editor -->
         <input type="hidden" id="descripcion" name="descripcion">
 </div>
-<!-- Script para inicializar Summernote y capturar su contenido al enviar el formulario -->
 <script>
     $(document).ready(function() {
         // Inicializar Summernote en el div con id "summernote"
