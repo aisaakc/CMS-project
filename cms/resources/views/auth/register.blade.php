@@ -302,7 +302,7 @@
                                             <option selected class="bg-gray-100">Selecciona una pregunta de seguridad
                                             </option>
                                             @foreach ($preguntas as $items)
-                                                <option value="{{ $items->idpregunta }}">{{ $items->pregunta }}</option>
+                                                <option value="{{ $items->idpregunta }}">{{ $items->pregunta}}</option>
                                             @endforeach
                                         </select>
 

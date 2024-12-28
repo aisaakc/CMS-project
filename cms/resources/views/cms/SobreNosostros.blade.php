@@ -107,6 +107,5 @@
 
     </main>
 
-    <!-- Footer -->
     <x-footer/>
 </body>
