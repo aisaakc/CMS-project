@@ -383,7 +383,7 @@
             alert("Debes tener al menos 18 años para registrarte.");
             input.setCustomValidity("Debes tener al menos 18 años para registrarte.");
         } else {
-            input.setCustomValidity(""); // Si la edad es válida, se permite la selección
+            input.setCustomValidity("");
         }
     }
         function validateName(input) {

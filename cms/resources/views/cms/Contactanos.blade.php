@@ -1,86 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contáctanos</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800">
 
     <x-navbar/>
 
     <main class="flex-grow">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
-            <h1 class="text-4xl font-extrabold text-gray-800 leading-tight">Contáctanos</h1>
-            <p class="text-lg text-center text-gray-700 mb-8">Estamos aquí para ayudarte</p>
+        <div class="container mx-auto px-6 sm:px-10 lg:px-16 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Contáctanos</h1>
+                <p class="text-xl text-gray-700 mt-4">Estamos aquí para resolver tus dudas y escuchar tus comentarios</p>
+            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white p-8 shadow-lg rounded-lg flex flex-col justify-between">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white p-10 shadow-xl rounded-lg">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Envíanos un mensaje</h2>
                     <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
                         <div>
                             <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
                         </div>
                         <div>
                             <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Tu email" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            <input type="email" id="email" name="email" placeholder="Tu email" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
                         </div>
                         <div>
                             <label for="mensaje" class="block text-lg font-medium text-gray-700">Mensaje</label>
-                            <textarea id="mensaje" name="mensaje" rows="6" placeholder="Tu mensaje" class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                            <textarea id="mensaje" name="mensaje" rows="6" placeholder="Tu mensaje" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required></textarea>
                         </div>
                         <div class="flex justify-center">
-                            <button type="submit" class="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-full shadow-md hover:bg-indigo-800 transition duration-300">
+                            <button type="submit" class="px-8 py-4 bg-indigo-700 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-800 transition duration-300">
                                 Enviar Mensaje
                             </button>
                         </div>
                     </form>
-                    <div id="successMessage" class="mt-4 text-green-600 font-medium text-center hidden">
+                    <div id="successMessage" class="mt-6 text-green-600 font-medium text-center hidden">
                         ¡Mensaje enviado con éxito!
                     </div>
                 </div>
 
-                <div class="bg-white p-8 shadow-lg rounded-lg flex flex-col justify-between">
+                <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white p-10 shadow-xl rounded-lg">
+                    <h2 class="text-2xl font-semibold mb-6">Información de Contacto</h2>
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-indigo-100 p-3 rounded-full">
-                                <i class="fas fa-envelope text-indigo-700 text-xl"></i>
+                            <div class="bg-white p-4 rounded-full">
+                                <i class="fas fa-envelope text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Email</h4>
-                                <span class="text-gray-600">info@empresa.com</span>
+                                <h4 class="font-semibold text-lg">Email</h4>
+                                <span class="text-gray-100">info@empresa.com</span>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <div class="bg-indigo-100 p-3 rounded-full">
-                                <i class="fas fa-phone-alt text-indigo-700 text-xl"></i>
+                            <div class="bg-white p-4 rounded-full">
+                                <i class="fas fa-phone-alt text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Teléfono</h4>
-                                <span class="text-gray-600">+58 0212 873 2535</span>
+                                <h4 class="font-semibold text-lg">Teléfono</h4>
+                                <span class="text-gray-100">+58 0212 873 2535</span>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <div class="bg-indigo-100 p-3 rounded-full">
-                                <i class="fas fa-map-marker-alt text-indigo-700 text-xl"></i>
+                            <div class="bg-white p-4 rounded-full">
+                                <i class="fas fa-map-marker-alt text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Dirección</h4>
-                                <span class="text-gray-600">123 Calle Principal, Ciudad, País</span>
+                                <h4 class="font-semibold text-lg">Dirección</h4>
+                                <span class="text-gray-100">Plaza Bolívar, Caracas, Venezuela</span>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-indigo-100 p-3 rounded-full">
-                                <i class="fas fa-clock text-indigo-700 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Horario</h4>
-                                <span class="text-gray-600">Lunes a Viernes: 9:00 AM - 6:00 PM</span>
-                            </div>
-                        </div>
+                        <div id="map" class="w-full h-96 rounded-lg shadow"></div>
                     </div>
                 </div>
             </div>
@@ -89,7 +75,25 @@
 
     <x-footer/>
 
+    <!-- Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
+        // Configuración del mapa con Leaflet.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const map = L.map('map').setView([10.5061, -66.9146], 15); // Coordenadas de la Plaza Bolívar
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Agregar un marcador
+            L.marker([10.5061, -66.9146]).addTo(map)
+                .bindPopup('Plaza Bolívar, Caracas, Venezuela')
+                .openPopup();
+        });
+
         function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -110,6 +114,4 @@
             successMessage.classList.add('block');
         }
     </script>
-
 </body>
-</html>
