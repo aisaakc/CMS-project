@@ -55,16 +55,13 @@ class AuthController extends Controller
         'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
         'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
         'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
+        'user_name' => 'required|unique:users,user_name',
         'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
         'nacionalidad' => 'required',
         'password' => 'required|min:8',
         'password_confirmation' => 'required|same:password',
         'address' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
-        'pregunta_1' => 'required',
-        'pregunta_2' => 'required',
-        'pregunta_3' => 'required',
-        'pregunta_4' => 'required',
         'respuesta_1' => 'required',
         'respuesta_2' => 'required',
         'respuesta_3' => 'required',
@@ -73,6 +70,7 @@ class AuthController extends Controller
         'first_name.required' => 'Los nombres son requeridos.',
         'last_name.required' => 'Los apellidos son requeridos.',
         'last_name.regex' => 'Apellido no válido.',
+        'user_name.required' => 'El nombre de usuario es requerido.',
         'date_of_birth.required' => 'La fecha de nacimiento es requerida.',
         'date_of_birth.before' => 'Debes ser mayor de 18 años.',
         'date_of_birth.before_or_equal' => 'Debes ser mayor de 18 años.',
@@ -88,55 +86,46 @@ class AuthController extends Controller
         'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
         'password_confirmation.same' => 'Las contraseñas no coinciden.',
         'address.required' => 'La dirección es requerida.',
-        'respuesta_1.required' => 'La pregunta 1 es requerida.',
-        'respuesta_2.required' => 'La pregunta 2 es requerida.',
-        'respuesta_3.required' => 'La pregunta 3 es requerida.',
-        'respuesta_4.required' => 'La pregunta 4 es requerida.',
+        'respuesta_1.required' => 'La respuesta 1 es requerida.',
+        'respuesta_2.required' => 'La respuesta 2 es requerida.',
+        'respuesta_3.required' => 'La respuesta 3 es requerida.',
+        'respuesta_4.required' => 'La respuesta 4 es requerida.',
     ]);
 
     // Crear el usuario
-    $user = new User();
-    $user->first_name = $request->first_name;
-    $user->last_name = $request->last_name;
-    $user->date_of_birth = $request->date_of_birth;
-    $user->cedula = $request->cedula;
-    $user->address = $request->address;
-    $user->email = $request->email;
-    $user->facebook = $request->facebook;
-    $user->instagram = $request->instagram;
-    $user->x = $request->x;
-    $user->tiktok = $request->tiktok;
-    $user->descripcion = $request->descripcion;
-    $user->password = bcrypt($request->password);
-    $user->nacionalidad_idnacionalidad = $request->nacionalidad;
-    $user->roles_idroles = 2;
-    $user->save();
-    // Obtener el ID del usuario recién creado
-    $usersaved = User::orderBy('idusers', 'desc')->first();
-    // Guardar las respuestas de seguridad
-    $pregunta1 = new Respuesta();
-    $pregunta1->users_idusers = $usersaved->idusers;
-    $pregunta1->preguntas_idpreguntas = $request->pregunta_1;
-    $pregunta1->respuesta = bcrypt($request->respuesta_1);
-    $pregunta1->save();
+    $user = User::create([
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'date_of_birth' => $request->date_of_birth,
+        'cedula' => $request->cedula,
+        'user_name' => $request->user_name,
+        'address' => $request->address,
+        'email' => $request->email,
+        'facebook' => $request->facebook,
+        'instagram' => $request->instagram,
+        'x' => $request->x,
+        'tiktok' => $request->tiktok,
+        'descripcion' => $request->descripcion,
+        'password' => bcrypt($request->password),
+        'nacionalidad_idnacionalidad' => $request->nacionalidad,
+        'roles_idroles' => 2,
+    ]);
 
-    $pregunta2 = new Respuesta();
-    $pregunta2->users_idusers = $usersaved->idusers;
-    $pregunta2->preguntas_idpreguntas = $request->pregunta_2;
-    $pregunta2->respuesta = bcrypt($request->respuesta_2);
-    $pregunta2->save();
+    // Crear las respuestas de seguridad
+    $preguntas = [
+        $request->pregunta_1 => $request->respuesta_1,
+        $request->pregunta_2 => $request->respuesta_2,
+        $request->pregunta_3 => $request->respuesta_3,
+        $request->pregunta_4 => $request->respuesta_4
+    ];
 
-    $pregunta3 = new Respuesta();
-    $pregunta3->users_idusers = $usersaved->idusers;
-    $pregunta3->preguntas_idpreguntas = $request->pregunta_3; // Asegúrate de que sea un ID entero válido
-    $pregunta3->respuesta = bcrypt($request->respuesta_3);
-    $pregunta3->save();
-
-    $pregunta4 = new Respuesta();
-    $pregunta4->users_idusers = $usersaved->idusers;
-    $pregunta4->preguntas_idpreguntas = $request->pregunta_4; // Asegúrate de que sea un ID entero válido
-    $pregunta4->respuesta = bcrypt($request->respuesta_4); // Ciframos la respuesta
-    $pregunta4->save();
+    foreach ($preguntas as $pregunta_id => $respuesta) {
+        Respuesta::create([
+            'users_idusers' => $user->idusers,
+            'preguntas_idpreguntas' => $pregunta_id,
+            'respuesta' => bcrypt($respuesta),
+        ]);
+    }
 
     // Redirigir al login con un mensaje de éxito
     return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');

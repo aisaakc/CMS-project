@@ -30,6 +30,7 @@ class User extends Authenticatable
 		'last_name',
 		'date_of_birth',
 		'cedula',
+        'user_name',
 		'image',
 		'address',
 		'email',
