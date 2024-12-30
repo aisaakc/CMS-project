@@ -7,7 +7,7 @@
         <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white py-28 shadow-lg">
             <div class="container mx-auto px-6 lg:px-16 text-center">
                 <h1 class="text-5xl font-extrabold leading-tight tracking-tight animate-fadeInDown">
-                    Bienvenidos a la página de búsqueda de empleo
+                    Bienvenidos a nuestra página de búsqueda de empleo
                 </h1>
                 <p class="text-lg lg:text-xl mt-6 font-medium max-w-3xl mx-auto leading-relaxed">
                     Conectamos a los mejores talentos con las oportunidades laborales ideales para su crecimiento
