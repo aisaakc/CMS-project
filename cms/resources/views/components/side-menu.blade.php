@@ -7,9 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Dashboard</title>
 
-    <!-- Google Fonts for professional typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -20,65 +17,128 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
-<body>
-    <div class="w-screen h-screen flex">
+<body class="font-inter bg-gray-100">
+    <div class="flex h-screen">
         <!-- Sidebar -->
-        <div id="sidebar" class="w-[400px] h-full bg-gray-200 text-white transition-all duration-300">
+        <div id="sidebar" class="fixed lg:static w-64 h-full bg-gray-900 text-white transition-transform transform lg:translate-x-0 -translate-x-full lg:block">
             <!-- Header -->
-            <div class="h-[50px] bg-gray-900 flex items-center px-[20px]">
-                <h3 class="font-bold text-xl">Admin</h3>
+            <div class="h-14 bg-gray-800 flex items-center justify-between px-4">
+                <!-- Icon and Title -->
+                <div class="flex items-center">
+                    <i class="fas fa-briefcase text-white text-2xl mr-3"></i>
+                    <h3 class="font-bold text-xl text-white">Busca de empleo</h3>
+                </div>
+
+                <!-- Close Sidebar Button -->
+                <button id="closeSidebar" class="lg:hidden text-white focus:outline-none hover:text-gray-300 transition">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
+
 
             <!-- Menu -->
-            <div class="h-[calc(100vh-50px)] bg-gray-800 py-[20px] flex flex-col">
-                <div class="px-[20px] space-y-[10px] text-gray-300">
-                    <div class="hover:text-white cursor-pointer">Dashboard</div>
-                    <div class="hover:text-white cursor-pointer">Users</div>
-                    <div class="hover:text-white cursor-pointer">Settings</div>
-                    <div class="hover:text-white cursor-pointer">Analytics</div>
-                    <div class="hover:text-white cursor-pointer">Reports</div>
-                </div>
+            <nav class="flex flex-col space-y-2 p-4 text-gray-300">
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-sitemap"></i>
+                    <span>Páginas</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Usuarios</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-photo-video"></i>
+                    <span>Medios</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-comments"></i>
+                    <span>Comentarios</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-cogs"></i>
+                    <span>Ajustes</span>
+                </a>
+            </nav>
 
-                <!-- Logout -->
-                <div class="mt-auto px-[20px] h-[50px] flex items-center text-gray-300 hover:text-white cursor-pointer">
-                    <div>Logout</div>
-                </div>
-            </div>
         </div>
 
-        <!-- Main Content Area -->
-        <div class="flex-1 h-full bg-gray-100">
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
             <!-- Header -->
-            <div class="h-[50px] bg-white flex items-center shadow-md px-[20px] w-full border-b">
-
+            <header class="h-14 bg-white shadow-md flex items-center justify-between px-4">
+                <!-- Sidebar Toggle Button -->
+                <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
 
                 <!-- Search Bar -->
-                <div class="flex flex-1 justify-center items-center">
-                    <form class="flex items-center w-[400px]">
-                        <input type="text" class="flex-grow h-[40px] border border-gray-300 rounded-l-lg px-[10px] focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="Search...">
-                        <button class="w-[50px] h-[40px] bg-gray-500 text-white rounded-r-lg flex justify-center items-center hover:bg-gray-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 18l6-6m0 0l-6-6m6 6H4" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
+                <form class="flex items-center w-full max-w-md mx-auto">
+                    <input type="text" placeholder="Search..." class="flex-grow border border-gray-300 rounded-l-lg px-4 py-2 focus:ring-2 focus:ring-gray-500 focus:outline-none">
+                    <button class="bg-gray-500 text-white px-4 py-2 rounded-r-lg hover:bg-gray-600">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
 
-                <!-- Profile Area -->
-                <div class="w-[150px] flex items-center justify-end space-x-4">
-                    <div class="h-8 w-8 bg-gray-300 rounded-full"></div>
-                    <div class="text-gray-800">John Doe</div>
-                </div>
-            </div>
+                <!-- Profile -->
+                <div class="relative">
+                    <div class="flex items-center space-x-2 cursor-pointer" id="profileMenuToggle">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-700 text-xl"></i>
+                        </div>
+                        <span class="text-gray-700">John Doe</span>
+                        <i class="fas fa-chevron-down text-gray-700"></i>
+                    </div>
 
+                    <!-- Dropdown Menu -->
+                    <div id="profileMenu" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-user-circle mr-2"></i>Ver perfil
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog mr-2"></i>Configuración de perfil
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión
+                        </a>
+                    </div>
+                </div>
+            </header>
 
 
         </div>
     </div>
 
+    <script>
+        const profileMenuToggle = document.getElementById('profileMenuToggle');
+    const profileMenu = document.getElementById('profileMenu');
 
+    profileMenuToggle.addEventListener('click', () => {
+        profileMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!profileMenuToggle.contains(event.target) && !profileMenu.contains(event.target)) {
+            profileMenu.classList.add('hidden');
+        }
+    });
+
+
+        const sidebar = document.getElementById('sidebar');
+        const openSidebar = document.getElementById('openSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        openSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+    </script>
 </body>
-
-
 
 </html>
