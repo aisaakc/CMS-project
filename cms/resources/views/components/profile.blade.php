@@ -26,7 +26,6 @@
                 <i class="fas fa-chevron-down text-gray-700"></i>
             </div>
 
-            <!-- Dropdown Menu -->
             <div id="profileMenu" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden">
                 <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                     <i class="fas fa-user-circle mr-2"></i>Ver perfil
@@ -34,12 +33,43 @@
                 <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                     <i class="fas fa-cog mr-2"></i>Configuración de perfil
                 </a>
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión
-                </a>
+                <form type="submit" action="{{ route('signOut') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión
+                    </button>
+                </form>
+
             </div>
         </div>
     </header>
 </div>
+
+<script>
+    // JavaScript para la funcionalidad del menú de perfil
+document.addEventListener("DOMContentLoaded", function () {
+    const profileMenuToggle = document.getElementById("profileMenuToggle");
+    const profileMenu = document.getElementById("profileMenu");
+
+    // Mostrar/ocultar el menú al hacer clic en el toggle
+    profileMenuToggle.addEventListener("click", function (e) {
+        e.stopPropagation(); // Evita que el clic se propague
+        profileMenu.classList.toggle("hidden");
+    });
+
+    // Ocultar el menú al hacer clic fuera de él
+    document.addEventListener("click", function () {
+        if (!profileMenu.classList.contains("hidden")) {
+            profileMenu.classList.add("hidden");
+        }
+    });
+
+    // Evita que el clic dentro del menú lo cierre
+    profileMenu.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+});
+
+</script>
 
 

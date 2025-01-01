@@ -83,18 +83,24 @@
                                 <div class="grid gap-8 md:grid-cols-2">
                                     <div class="w-full">
                                         <label for="cedula" class="block mb-2 text-sm font-medium text-slate-700">Cédula de Identidad</label>
-                                        <div class="flex items-center space-x-4">
-                                            <input type="text" id="cedula" name="cedula"
-                                                class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                                @error('cedula') border-red-500 @else border-slate-300 @enderror"
-                                                placeholder="12345678" oninput="validateCedula(event)" />
-                                            @error('cedula')
-                                                <small class="text-red-500 mt-1 text-sm">
-                                                    <strong>{{ $message }}</strong>
-                                                </small>
-                                            @enderror
+                                        <div class="relative">
+                                            <input type="text" id="cedula" name="cedula" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
+                                                @error('cedula') border-red-500 focus:ring-red-500 @else border-slate-300 @enderror"
+                                                oninput="validateCedula(event)"
+                                                placeholder="Cédula de Identidad"
+                                                maxlength="10"
+                                            />
+                                            <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                                                <i class="fas fa-id-card text-slate-400"></i>
+                                            </span>
                                         </div>
+                                        @error('cedula')
+                                            <p class="text-red-500 mt-1 text-sm">
+                                                <strong>{{ $message }}</strong>
+                                            </p>
+                                        @enderror
                                     </div>
+
                                     <div class="w-full">
                                         <label for="user_name" class="block mb-2 text-sm font-medium text-slate-700">Nombre de usuario</label>
                                         <input type="text" id="user_name" name="user_name"
