@@ -16,6 +16,7 @@
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
+<x-mensaje />
 
 <body class="font-inter bg-gray-100">
 
@@ -36,3 +37,5 @@
 </body>
 
 </html>
+
+

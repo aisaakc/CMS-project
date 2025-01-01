@@ -131,24 +131,33 @@ class AuthController extends Controller
     return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
 }
 
-    public function loginVerify(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:4'
-        ], [
-            'email.required' => 'El email es requerido.',
-            'email.email' => 'El email debe ser una dirección de correo válida.',
-            'password.required' => 'La contraseña es requerida.',
-            'password.min' => 'La contraseña debe tener al menos 4 caracteres.',
-        ]);
+public function loginVerify(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:8'
+    ], [
+        'email.required' => 'El email es requerido.',
+        'email.email' => 'El email debe ser una dirección de correo válida.',
+        'password.required' => 'La contraseña es requerida.',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+    ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('dashboard');
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $user = Auth::user();
+
+        // Verificar si el usuario tiene un rol asociado
+        if ($user->role) {
+            $role = $user->role->name;
+            return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Tu rol es de: {$role}.");
+        } else {
+            return redirect()->route('dashboard')->with('warning', "Bienvenido, {$user->first_name}! No tienes un rol asignado.");
         }
-
-        return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
     }
+
+    return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
+}
+
 
 
     public function verifyEmail(Request $request)

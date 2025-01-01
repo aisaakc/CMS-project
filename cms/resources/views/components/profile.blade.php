@@ -1,7 +1,5 @@
 <div class="flex-1 flex flex-col">
     <!-- Header -->
-
-
     <header class="h-14 bg-white shadow-md flex items-center justify-between px-4">
         <!-- Sidebar Toggle Button -->
         <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none">
@@ -22,7 +20,9 @@
                 <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
                     <i class="fas fa-user text-gray-700 text-xl"></i>
                 </div>
-                <span class="text-gray-700">John Doe</span>
+                @auth
+                 <span class="text-gray-700">{{ Auth::user()->user_name }}</span>
+                @endauth
                 <i class="fas fa-chevron-down text-gray-700"></i>
             </div>
 
