@@ -20,58 +20,14 @@
             <x-side-menu />
         </div>
 
+
+
         <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gray-100 pl-64 lg:pl-0">
             <!-- Header -->
-            <header class="h-16 bg-white shadow-md flex items-center justify-between px-6 lg:px-10">
-                <div class="flex items-center w-full space-x-4">
-                    <!-- Search Bar -->
-                    <form class="flex items-center w-full max-w-md mx-auto">
-                        <input type="text" placeholder="Buscar..." class="flex-grow border border-gray-300 rounded-l-full px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 hover:border-blue-400 shadow-sm focus:shadow-md focus:border-blue-600 text-gray-700 h-12">
-                        <button class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white px-4 py-2 rounded-r-full hover:from-blue-600 hover:to-blue-800 focus:outline-none transition-all duration-300 shadow-lg focus:shadow-xl flex items-center justify-center h-12">
-                            <i class="fas fa-search text-lg"></i>
-                        </button>
-                    </form>
-
-                    <!-- Profile Section -->
-                    <div class="relative group">
-                        <div class="flex items-center space-x-2 cursor-pointer" id="profileMenuToggle">
-                            <!-- Foto de perfil -->
-                            <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
-                                <i class="fas fa-user text-gray-700 text-xl"></i>
-                            </div>
-
-                            <!-- Nombre de usuario -->
-                            @auth
-                                <span class="text-gray-700 font-semibold">{{ Auth::user()->user_name }}</span>
-                            @endauth
-
-                            <i class="fas fa-chevron-down text-gray-700"></i>
-                        </div>
-
-                        <!-- Tooltip con información de usuario -->
-                        @auth
-                            <div class="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 bg-gray-800 text-white text-sm rounded-lg p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-auto max-w-xs">
-                                <p class="font-semibold">{{ Auth::user()->user_name }}</p>
-                                <p class="text-xs">{{ Auth::user()->email }}</p>
-                            </div>
-                        @endauth
-
-                        <!-- Menu de perfil -->
-                        <div id="profileMenu" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden transition-all duration-300 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100">
-                            <a href="{{ route('edit-profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-all duration-300">
-                                <i class="fas fa-user-circle mr-2"></i>Ver perfil
-                            </a>
-                            <form type="submit" action="{{ route('signOut') }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left transition-all duration-300">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <div class="flex-1 flex flex-col">
+                <x-profile />
+            </div>
 
             <!-- Main Content Area -->
             <main class="p-8 space-y-6">
@@ -81,9 +37,9 @@
                     <div class="space-y-6">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Información del Perfil</h2>
 
-                        <form action="/" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update.profile.picture')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
+
 
                             <!-- Full Name (combining first and last name) and Cedula -->
                             <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -114,7 +70,7 @@
                                 <input type="text" id="user_name" name="user_name"
                                        value="{{ old('user_name', Auth::user()->user_name) }}"
                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                       disabled>
+                                      >
                             </div>
 
                             <!-- Birth Date and Email -->
@@ -169,6 +125,11 @@
                                        disabled>
                                 @endif
                             </div>
+                            <div class="flex items-center justify-center mt-8">
+                                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    Guardar cambios
+                                </button>
+                            </div>
                         </form>
                     </div>
 
@@ -208,41 +169,11 @@
                 </div>
 
                 <!-- Save Changes Button -->
-                <div class="flex items-center justify-center mt-8">
-                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Guardar cambios
-                    </button>
-                </div>
+
 
             </main>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const profileMenuToggle = document.getElementById("profileMenuToggle");
-            const profileMenu = document.getElementById("profileMenu");
-
-            profileMenuToggle.addEventListener("click", function (e) {
-                e.stopPropagation();
-                profileMenu.classList.toggle("hidden");
-                profileMenu.classList.toggle("scale-95");
-                profileMenu.classList.toggle("opacity-0");
-            });
-
-            document.addEventListener("click", function () {
-                if (!profileMenu.classList.contains("hidden")) {
-                    profileMenu.classList.add("hidden");
-                    profileMenu.classList.add("scale-95");
-                    profileMenu.classList.add("opacity-0");
-                }
-            });
-
-            profileMenu.addEventListener("click", function (e) {
-                e.stopPropagation();
-            });
-        });
-    </script>
 
 </body>
 

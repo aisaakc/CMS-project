@@ -14,8 +14,6 @@
             </button>
         </form>
 
-
-
         <!-- Profile -->
         <div class="relative group">
             <div class="flex items-center space-x-2 cursor-pointer" id="profileMenuToggle">
@@ -23,9 +21,9 @@
                     <i class="fas fa-user text-gray-700 text-xl"></i>
                 </div>
                 @auth
-                    <span class="text-gray-700 font-semibold">{{ Auth::user()->user_name }}</span>
+                    <span class="text-gray-700 font-semibold hidden lg:block">{{ Auth::user()->user_name }}</span>
                 @endauth
-                <i class="fas fa-chevron-down text-gray-700"></i>
+                <i class="fas fa-chevron-down text-gray-700 lg:block hidden"></i>
             </div>
 
             <!-- Tooltip con información de usuario -->
@@ -38,9 +36,12 @@
 
             <!-- Menu de perfil -->
             <div id="profileMenu" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden transition-all duration-300 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100">
-                <a href="{{ route('edit-profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-all duration-300">
-                    <i class="fas fa-user-circle mr-2"></i>Ver perfil
-                </a>
+               <!-- Enlace para ver el perfil -->
+               <a href="{{ route('edit-profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-all duration-300">
+                <i class="fas fa-user-circle mr-2"></i>Ver perfil
+            </a>
+
+
                 <form type="submit" action="{{ route('signOut') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left transition-all duration-300">

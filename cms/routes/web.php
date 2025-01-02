@@ -61,10 +61,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // Profile
-route::get('edit-profile', function () {
+
+Route::get('edit-profile', function () {
     return view('vistas.edit-profile');
 })->name('edit-profile');
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-});
+Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
+Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('update.profile.picture');
+
+

@@ -334,4 +334,25 @@ public function loginVerify(Request $request)
         Auth::logout();
         return redirect()->route('login')->with('success', 'session cerrada correctamente');
     }
+
+    public function updateProfilePicture(Request $request)
+{
+    // Validación
+    $request->validate([
+        'user_name' => 'nullable|string|max:255',
+    ]);
+
+    // Obtener el usuario autenticado
+    $user = Auth::user();
+
+    // Asignar los datos validados
+    $user->user_name = $request->user_name;
+
+    // Guardar los cambios en la base de datos
+    $user->save();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
+}
+
 }
