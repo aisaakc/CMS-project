@@ -146,7 +146,6 @@ public function loginVerify(Request $request)
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = Auth::user();
 
-        // Verificar si el usuario tiene un rol asociado
         if ($user->role) {
             $role = $user->role->name;
             return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Tu rol es de: {$role}.");

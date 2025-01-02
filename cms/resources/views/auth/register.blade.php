@@ -101,6 +101,7 @@
                                         @enderror
                                     </div>
 
+
                                     <div class="w-full">
                                         <label for="user_name" class="block mb-2 text-sm font-medium text-slate-700">Nombre de usuario</label>
                                         <input type="text" id="user_name" name="user_name"
@@ -456,7 +457,6 @@
         const passwordField = document.getElementById('password_confirmation');
         const eyeIcon = document.getElementById('eye-icon-confirm-password');
 
-        // Toggle between password and text input
         if (passwordField.type === 'password') {
             passwordField.type = 'text';
             eyeIcon.classList.remove('fa-eye-slash');
@@ -468,9 +468,16 @@
         }
     });
 
-        function validateCedula(event) {
-            const input = event.target;
-            input.value = input.value.replace(/[^0-9]/g, '');
-        }
+    function validateCedula(event) {
+    const input = event.target;
+
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    if (parseInt(input.value) <= 0) {
+        input.value = '';
+    }
+}
+
+
     </script>
 @endsection
