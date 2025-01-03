@@ -135,10 +135,6 @@
                             </div>
                         @endif
                     </div>
-
-
-
-
                     <!-- Redes Sociales (Movida a una nueva posición en el grid) -->
                     <div class="space-y-6 col-span-1 md:col-span-1">
                         <h3 class="text-xl font-semibold text-gray-800 mb-4">Redes Sociales</h3>
@@ -178,5 +174,6 @@
     </div>
 
 </body>
+
 
 </html>

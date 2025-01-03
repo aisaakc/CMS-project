@@ -56,7 +56,6 @@ return new class extends Migration
             $table->string('date_of_birth', 45)->nullable();
             $table->integer('cedula')->nullable()->unique();
             $table->string('user_name', 45)->nullable()->unique();
-            $table->text('image')->nullable();
             $table->string('address', 45)->nullable();
             $table->string('email', 45)->nullable()->unique();
             $table->string('facebook', 45)->nullable();
