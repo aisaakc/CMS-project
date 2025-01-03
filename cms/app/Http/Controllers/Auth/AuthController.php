@@ -347,4 +347,18 @@ class AuthController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
     }
+
+    public function destroy()
+    {
+        $user = Auth::user();
+
+        // Eliminar la cuenta del usuario
+        $user->delete();
+
+        // Cerrar la sesión después de eliminar la cuenta
+        Auth::logout();
+
+        // Redirigir al usuario a la página de inicio o login con un mensaje de éxito
+        return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
+    }
 }

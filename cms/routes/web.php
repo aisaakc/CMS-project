@@ -65,7 +65,10 @@ Route::middleware('auth')->group(function () {
 Route::get('edit-profile', function () {
     return view('vistas.edit-profile');
 })->name('edit-profile');
-Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
+Route::get('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
 Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('update.profile.picture');
+Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
+
+
 
 
