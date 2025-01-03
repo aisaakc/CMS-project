@@ -40,18 +40,16 @@
                     <div class="space-y-6">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Información del Perfil</h2>
 
-                        <form action="{{ route('update.profile.picture')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update.profile.picture')}}" method="POST" enctype="multipart/form-data" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
                             @csrf
-
-                            <!-- Full Name (combining first and last name) and Cedula -->
+                            <!-- Nombre Completo y Cédula (En una fila) -->
                             <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 @if (Auth::user()->first_name || Auth::user()->last_name)
                                     <div>
                                         <label for="full_name" class="block text-gray-700 font-medium">Nombre Completo</label>
                                         <input type="text" id="full_name" name="full_name"
-                                               value="{{ old('full_name', Auth::user()->first_name . ' ' . Auth::user()->last_name) }} "
-                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                               disabled>
+                                               value="{{ old('full_name', Auth::user()->first_name . ' ' . Auth::user()->last_name) }}"
+                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
                                     </div>
                                 @endif
 
@@ -59,9 +57,8 @@
                                     <div>
                                         <label for="cedula" class="block text-gray-700 font-medium">Cédula</label>
                                         <input type="text" id="cedula" name="cedula"
-                                               value="{{ old('cedula', Auth::user()->cedula) }} "
-                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                               disabled>
+                                               value="{{ old('cedula', Auth::user()->cedula) }}"
+                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
                                     </div>
                                 @endif
                             </div>
@@ -70,64 +67,57 @@
                             <div class="mb-6">
                                 <label for="user_name" class="block text-gray-700 font-medium">Nombre de Usuario</label>
                                 <input type="text" id="user_name" name="user_name"
-                                       value="{{ old('user_name', Auth::user()->user_name) }} "
+                                       value="{{ old('user_name', Auth::user()->user_name) }}"
                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
                             </div>
 
-                            <!-- Birth Date and Email -->
+                            <!-- Fecha de Nacimiento y Correo Electrónico -->
                             <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 @if (Auth::user()->date_of_birth)
                                     <div>
                                         <label for="date_of_birth" class="block text-gray-700 font-medium">Fecha de Nacimiento</label>
                                         <input type="text" id="date_of_birth" name="date_of_birth"
-                                               value="{{ old('date_of_birth', Auth::user()->date_of_birth) }} "
-                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                               disabled>
+                                               value="{{ old('date_of_birth', Auth::user()->date_of_birth) }}"
+                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
                                     </div>
                                 @endif
 
                                 @if (Auth::user()->email)
                                     <div>
                                         <label for="email" class="block text-gray-700 font-medium">Correo Electrónico</label>
-                                        <input type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }} "
-                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                               disabled>
+                                        @if (Auth::user()->id == 1) <!-- Solo el usuario con id = 1 (publicador) puede editar el correo -->
+                                            <input type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}"
+                                                   class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                                        @else
+                                            <input type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}"
+                                                   class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
+                                        @endif
                                     </div>
                                 @endif
                             </div>
 
-                            <!-- Address, Profile Picture, and Nationality -->
+                            <!-- Dirección y Nacionalidad -->
                             <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 @if (Auth::user()->address)
                                     <div>
                                         <label for="address" class="block text-gray-700 font-medium">Dirección</label>
                                         <input type="text" id="address" name="address"
-                                               value="{{ old('address', Auth::user()->address) }} "
-                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                               disabled>
+                                               value="{{ old('address', Auth::user()->address) }}"
+                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
                                     </div>
                                 @endif
 
-                                <div>
-                                    <label for="profile_picture" class="block text-gray-700 font-medium">Foto de Perfil</label>
-                                    @if (Auth::user()->image)
-                                        <img src="{{ Storage::url(Auth::user()->image) }}" alt="Imagen de perfil" class="w-32 h-32 rounded-full mb-4">
-                                    @endif
-                                    <input type="file" id="profile_picture" name="profile_picture" class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
-                                </div>
-                            </div>
-
-                            <!-- Nacionalidad (solo lectura) -->
-                            <div class="mb-6">
                                 @if(Auth::user()->nacionalidad)
-                                    <label for="nacionalidad" class="block text-gray-700 font-medium">Nacionalidad</label>
-                                    <input type="text" id="nacionalidad" name="nacionalidad"
-                                           value="{{ old('nacionalidad', Auth::user()->nacionalidad ) }} "
-                                           class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                                           disabled>
+                                    <div>
+                                        <label for="nacionalidad" class="block text-gray-700 font-medium">Nacionalidad</label>
+                                        <input type="text" id="nacionalidad" name="nacionalidad"
+                                               value="{{ old('nacionalidad', Auth::user()->nacionalidad) }}"
+                                               class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" disabled>
+                                    </div>
                                 @endif
                             </div>
 
+                            <!-- Botón de Guardar -->
                             <div class="flex items-center justify-center mt-8">
                                 <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     Guardar cambios
