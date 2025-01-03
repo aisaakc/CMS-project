@@ -18,10 +18,12 @@
 </head>
 
 <body class="font-inter bg-gray-100">
+
     <div class="flex h-screen">
+
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed lg:static w-64 h-full bg-gray-900 text-white transition-transform transform lg:translate-x-0 -translate-x-full lg:block">
-            <!-- Header -->
+        <div id="sidebar" class="w-64 h-full bg-gray-900 text-white transition-transform transform lg:translate-x-0 -translate-x-full lg:block fixed top-0 left-0 z-10">
+            <!-- Sidebar Header -->
             <div class="h-14 bg-gray-800 flex items-center justify-between px-4">
                 <!-- Icon and Title -->
                 <div class="flex items-center">
@@ -29,14 +31,13 @@
                     <h3 class="font-bold text-xl text-white">Busca de empleo</h3>
                 </div>
 
-                <!-- Close Sidebar Button -->
-                <button id="closeSidebar" class="lg:hidden text-white focus:outline-none hover:text-gray-300 transition">
-                    <i class="fas fa-times text-xl"></i>
+                <!-- Button to toggle sidebar visibility -->
+                <button id="toggleSidebar" class="text-white focus:outline-none hover:text-gray-300 transition lg:hidden">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
 
-
-            <!-- Menu -->
+            <!-- Sidebar Menu -->
             <nav class="flex flex-col space-y-2 p-4 text-gray-300">
                 <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-sitemap"></i>
@@ -63,44 +64,10 @@
                     <span>Ajustes</span>
                 </a>
             </nav>
-
         </div>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
-            <!-- Header -->
-
-
-        </div>
     </div>
 
-    <script>
-        const profileMenuToggle = document.getElementById('profileMenuToggle');
-    const profileMenu = document.getElementById('profileMenu');
-
-    profileMenuToggle.addEventListener('click', () => {
-        profileMenu.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!profileMenuToggle.contains(event.target) && !profileMenu.contains(event.target)) {
-            profileMenu.classList.add('hidden');
-        }
-    });
-
-
-        const sidebar = document.getElementById('sidebar');
-        const openSidebar = document.getElementById('openSidebar');
-        const closeSidebar = document.getElementById('closeSidebar');
-
-        openSidebar.addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full');
-        });
-
-        closeSidebar.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-        });
-    </script>
 </body>
 
 </html>
