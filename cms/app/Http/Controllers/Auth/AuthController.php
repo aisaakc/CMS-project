@@ -45,117 +45,116 @@ class AuthController extends Controller
         $preguntas = Pregunta::all();
 
         return view('auth.register', compact('nacionalidades', 'preguntas'));
-
     }
 
     public function registerVerify(Request $request)
-{
+    {
 
-    $request->validate([
-        'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
-        'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
-        'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
-        'user_name' => 'required|unique:users,user_name',
-        'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
-        'nacionalidad' => 'required',
-        'password' => 'required|min:8',
-        'password_confirmation' => 'required|same:password',
-        'address' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'respuesta_1' => 'required',
-        'respuesta_2' => 'required',
-        'respuesta_3' => 'required',
-        'respuesta_4' => 'required',
-    ], [
-        'first_name.required' => 'Los nombres son requeridos.',
-        'last_name.required' => 'Los apellidos son requeridos.',
-        'last_name.regex' => 'Apellido no válido.',
-        'user_name.required' => 'El nombre de usuario es requerido.',
-        'date_of_birth.required' => 'La fecha de nacimiento es requerida.',
-        'date_of_birth.before' => 'Debes ser mayor de 18 años.',
-        'date_of_birth.before_or_equal' => 'Debes ser mayor de 18 años.',
-        'nacionalidad.required' => 'La nacionalidad es requerida.',
-        'email.required' => 'El email es requerido.',
-        'email.unique' => 'El email ya está en uso.',
-        'email.email' => 'Por favor, ingresa un email válido.',
-        'cedula.required' => 'La cédula es requerida.',
-        'cedula.unique' => 'La cédula ya está registrada.',
-        'cedula.regex' => 'La cédula debe tener entre 6 y 10 dígitos.',
-        'password.required' => 'La contraseña es requerida.',
-        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-        'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
-        'password_confirmation.same' => 'Las contraseñas no coinciden.',
-        'address.required' => 'La dirección es requerida.',
-        'respuesta_1.required' => 'La respuesta 1 es requerida.',
-        'respuesta_2.required' => 'La respuesta 2 es requerida.',
-        'respuesta_3.required' => 'La respuesta 3 es requerida.',
-        'respuesta_4.required' => 'La respuesta 4 es requerida.',
-    ]);
-
-    // Crear el usuario
-    $user = User::create([
-        'first_name' => $request->first_name,
-        'last_name' => $request->last_name,
-        'date_of_birth' => $request->date_of_birth,
-        'cedula' => $request->cedula,
-        'user_name' => $request->user_name,
-        'address' => $request->address,
-        'email' => $request->email,
-        'facebook' => $request->facebook,
-        'instagram' => $request->instagram,
-        'x' => $request->x,
-        'tiktok' => $request->tiktok,
-        'descripcion' => $request->descripcion,
-        'password' => bcrypt($request->password),
-        'nacionalidad_idnacionalidad' => $request->nacionalidad,
-        'roles_idroles' => 2,
-    ]);
-
-    // Crear las respuestas de seguridad
-    $preguntas = [
-        $request->pregunta_1 => $request->respuesta_1,
-        $request->pregunta_2 => $request->respuesta_2,
-        $request->pregunta_3 => $request->respuesta_3,
-        $request->pregunta_4 => $request->respuesta_4
-    ];
-
-    foreach ($preguntas as $pregunta_id => $respuesta) {
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $pregunta_id,
-            'respuesta' => bcrypt($respuesta),
+        $request->validate([
+            'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
+            'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
+            'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
+            'user_name' => 'required|unique:users,user_name',
+            'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
+            'nacionalidad' => 'required',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'respuesta_1' => 'required',
+            'respuesta_2' => 'required',
+            'respuesta_3' => 'required',
+            'respuesta_4' => 'required',
+        ], [
+            'first_name.required' => 'Los nombres son requeridos.',
+            'last_name.required' => 'Los apellidos son requeridos.',
+            'last_name.regex' => 'Apellido no válido.',
+            'user_name.required' => 'El nombre de usuario es requerido.',
+            'date_of_birth.required' => 'La fecha de nacimiento es requerida.',
+            'date_of_birth.before' => 'Debes ser mayor de 18 años.',
+            'date_of_birth.before_or_equal' => 'Debes ser mayor de 18 años.',
+            'nacionalidad.required' => 'La nacionalidad es requerida.',
+            'email.required' => 'El email es requerido.',
+            'email.unique' => 'El email ya está en uso.',
+            'email.email' => 'Por favor, ingresa un email válido.',
+            'cedula.required' => 'La cédula es requerida.',
+            'cedula.unique' => 'La cédula ya está registrada.',
+            'cedula.regex' => 'La cédula debe tener entre 6 y 10 dígitos.',
+            'password.required' => 'La contraseña es requerida.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
+            'password_confirmation.same' => 'Las contraseñas no coinciden.',
+            'address.required' => 'La dirección es requerida.',
+            'respuesta_1.required' => 'La respuesta 1 es requerida.',
+            'respuesta_2.required' => 'La respuesta 2 es requerida.',
+            'respuesta_3.required' => 'La respuesta 3 es requerida.',
+            'respuesta_4.required' => 'La respuesta 4 es requerida.',
         ]);
-    }
 
-    // Redirigir al login con un mensaje de éxito
-    return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
-}
+        // Crear el usuario
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'date_of_birth' => $request->date_of_birth,
+            'cedula' => $request->cedula,
+            'user_name' => $request->user_name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'x' => $request->x,
+            'tiktok' => $request->tiktok,
+            'descripcion' => $request->descripcion,
+            'password' => bcrypt($request->password),
+            'nacionalidad_idnacionalidad' => $request->nacionalidad,
+            'roles_idroles' => 2,
+        ]);
 
-public function loginVerify(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|min:8'
-    ], [
-        'email.required' => 'El email es requerido.',
-        'email.email' => 'El email debe ser una dirección de correo válida.',
-        'password.required' => 'La contraseña es requerida.',
-        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-    ]);
+        // Crear las respuestas de seguridad
+        $preguntas = [
+            $request->pregunta_1 => $request->respuesta_1,
+            $request->pregunta_2 => $request->respuesta_2,
+            $request->pregunta_3 => $request->respuesta_3,
+            $request->pregunta_4 => $request->respuesta_4
+        ];
 
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        $user = Auth::user();
-
-        if ($user->role) {
-            $role = $user->role->name;
-            return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Tu rol es de: {$role}.");
-        } else {
-            return redirect()->route('dashboard')->with('warning', "Bienvenido, {$user->first_name}! No tienes un rol asignado.");
+        foreach ($preguntas as $pregunta_id => $respuesta) {
+            Respuesta::create([
+                'users_idusers' => $user->idusers,
+                'preguntas_idpreguntas' => $pregunta_id,
+                'respuesta' => bcrypt($respuesta),
+            ]);
         }
+
+        // Redirigir al login con un mensaje de éxito
+        return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
     }
 
-    return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
-}
+    public function loginVerify(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ], [
+            'email.required' => 'El email es requerido.',
+            'email.email' => 'El email debe ser una dirección de correo válida.',
+            'password.required' => 'La contraseña es requerida.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+
+            if ($user->role) {
+                $role = $user->role->name;
+                return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Tu rol es de: {$role}.");
+            } else {
+                return redirect()->route('dashboard')->with('warning', "Bienvenido, {$user->first_name}! No tienes un rol asignado.");
+            }
+        }
+
+        return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
+    }
 
 
 
@@ -332,16 +331,17 @@ public function loginVerify(Request $request)
     public function signOut(Request $request)
     {
         Auth::logout();
-        return redirect()->route('login')->with('success', 'session cerrada correctamente');
+        return redirect()->route('login')->with('success', 'Su sesion ha finalizado');
     }
 
     public function updateProfilePicture(Request $request)
-{
-    // Validación
-    $request->validate([
-        'user_name' => 'nullable|string|max:255',
-    ]);
+    {
+        // Validación
+        $request->validate([
+            'user_name' => 'nullable|string|max:255',
+        ]);
 
+<<<<<<< HEAD
     $user = Auth::user();
     $user->user_name = $request->user_name;
     $user->save();
@@ -362,5 +362,12 @@ public function destroy()
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
 }
 
+=======
+        $user = Auth::user();
+        $user->user_name = $request->user_name;
+        $user->save();
+>>>>>>> f6328cb (add user)
 
+        return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
+    }
 }
