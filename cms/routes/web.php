@@ -3,10 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\PublicationController;
-
-use App\Models\Publication;
 
 Route::get('/', function () {
     return view('cms.HomePage');
@@ -68,10 +65,17 @@ Route::middleware('auth')->group(function () {
 Route::get('edit-profile', function () {
     return view('vistas.edit-profile');
 })->name('edit-profile');
+
 Route::get('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
+
 Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('update.profile.picture');
+
 Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
 
-//Blog
+// PUBLICATIONS
+Route::get('blog/listBlog', [PublicationController::class, 'listaBlog'])->name('publications');
 
-Route::get('listaBlog', [PublicationController::class, 'listaBlog'])->name('listaBlog');
+
+
+
+
