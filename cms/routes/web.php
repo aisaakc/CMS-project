@@ -4,6 +4,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\PublicationController;
+
+use App\Models\Publication;
 
 Route::get('/', function () {
     return view('cms.HomePage');
@@ -69,6 +72,6 @@ Route::get('update-profile', [AuthController::class, 'updateProfile'])->name('up
 Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('update.profile.picture');
 Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
 
+//Blog
 
-
-
+Route::get('listaBlog', [PublicationController::class, 'listaBlog'])->name('listaBlog');
