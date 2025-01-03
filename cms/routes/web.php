@@ -73,6 +73,7 @@ Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePic
 Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
 
 // PUBLICATIONS
+
 Route::get('blog/listBlog', [PublicationController::class, 'listaBlog'])->name('publications');
 
 

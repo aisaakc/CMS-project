@@ -41,10 +41,17 @@
 
             <!-- Sidebar Menu -->
             <nav class="flex flex-col space-y-2 p-4 text-gray-300">
-                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Páginas</span>
-                </a>
+                <!-- Verificamos si el usuario no es publicador antes de mostrar el enlace -->
+                @if(Auth::user()->role_idroles == 1) <!-- Verificamos si el usuario es admin (ID = 1) -->
+    <!-- El enlace a "Páginas" se muestra solo si el usuario es admin -->
+    <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+        <i class="fas fa-sitemap"></i>
+        <span>Páginas</span>
+    </a>
+@endif
+
+
+
                 <a href="{{ route('publications') }}" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-blog"></i>
                     <span>Blog</span>

@@ -11,6 +11,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -71,6 +72,7 @@ class AuthController extends Controller
         'last_name.required' => 'Los apellidos son requeridos.',
         'last_name.regex' => 'Apellido no válido.',
         'user_name.required' => 'El nombre de usuario es requerido.',
+        'user_name.unique' => 'El nombre de usuario ya está en uso.',
         'date_of_birth.required' => 'La fecha de nacimiento es requerida.',
         'date_of_birth.before' => 'Debes ser mayor de 18 años.',
         'date_of_birth.before_or_equal' => 'Debes ser mayor de 18 años.',
@@ -339,26 +341,44 @@ public function loginVerify(Request $request)
 {
     // Validación
     $request->validate([
-        'user_name' => 'nullable|string|max:255',
+        'user_name' => [
+            'nullable',
+            'string',
+            'max:255',
+            Rule::unique('users', 'user_name')->ignore(Auth::user()->idusers, 'idusers'),
+        ],
+        'address' => 'nullable|string|max:255',
+        'email' => [
+            'nullable',
+            'email',
+            'max:255',
+            Rule::unique('users', 'email')->ignore(Auth::user()->idusers, 'idusers'),
+        ],
+    ], [
+        'user_name.unique' => 'El nombre de usuario ya está en uso.',
+        'email.unique' => 'El correo electrónico ya está registrado.',
+        'email.email' => 'El correo electrónico debe ser una dirección válida.',
     ]);
 
     $user = Auth::user();
     $user->user_name = $request->user_name;
+    $user->address = $request->address;
+    $user->email = $request->email;
     $user->save();
 
     return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
 }
+
+
+
+
 public function destroy()
 {
     $user = Auth::user();
-
-    // Eliminar la cuenta del usuario
     $user->delete();
 
-    // Cerrar la sesión después de eliminar la cuenta
     Auth::logout();
 
-    // Redirigir al usuario a la página de inicio o login con un mensaje de éxito
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
 }
 
