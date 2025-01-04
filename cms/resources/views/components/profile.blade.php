@@ -29,7 +29,7 @@
             <!-- Tooltip con información de usuario -->
             @auth
                 <div class="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 bg-gray-800 text-white text-sm rounded-lg p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-auto max-w-xs">
-                    <p class="font-semibold">{{ Auth::user()->user_name }}</p>
+                    <p class="font-semibold">Rol: {{ Auth::user()->role->name }}</p>
                     <p class="text-xs">{{ Auth::user()->email }}</p>
                 </div>
             @endauth

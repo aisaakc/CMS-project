@@ -26,7 +26,6 @@ class User extends Authenticatable
         'date_of_birth',
         'cedula',
         'user_name',
-        'image',
         'address',
         'email',
         'facebook',

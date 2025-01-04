@@ -40,33 +40,40 @@
             </div>
 
             <!-- Sidebar Menu -->
+            <form action="">
             <nav class="flex flex-col space-y-2 p-4 text-gray-300">
-                <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Páginas</span>
-                </a>
-                <a href="{{ route('listaBlog') }}"
-                    class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
-                    <i class="fas fa-blog"></i>
-                    <span>Blog</span>
-                </a>
                 <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-user-friends"></i>
                     <span>Usuarios</span>
                 </a>
+
+                <a href="{{ route('publications')}}" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-sitemap"></i>
+                    <span>Páginas</span>
+                </a>
+
+                <a href="{{ route('publications') }}" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+
                 <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-photo-video"></i>
                     <span>Medios</span>
                 </a>
+
                 <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-comments"></i>
                     <span>Comentarios</span>
                 </a>
+
                 <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                     <i class="fas fa-cogs"></i>
                     <span>Ajustes</span>
                 </a>
+
             </nav>
+        </form>
         </div>
 
     </div>
