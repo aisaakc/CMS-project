@@ -22,7 +22,6 @@ use Carbon\Carbon;
 class AuthController extends Controller
 {
 
-
     public function login()
     {
         return view('auth.login');
@@ -148,16 +147,20 @@ public function loginVerify(Request $request)
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = Auth::user();
 
-        if ($user->role) {
-            $role = $user->role->name;
-            return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Tu rol es de: {$role}.");
-        } else {
-            return redirect()->route('dashboard')->with('warning', "Bienvenido, {$user->first_name}! No tienes un rol asignado.");
+        // Verificar el ID del rol del usuario
+        if ($user->roles_idroles === 2) {
+            // Redirigir a la ruta de publicaciones si es Publisher
+            return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Publicador.");
         }
+
+        // Otros roles (por ejemplo, Admin)
+        return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Accediste como Administrador.");
     }
 
+    // Credenciales inválidas
     return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
 }
+
 
 
 
@@ -338,7 +341,7 @@ public function loginVerify(Request $request)
     }
 
     public function updateProfilePicture(Request $request)
-{
+    {
     // Validación
     $request->validate([
         'user_name' => [
@@ -367,20 +370,22 @@ public function loginVerify(Request $request)
     $user->save();
 
     return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
-}
+
+    }
 
 
 
 
 public function destroy()
-{
+   {
     $user = Auth::user();
     $user->delete();
 
     Auth::logout();
 
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
-}
+
+    }
 
 
 
