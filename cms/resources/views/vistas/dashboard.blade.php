@@ -14,7 +14,15 @@
 <body class="font-inter bg-gray-100">
 
     <div class="flex h-screen">
-        <x-mensaje />
+        @if (session('show_message'))
+        <!-- Mostrar el mensaje de sesión solo cuando 'show_message' está presente -->
+        <x-mensaje :message="session('show_message')" />
+
+        @php
+            // Limpiar la sesión para que el mensaje no se repita
+            session()->forget('show_message');
+        @endphp
+       @endif
 
         <div class="flex h-screen">
             <!-- Componente de menú lateral (Sidebar) -->

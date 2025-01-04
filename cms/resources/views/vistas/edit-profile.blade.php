@@ -25,9 +25,8 @@
             <x-side-menu />
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
-            <!-- Header -->
+
             <div class="h-14 text-white flex items-center justify-between  z-20">
                 <x-profile />
             </div>

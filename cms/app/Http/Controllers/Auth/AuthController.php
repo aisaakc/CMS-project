@@ -147,8 +147,10 @@ public function loginVerify(Request $request)
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = Auth::user();
 
-        if ($user->roles_idroles === 2) {
+        // Establecer una sesión para mostrar el mensaje de bienvenida
+        session(['show_message' => "Bienvenido, {$user->first_name} {$user->last_name}!"]);
 
+        if ($user->roles_idroles === 2) {
             return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Publicador.");
         }
 
@@ -157,6 +159,7 @@ public function loginVerify(Request $request)
 
     return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
 }
+
 
 
     public function verifyEmail(Request $request)
@@ -336,7 +339,7 @@ public function loginVerify(Request $request)
     }
 
     public function updateProfilePicture(Request $request)
-    {
+{
     // Validación
     $request->validate([
         'user_name' => [
@@ -358,21 +361,24 @@ public function loginVerify(Request $request)
         'email.email' => 'El correo electrónico debe ser una dirección válida.',
     ]);
 
+    // Actualiza el perfil del usuario
     $user = Auth::user();
     $user->user_name = $request->user_name;
     $user->address = $request->address;
     $user->email = $request->email;
     $user->save();
 
-    return redirect()->route('dashboard')->with('success', 'Perfil actualizado correctamente.');
+    // Establecer el mensaje de éxito en la sesión
+    session()->flash('show_message', 'Perfil actualizado correctamente.');
 
-    }
+    // Redirigir con el mensaje
+    return redirect()->route('dashboard');
+}
 
 public function destroy()
    {
     $user = Auth::user();
     $user->delete();
-
     Auth::logout();
 
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
