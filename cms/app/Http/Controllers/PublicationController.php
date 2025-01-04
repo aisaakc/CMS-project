@@ -11,7 +11,9 @@ class PublicationController extends Controller
 {
     public function listaBlog()
     {
-        return view('blog/listBlog');
+        $publications = Publication::all();
+
+        return view('blog/listBlog', compact('publications'));
     }
 
     public function register()
