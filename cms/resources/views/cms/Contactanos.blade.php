@@ -40,7 +40,7 @@
                     <h2 class="text-2xl font-semibold mb-6">Información de Contacto</h2>
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-white p-4 rounded-full hover:ring hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
+                            <div class="bg-white p-4 rounded-full hover hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
                                 <i class="fas fa-envelope text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <div class="bg-white p-4 rounded-full hover:ring hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
+                            <div class="bg-white p-4 rounded-full hover hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
                                 <i class="fas fa-phone-alt text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <div class="bg-white p-4 rounded-full hover:ring hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
+                            <div class="bg-white p-4 rounded-full hover: hover:ring-indigo-500 hover:ring-offset-2 hover:ring-4 transition duration-300">
                                 <i class="fas fa-map-marker-alt text-indigo-700 text-2xl"></i>
                             </div>
                             <div>
@@ -66,7 +66,6 @@
                                 <span class="text-gray-100">Plaza Bolívar, Caracas, Venezuela</span>
                             </div>
                         </div>
-
 
                         <div id="map" class="w-full h-96 rounded-lg shadow"></div>
                     </div>
