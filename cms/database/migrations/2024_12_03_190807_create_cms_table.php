@@ -19,8 +19,8 @@ return new class extends Migration
         });
 
         DB::table('roles')->insert([
-            ['name' => 'admin'],
-            ['name' => 'publisher'],
+            ['name' => 'Admin'],
+            ['name' => 'Publisher'],
         ]);
 
         // Crear tabla de nacionalidades

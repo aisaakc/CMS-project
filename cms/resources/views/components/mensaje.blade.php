@@ -1,4 +1,4 @@
-<div id="alertModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div id="alertModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6 relative text-center alert-box">
 
         <div id="progressBar" class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>

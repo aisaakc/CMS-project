@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicationController;
+USE App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('cms.HomePage');
@@ -75,6 +76,13 @@ Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('dele
 // PUBLICATIONS
 
 Route::get('blog/listBlog', [PublicationController::class, 'listaBlog'])->name('publications');
+
+// USUARIOS
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
 
 
 
