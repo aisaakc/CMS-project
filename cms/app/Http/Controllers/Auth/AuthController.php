@@ -147,21 +147,16 @@ public function loginVerify(Request $request)
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = Auth::user();
 
-        // Verificar el ID del rol del usuario
         if ($user->roles_idroles === 2) {
-            // Redirigir a la ruta de publicaciones si es Publisher
+
             return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Publicador.");
         }
 
-        // Otros roles (por ejemplo, Admin)
         return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Accediste como Administrador.");
     }
 
-    // Credenciales inválidas
     return back()->withErrors(['invalid_credentials' => 'Usuario y/o contraseña incorrecto'])->withInput();
 }
-
-
 
 
     public function verifyEmail(Request $request)
@@ -373,9 +368,6 @@ public function loginVerify(Request $request)
 
     }
 
-
-
-
 public function destroy()
    {
     $user = Auth::user();
@@ -386,7 +378,5 @@ public function destroy()
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
 
     }
-
-
 
 }

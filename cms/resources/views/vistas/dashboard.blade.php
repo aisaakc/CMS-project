@@ -14,18 +14,9 @@
 <body class="font-inter bg-gray-100">
 
     <div class="flex h-screen">
-
-        <!-- Mostrar mensaje solo si el usuario está autenticado -->
-        @auth
-            <x-mensaje />
-        @else
-            <div class="w-full text-center bg-yellow-100 text-yellow-800 p-4">
-                <p>Por favor, inicia sesión para acceder a las funcionalidades.</p>
-            </div>
-        @endauth
+        <x-mensaje />
 
         <div class="flex h-screen">
-
             <!-- Componente de menú lateral (Sidebar) -->
             <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
                 <x-side-menu />
@@ -33,7 +24,6 @@
 
             <!-- Contenedor principal -->
             <div class="flex-1 flex flex-col">
-
                 @auth
                     <!-- Componente de perfil -->
                     <div class="flex items-center space-x-4 mb-12">
@@ -75,30 +65,8 @@
                                 añaden nuevas.</p>
                         </div>
                     </div>
-                @else
-                    <div class="p-8">
-                        <h2 class="text-2xl font-bold mb-4">Modificar Datos</h2>
-                        <form action="{{ route('user.update') }}" method="POST" class="space-y-4">
-                            @csrf
-                            @method('PUT')
-                            <div>
-                                <label for="email" class="block text-gray-700">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg"
-                                    value="{{ old('email') }}">
-                            </div>
-                            <div>
-                                <label for="name" class="block text-gray-700">Nombre</label>
-                                <input type="text" id="name" name="name" class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg"
-                                    value="{{ old('name') }}">
-                            </div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Guardar
-                                Cambios</button>
-                        </form>
-                    </div>
                 @endauth
-
             </div>
-
         </div>
     </div>
 
