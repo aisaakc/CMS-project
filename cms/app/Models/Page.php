@@ -18,7 +18,7 @@ class Page extends Model
     ];
 
     // Relación con el modelo User
-    public function author()
+    public function users()
     {
         return $this->belongsTo(User::class, 'users_idusers');
     }

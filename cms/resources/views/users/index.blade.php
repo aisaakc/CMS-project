@@ -35,6 +35,7 @@
                                 <th class="px-4 py-2">Email</th>
                                 <th class="px-4 py-2">Dirección</th>
                                 <th class="px-4 py-2">Nro de Publicaciones</th>
+                                <th class="px-4 py-2">Nro de Paginas</th>
                                 <th class="px-4 py-2">Rol</th>
                                 <th class="px-4 py-2">Fecha de Nacimiento</th>
                                 <th class="px-4 py-2">Acciones</th>
@@ -48,6 +49,7 @@
                                     <td class="border px-4 py-2">{{ $user->email }}</td>
                                     <td class="border px-4 py-2">{{ $user->address }}</td>
                                     <td class="border px-4 py-2">{{ $user->publications->count() }}</td>
+                                    <td class="border px-4 py-2">{{ $user->pages->count() }}</td>
                                     <td class="border px-4 py-2">{{ $user->role->name }}</td>
                                     <td class="border px-4 py-2">{{ $user->date_of_birth }}</td>
                                     <td class="border px-4 py-2 flex space-x-2">
