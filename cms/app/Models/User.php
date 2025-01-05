@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Publication::class, 'users_idusers');
     }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class, 'users_idusers');
+    }
 }
