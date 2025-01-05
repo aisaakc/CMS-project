@@ -70,6 +70,8 @@
                                             @endswitch
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-800 flex space-x-4">
+                                            <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}"
+                                                class="text-green-500 hover:text-green-700">Vista</a>
                                             <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
                                                class="text-blue-500 hover:text-blue-700 transition duration-200">Editar</a>
 
