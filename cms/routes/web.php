@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PublicadorController;
+
 
 Route::get('/', function () {
     return view('cms.HomePage');
@@ -80,6 +82,6 @@ Route::get('blog/{id}/edit', [PublicationController::class, 'edit'])->name('publ
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 
 // USUARIOS
-
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/publicadores', [PublicadorController::class, 'index'])->name('publicadores');

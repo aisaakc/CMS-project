@@ -14,64 +14,72 @@
 <body class="font-inter bg-gray-100">
 
     <div class="flex h-screen">
-
-        <!-- Componente de menú lateral (Sidebar) -->
-        <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
-            <x-side-menu />
-        </div>
-
-        <!-- Contenedor principal -->
-        <div class="flex-1 flex flex-col">
+        @if (session('show_message'))
+        <x-mensaje :message="session('show_message')" />
+        @php
+            session()->forget('show_message');
+        @endphp
+       @endif
 
 
-                <!-- Componente de perfil -->
-                <div class="flex items-center space-x-4">
-                    <x-profile />
-                </div>
+        <div class="flex h-screen">
+            <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
+                <x-side-menu />
+            </div>
 
-
-                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Card de Publicadores -->
-                    <div class="bg-blue-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-                        <h2 class="text-3xl font-bold mb-4">Cantidad de Publicadores</h2>
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center space-x-4">
-                                <!-- Ícono de Publicadores -->
-                                <i class="fas fa-users fa-2x"></i>
-                                <span class="text-lg font-medium">Publicadores</span>
-                            </div>
-                            <div class="text-4xl font-semibold">{{ $publisherCount }}</div>
-                        </div>
-                        <div class="h-1 w-16 bg-gray-200 mb-6"></div>
-                        <p class="text-lg">Este es el total de publicadores registrados en el sistema, actualizado en tiempo real.</p>
+            <div class="flex-1 flex flex-col">
+                @auth
+                    <div class="flex items-center space-x-4 mb-12">
+                        <x-profile />
                     </div>
 
-                    <!-- Card de Publicaciones -->
-                    <div class="bg-gray-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-                        <h2 class="text-3xl font-bold mb-4">Cantidad de Publicaciones</h2>
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center space-x-4">
-                                <!-- Ícono de Publicaciones -->
-                                <i class="fas fa-newspaper fa-2x"></i>
-                                <span class="text-lg font-medium">Total Publicaciones</span>
+                    <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div
+                            class="bg-blue-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                            <h2 class="text-3xl font-bold mb-4">Cantidad de Publicadores</h2>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-users fa-2x"></i>
+                                    <span class="text-lg font-medium">Publicadores</span>
+                                </div>
+                                <div class="text-4xl font-semibold">{{ $publisherCount }}</div>
                             </div>
-                            <div class="text-4xl font-semibold">{{ $publicationCount }}</div>
+                            <div class="h-1 w-16 bg-gray-200 mb-6"></div>
+                            <p class="text-lg">Este es el total de publicadores registrados en el sistema, actualizado en
+                                tiempo real.
+                            </p>
+                            <a href="{{ route('publicadores') }}">
+                                <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                                    Ver Todos los publicadores
+                                </button>
+                            </a>
+
                         </div>
-                        <div class="h-1 w-16 bg-gray-200 mb-6"></div>
-                        <p class="text-lg">Total de publicaciones activas en la plataforma, actualizándose conforme se añaden nuevas.</p>
+
+                        <div
+                            class="bg-gray-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                            <h2 class="text-3xl font-bold mb-4">Cantidad de Publicaciones</h2>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-4">
+                                    <i class="fas fa-newspaper fa-2x"></i>
+                                    <span class="text-lg font-medium">Total Publicaciones</span>
+                                </div>
+                                <div class="text-4xl font-semibold">{{ $publicationCount }}</div>
+                            </div>
+                            <div class="h-1 w-16 bg-gray-200 mb-6"></div>
+                            <p class="text-lg">Total de publicaciones activas en la plataforma, actualizándose conforme se
+                                añaden nuevas.
+                            </p>
+                            <a>
+                            <button class="mt-4 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">
+                                Ver Todas las publicaciones
+                            </button>
+                            </a>
+                        </div>
                     </div>
-                </div>
-
-
-
-
-
-
-
-
-
+                @endauth
+            </div>
         </div>
-
     </div>
 
 </body>

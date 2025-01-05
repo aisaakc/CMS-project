@@ -25,54 +25,52 @@
             <x-side-menu />
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
-            <!-- Header -->
+
             <div class="h-14 text-white flex items-center justify-between  z-20">
                 <x-profile />
             </div>
 
-            <!-- Main Content Area -->
             <main class="p-4 space-y-6">
                 <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                    <!-- Información del perfil -->
                     <div class="space-y-8">
                         <h2 class="text-3xl font-semibold text-gray-900 mb-6">Información del Perfil</h2>
+
 
                         <form action="{{ route('update.profile.picture') }}" method="POST" enctype="multipart/form-data" class="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-lg border border-gray-200">
                             @csrf
 
-                            <!-- Nombre Completo y Cédula (En una fila) -->
                             <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                                @if (Auth::user()->first_name || Auth::user()->last_name)
+
                                     <div>
                                         <label for="full_name" class="block text-gray-700 font-medium">Nombre Completo</label>
                                         <input type="text" id="full_name" name="full_name"
                                             value="{{ old('full_name', Auth::user()->first_name . ' ' . Auth::user()->last_name) }}"
                                             class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 bg-gray-100 cursor-not-allowed" disabled>
                                     </div>
-                                @endif
 
-                                @if (Auth::user()->cedula)
                                     <div>
                                         <label for="cedula" class="block text-gray-700 font-medium">Cédula</label>
                                         <input type="text" id="cedula" name="cedula"
                                             value="{{ old('cedula', Auth::user()->cedula) }}"
                                             class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 bg-gray-100 cursor-not-allowed" disabled>
                                     </div>
-                                @endif
+
                             </div>
 
-
-                            <!-- Dirección y Nacionalidad -->
                             <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div>
-                                    <label for="address" class="block text-gray-700 font-medium">Dirección</label>
-                                    <input type="text" id="address" name="address"
-                                        value="{{ old('address', Auth::user()->address ?? 'No disponible') }}"
-                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                                <div >
+                                    <label for="user_name" class="block text-gray-700 font-medium">Nombre de Usuario</label>
+                                    <input type="text" id="user_name" name="user_name"
+                                        value="{{ old('user_name', Auth::user()->user_name) }}"
+                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
+                                        @error('user_name') border-red-500 focus:ring-red-500 @enderror">
+                                    @error('user_name')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
 
                                 <div>
                                     <label for="nacionalidad" class="block text-gray-700 font-medium">Nacionalidad</label>
@@ -80,10 +78,8 @@
                                         value="{{ old('nacionalidad', Auth::user()->nacionalidad) }}"
                                         class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 bg-gray-100 cursor-not-allowed" disabled>
                                 </div>
-                        </div>
+                            </div>
 
-
-                            <!-- Fecha de Nacimiento y Correo Electrónico -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
                                     <label for="date_of_birth" class="block text-gray-700 font-medium">Fecha de Nacimiento</label>
@@ -101,22 +97,16 @@
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div>
 
+                            </div>
                             <div class="mb-8">
-                                <label for="user_name" class="block text-gray-700 font-medium">Nombre de Usuario</label>
-                                <input type="text" id="user_name" name="user_name"
-                                    value="{{ old('user_name', Auth::user()->user_name) }}"
-                                    class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
-                                    @error('user_name') border-red-500 focus:ring-red-500 @enderror">
-                                @error('user_name')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                <label for="address" class="block text-gray-700 font-medium">Dirección</label>
+                                <textarea id="address" name="address"
+                                    class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                                    {{ old('address', Auth::user()->address ?? 'No disponible') }}
+                                </textarea>
                             </div>
-
-                            <!-- Botones de Guardar y Eliminar -->
                             <div class="mt-8">
-                                <!-- Botón de Guardar -->
                                 <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto mb-6">
                                     Guardar Cambios
                                 </button>
@@ -135,7 +125,7 @@
                             </div>
                         @endif
                     </div>
-                    <!-- Redes Sociales (Movida a una nueva posición en el grid) -->
+
                     <div class="space-y-6 col-span-1 md:col-span-1">
                         <h3 class="text-xl font-semibold text-gray-800 mb-4">Redes Sociales</h3>
                         <div class="overflow-x-auto shadow-lg rounded-lg w-full">
