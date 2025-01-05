@@ -369,8 +369,6 @@ public function loginVerify(Request $request)
     return redirect()->route('dashboard')->with('success', "Actualizaste tu perfil, {$user->first_name} {$user->last_name}");
 }
 
-
-
 public function destroy()
    {
     $user = Auth::user();
