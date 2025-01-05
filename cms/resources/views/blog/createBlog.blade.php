@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Publicación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body class="font-inter bg-gray-50">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 h-full bg-gray-900 text-white transition-transform lg:block fixed ">
+            <x-side-menu />
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
+            <!-- Header -->
+            <div class="h-14 text-white flex items-center justify-between  z-20">
+                <x-profile />
+            </div>
+
+            <main class="p-4 space-y-6">
+                <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <h1 class="text-3xl font-bold mb-4 col-span-2">Crear Publicación</h1>
+                    <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data"
+                        class="col-span-2">
+                        @csrf
+
+                        <div class="mb-4">
+                            <label for="title" class="block text-gray-700">Título</label>
+                            <input type="text" name="title" id="title"
+                                class="w-full px-4 py-2 border rounded-lg" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="content" class="block text-gray-700">Contenido</label>
+                            <textarea name="content" id="content" class="summernote w-full px-4 py-2 border rounded-lg" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="fecha_publicacion" class="block text-gray-700">Fecha de Publicación</label>
+                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion"
+                                class="w-full px-4 py-2 border rounded-lg" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="estado" class="block text-gray-700">Estado</label>
+                            <select name="estado" id="estado" class="w-full px-4 py-2 border rounded-lg" required>
+                                <option value="borrador">Borrador</option>
+                                <option value="publicado">Publicado</option>
+                                <option value="programado">Programado</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="categoria" class="block text-gray-700">Categoría</label>
+                            <input type="text" name="categoria" id="categoria"
+                                class="w-full px-4 py-2 border rounded-lg" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700">Imagen</label>
+                            <input type="file" name="image" id="image"
+                                class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+
+                        <div class="mb-4">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear
+                                Publicación</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 300
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -17,6 +17,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <x-mensaje />
+
 <body class="font-inter bg-gray-50">
 
 
@@ -34,6 +35,11 @@
             </div>
             <div class="container mx-auto p-6">
                 <h1 class="text-3xl font-bold mb-4">Publicaciones</h1>
+
+                <div class="mb-4">
+                    <a href="{{ route('publications.create') }}"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
+                </div>
 
                 <table class="min-w-full bg-white border border-gray-200">
                     <thead>
@@ -53,7 +59,6 @@
                                 <td class="border px-4 py-2">{{ $publication->title }}</td>
                                 <td class="border px-4 py-2">
                                     {{ $publication->fecha_creacion ? $publication->fecha_creacion->format('Y-m-d H:i:s') : 'N/A' }}
-                                </td>
                                 </td>
                                 <td class="border px-4 py-2">
                                     @if ($publication->fecha_publicacion)
@@ -79,6 +84,8 @@
                                     @endswitch
                                 </td>
                                 <td class="border px-4 py-2 flex space-x-2">
+                                    <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}"
+                                        class="text-green-500 hover:text-green-700">Vista</a>
                                     <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
                                         class="text-blue-500 hover:text-blue-700">Editar</a>
                                     <form
@@ -94,9 +101,10 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
 
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
 </body>
 
 </html>

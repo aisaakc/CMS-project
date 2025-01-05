@@ -79,6 +79,11 @@ Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('dele
 
 Route::get('blog/listBlog', [PublicationController::class, 'listaBlog'])->name('publications');
 Route::get('blog/{id}/edit', [PublicationController::class, 'edit'])->name('publications.edit');
+Route::put('blog/{id}', [PublicationController::class, 'update'])->name('publications.update'); // Define la ruta publications.update
+Route::get('blog/create', [PublicationController::class, 'create'])->name('publications.create'); // Ruta para crear una nueva publicación
+Route::post('blog', [PublicationController::class, 'store'])->name('publications.store'); // Ruta para almacenar la nueva publicación
+Route::get('blog/show/{id}', [PublicationController::class, 'show'])->name('publications.show'); // Ruta para visualizar una publicación
+
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 
 // USUARIOS
