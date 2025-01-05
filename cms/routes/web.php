@@ -70,9 +70,7 @@ Route::get('edit-profile', function () {
 })->name('edit-profile');
 
 Route::get('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
-
 Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('update.profile.picture');
-
 Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
 
 // PUBLICATIONS
@@ -83,7 +81,6 @@ Route::put('blog/{id}', [PublicationController::class, 'update'])->name('publica
 Route::get('blog/create', [PublicationController::class, 'create'])->name('publications.create'); // Ruta para crear una nueva publicación
 Route::post('blog', [PublicationController::class, 'store'])->name('publications.store'); // Ruta para almacenar la nueva publicación
 Route::get('blog/show/{id}', [PublicationController::class, 'show'])->name('publications.show'); // Ruta para visualizar una publicación
-
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 
 // USUARIOS

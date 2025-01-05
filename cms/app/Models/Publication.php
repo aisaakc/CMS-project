@@ -21,6 +21,11 @@ class Publication extends Model
         'users_idusers',
     ];
 
+    protected $casts = [
+        'fecha_creacion' => 'datetime',
+        'fecha_publicacion' => 'datetime',
+    ];
+
     public function users()
     {
         return $this->belongsTo(User::class, 'users_idusers');
