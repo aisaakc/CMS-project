@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Nacionalidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,7 +19,8 @@ class UsersController extends Controller
     // Mostrar formulario de creación de usuario
     public function create()
     {
-        return view('users.create');
+        $nacionalidades = Nacionalidad::all();
+        return view('users.create', compact('nacionalidades'));
     }
 
     // Guardar nuevo usuario
@@ -74,7 +76,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        $nacionalidades = Nacionalidad::all();
+        return view('users.edit', compact('user', 'nacionalidades'));
     }
 
     // Actualizar usuario
@@ -87,7 +90,7 @@ class UsersController extends Controller
             'cedula' => 'required|integer',
             'user_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'x' => 'nullable|string|max:255',

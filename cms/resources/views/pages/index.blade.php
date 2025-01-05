@@ -1,4 +1,3 @@
-# filepath: /c:/Users/user/Desktop/CMS-project/cms/resources/views/pages/index.blade.php
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +23,7 @@
                     <h1 class="text-3xl font-bold mb-4">Páginas</h1>
 
                     <div class="mb-4">
-                        <a href="{{ route('pages.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva
-                            Página</a>
+                        <a href="{{ route('pages.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Página</a>
                     </div>
 
                     <table class="min-w-full bg-white border border-gray-200">
@@ -33,7 +31,6 @@
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2">Título</th>
                                 <th class="px-4 py-2">Slug</th>
-                                <th class="px-4 py-2">Estado</th>
                                 <th class="px-4 py-2">Acciones</th>
                             </tr>
                         </thead>
@@ -42,14 +39,10 @@
                                 <tr>
                                     <td class="border px-4 py-2">{{ $page->title }}</td>
                                     <td class="border px-4 py-2">{{ $page->slug }}</td>
-                                    <td class="border px-4 py-2">{{ ucfirst($page->status) }}</td>
                                     <td class="border px-4 py-2 flex space-x-2">
-                                        <a href="{{ route('pages.show', $page->id) }}"
-                                            class="text-green-500 hover:text-green-700">Vista</a>
-                                        <a href="{{ route('pages.edit', $page->id) }}"
-                                            class="text-blue-500 hover:text-blue-700">Editar</a>
-                                        <form action="{{ route('pages.destroy', $page->id) }}" method="POST"
-                                            class="inline-block">
+                                        <a href="{{ route('pages.show', $page->id) }}" class="text-green-500 hover:text-green-700">Vista</a>
+                                        <a href="{{ route('pages.edit', $page->id) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
+                                        <form action="{{ route('pages.destroy', $page->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button>
@@ -60,7 +53,9 @@
                         </tbody>
                     </table>
                 </div>
+            @endauth
+        </div>
+    </div>
+</body>
 
-    </body>
-
-    </html>
+</html>

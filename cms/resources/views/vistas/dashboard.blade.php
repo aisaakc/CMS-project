@@ -20,7 +20,7 @@
             session()->forget('show_message');
         @endphp
        @endif
-
+       @auth
 
         <div class="flex h-screen">
             <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-
+    @endauth
 </body>
 
 </html>

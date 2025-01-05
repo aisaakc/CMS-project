@@ -11,6 +11,12 @@
 <body class="font-inter bg-gray-50">
 
     <div class="flex h-screen">
+        @if (session('show_message'))
+        <x-mensaje :message="session('show_message')" />
+        @php
+            session()->forget('show_message');
+        @endphp
+       @endif
         <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
             <x-side-menu />
         </div>
@@ -93,7 +99,11 @@
 
                         <div class="mb-4">
                             <label for="nacionalidad_idnacionalidad" class="block text-gray-700">Nacionalidad</label>
-                            <input type="text" name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg" required>
+                            <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg" required>
+                                @foreach($nacionalidades as $nacionalidad)
+                                    <option value="{{ $nacionalidad->idnacionalidad }}">{{ $nacionalidad->nacionalidad }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="mb-4">
@@ -101,9 +111,10 @@
                             <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg" required>
                                 <option value="1">Administrador</option>
                                 <option value="2">Publicador</option>
-                                <option value="3">Visitante</option>
                             </select>
                         </div>
+
+
 
                         <div class="mb-4 flex space-x-4">
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Usuario</button>
