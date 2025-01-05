@@ -25,15 +25,39 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'cedula' => 'required|integer',
+            'user_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'facebook' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'x' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
+            'descripcion' => 'nullable|string',
             'password' => 'required|string|min:8|confirmed',
+            'nacionalidad_idnacionalidad' => 'required|integer',
+            'roles_idroles' => 'required|integer',
         ]);
 
         $user = new User();
-        $user->name = $request->input('name');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->date_of_birth = $request->input('date_of_birth');
+        $user->cedula = $request->input('cedula');
+        $user->user_name = $request->input('user_name');
+        $user->address = $request->input('address');
         $user->email = $request->input('email');
+        $user->facebook = $request->input('facebook');
+        $user->instagram = $request->input('instagram');
+        $user->x = $request->input('x');
+        $user->tiktok = $request->input('tiktok');
+        $user->descripcion = $request->input('descripcion');
         $user->password = Hash::make($request->input('password'));
+        $user->nacionalidad_idnacionalidad = $request->input('nacionalidad_idnacionalidad');
+        $user->roles_idroles = $request->input('roles_idroles');
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
@@ -57,17 +81,41 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'cedula' => 'required|integer',
+            'user_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'x' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
+            'descripcion' => 'nullable|string',
             'password' => 'nullable|string|min:8|confirmed',
+            'nacionalidad_idnacionalidad' => 'required|integer',
+            'roles_idroles' => 'required|integer',
         ]);
 
         $user = User::findOrFail($id);
-        $user->name = $request->input('name');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->date_of_birth = $request->input('date_of_birth');
+        $user->cedula = $request->input('cedula');
+        $user->user_name = $request->input('user_name');
+        $user->address = $request->input('address');
         $user->email = $request->input('email');
+        $user->facebook = $request->input('facebook');
+        $user->instagram = $request->input('instagram');
+        $user->x = $request->input('x');
+        $user->tiktok = $request->input('tiktok');
+        $user->descripcion = $request->input('descripcion');
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
+        $user->nacionalidad_idnacionalidad = $request->input('nacionalidad_idnacionalidad');
+        $user->roles_idroles = $request->input('roles_idroles');
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
