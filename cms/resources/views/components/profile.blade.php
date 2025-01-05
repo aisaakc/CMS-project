@@ -2,7 +2,7 @@
     <!-- Barra superior -->
     <header class="h-14 bg-white shadow-md flex items-center justify-between px-6 lg:px-10">
         <!-- Botón para abrir el sidebar en pantallas pequeñas -->
-        <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none hover:text-gray-900 transition-all">
+        <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none hover:text-gray-900 transition-all hidden ">
             <i class="fas fa-bars text-xl"></i>
         </button>
 

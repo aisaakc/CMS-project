@@ -26,6 +26,10 @@
             <div class="container mx-auto p-6">
                 <h1 class="text-3xl font-bold mb-6 text-gray-800">Publicaciones</h1>
 
+                <div class="mb-4">
+                    <a href="{{ route('publications.create') }}"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
+                </div>
                 <!-- Mostrar publicaciones por categorías -->
                 @foreach ($publicationsByCategory as $category => $categoryPublications)
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $category }}</h2>
@@ -70,6 +74,8 @@
                                             @endswitch
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-800 flex space-x-4">
+                                            <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}"
+                                                class="text-green-500 hover:text-green-700">Vista</a>
                                             <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
                                                class="text-blue-500 hover:text-blue-700 transition duration-200">Editar</a>
 

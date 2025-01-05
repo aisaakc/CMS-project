@@ -166,7 +166,11 @@ public function loginVerify(Request $request)
     {
         // Validar el correo electrónico
         $request->validate([
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email|exists:users,email',  // validaciones para el email
+        ], [
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección de correo válida.',
+            'email.exists' => 'El correo electrónico no está registrado en nuestros registros.',
         ]);
         $email = $request->email;
 
@@ -176,7 +180,7 @@ public function loginVerify(Request $request)
         if (!$thisuser) {
             return redirect()->route('verify')->withErrors('Usuario no encontrado');
         }
-        // Almacenar el correo en la sesión
+
 
         session(['email' => $thisuser->email]);
         return redirect()->route('questions', ['id' => $user])->with('success', 'Usuario registrado exitosamente.');
@@ -201,63 +205,48 @@ public function loginVerify(Request $request)
     }
 
     public function verifyQuestions(Request $request)
-    {
+{
+    // Validar las respuestas enviadas por el formulario
+    $request->validate([
+        'respuesta_1' => 'required',
+        'respuesta_2' => 'required',
+        'respuesta_3' => 'required',
+        'respuesta_4' => 'required',
+    ]);
 
-        $request->validate([
+    // Obtener el usuario autenticado
+    $userId = auth()->id();
 
-            'respuesta_1' => 'required',
-            'respuesta_2' => 'required',
-            'respuesta_3' => 'required',
-            'respuesta_4' => 'required',
+    // Validar las preguntas y respuestas proporcionadas
+    $preguntasYRespuestas = [
+        ['pregunta' => $request->pregunta_1, 'respuesta' => $request->respuesta_1],
+        ['pregunta' => $request->pregunta_2, 'respuesta' => $request->respuesta_2],
+        ['pregunta' => $request->pregunta_3, 'respuesta' => $request->respuesta_3],
+        ['pregunta' => $request->pregunta_4, 'respuesta' => $request->respuesta_4],
+    ];
 
-        ]);
+    foreach ($preguntasYRespuestas as $index => $item) {
+        $preguntaId = $item['pregunta'];
+        $respuesta = $item['respuesta'];
 
-        $idquestion1 = $request->pregunta_1;
-        $idquestion2 = $request->pregunta_2;
-        $idquestion3 = $request->pregunta_3;
-        $idquestion4 = $request->pregunta_4;
-        $idrespuesta1 = $request->respuesta_1;
-        $idrespuesta2 = $request->respuesta_2;
-        $idrespuesta3 = $request->respuesta_3;
-        $idrespuesta4 = $request->respuesta_4;
-        //validar pregunta 1
-
-        //dump($idquestion1, $idquestion2, $idquestion3, $idquestion4, $idrespuesta1, $idrespuesta2, $idrespuesta3, $idrespuesta4);
-
-        $respuestaCorrecta1 = Respuesta::where('preguntas_idpreguntas', $idquestion1)
-            ->where('respuesta', $idrespuesta1)
+        // Verificar si la pregunta y respuesta coinciden en la base de datos
+        $respuestaCorrecta = DB::table('respuestas')
+            ->where('user_id', $userId)
+            ->where('pregunta_id', $preguntaId)
+            ->where('respuesta', $respuesta)
             ->exists();
 
-        if (!$respuestaCorrecta1) {
-            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion1}' es incorrecta."]);
+        if (!$respuestaCorrecta) {
+            return back()->withErrors([
+                'invalid_questions' => "La respuesta a la pregunta '{$preguntaId}' es incorrecta.",
+            ]);
         }
-        //validar pregunta 2
-        $respuestaCorrecta2 = Respuesta::where('preguntas_idpreguntas', $idquestion2)
-            ->where('respuesta', $idrespuesta2)
-            ->exists();
-
-        if (!$respuestaCorrecta2) {
-            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion2}' es incorrecta."]);
-        }
-        //validar pregunta 3
-        $respuestaCorrecta3 = Respuesta::where('preguntas_idpreguntas', $idquestion3)
-            ->where('respuesta', $idrespuesta3)
-            ->exists();
-
-        if (!$respuestaCorrecta3) {
-            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion3}' es incorrecta."]);
-        }
-        //validar pregunta 4
-        $respuestaCorrecta4 = Respuesta::where('preguntas_idpreguntas', $idquestion4)
-            ->where('respuesta', $idrespuesta4)
-            ->exists();
-
-        if (!$respuestaCorrecta4) {
-            return back()->withErrors(['invalid_questions' => "La respuesta a la pregunta '{$idquestion4}' es incorrecta."]);
-        }
-
-        return redirect()->route('token')->with('success', 'Usuario registrado exitosamente.');
     }
+
+    // Si todas las respuestas son correctas, redirigir al token
+    return redirect()->route('token')->with('success', 'Usuario registrado exitosamente.');
+}
+
 
     public function Token()
     {
