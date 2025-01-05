@@ -371,9 +371,16 @@ public function loginVerify(Request $request)
     // Establecer el mensaje de éxito en la sesión
     session()->flash('show_message', 'Perfil actualizado correctamente.');
 
-    // Redirigir con el mensaje
-    return redirect()->route('dashboard');
+    // Redirigir según el rol del usuario
+    if ($user->roles_idroles === 2) { // Si el usuario es un Publicador (roles_idroles = 2)
+        return redirect()->route('publications')->with('success', "Actualizaste tu perfil, {$user->first_name} {$user->last_name}");
+    }
+
+    // Si no es Publicador, es Administrador (asumimos roles_idroles = 1 para Admin)
+    return redirect()->route('dashboard')->with('success', "Actualizaste tu perfil, {$user->first_name} {$user->last_name}");
 }
+
+
 
 public function destroy()
    {
@@ -382,7 +389,6 @@ public function destroy()
     Auth::logout();
 
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
-
     }
 
 }
