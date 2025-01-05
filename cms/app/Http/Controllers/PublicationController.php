@@ -2,37 +2,21 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
+
 use Carbon\Carbon;
-=======
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
 use App\Models\Publication;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
 class PublicationController extends Controller
 {
-<<<<<<< HEAD
-=======
+
     // Método para listar publicaciones
-    public function listaBlog()
-    {
-        $publications = Publication::all();
-
-        // Convertir las fechas a instancias de Carbon
-        foreach ($publications as $publication) {
-            $publication->fecha_creacion = Carbon::parse($publication->fecha_creacion);
-            $publication->fecha_publicacion = $publication->fecha_publicacion ? Carbon::parse($publication->fecha_publicacion) : null;
-        }
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
-
-
-    public function listaBlog(Request $request)
+   public function listaBlog(Request $request)
 {
     // Número de publicaciones por página
-    $perPage = 5;
+    $perPage = 10;
 
     // Obtener las publicaciones paginadas
     $publications = Publication::paginate($perPage);
@@ -42,7 +26,6 @@ class PublicationController extends Controller
         $publication->fecha_creacion = $publication->fecha_creacion ? Carbon::parse($publication->fecha_creacion) : null;
         $publication->fecha_publicacion = $publication->fecha_publicacion ? Carbon::parse($publication->fecha_publicacion) : null;
     }
-<<<<<<< HEAD
 
     // Agrupar las publicaciones por categoría usando la colección ya paginada
     $publicationsByCategory = $publications->getCollection()->groupBy('categoria');
@@ -53,17 +36,12 @@ class PublicationController extends Controller
 
 
     // Método para registrar un usuario (sin cambios)
-    public function register()
-=======
     public function create()
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
     {
         return view('blog/createBlog');
     }
-
-<<<<<<< HEAD
     // Método para editar una publicación (sin cambios)
-=======
+
     public function show($id)
     {
         $publication = Publication::findOrFail($id);
@@ -109,7 +87,7 @@ class PublicationController extends Controller
     }
 
     // Método para editar una publicación
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
+
     public function edit($id)
     {
         $publication = Publication::findOrFail($id);

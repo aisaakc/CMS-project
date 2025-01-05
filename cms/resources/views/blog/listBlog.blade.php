@@ -10,10 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-<<<<<<< HEAD
-=======
-<x-mensaje />
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
 
 <body class="font-inter bg-gray-50">
 
@@ -30,7 +26,6 @@
             <div class="container mx-auto p-6">
                 <h1 class="text-3xl font-bold mb-6 text-gray-800">Publicaciones</h1>
 
-<<<<<<< HEAD
                 <!-- Mostrar publicaciones por categorías -->
                 @foreach ($publicationsByCategory as $category => $categoryPublications)
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $category }}</h2>
@@ -68,45 +63,6 @@
                                                 @case('publicado')
                                                     <span class="px-2 py-1 text-xs font-semibold text-green-600 bg-green-100 rounded-full">Publicado</span>
                                                     @break
-=======
-                <div class="mb-4">
-                    <a href="{{ route('publications.create') }}"
-                        class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
-                </div>
-
-                <table class="min-w-full bg-white border border-gray-200">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="px-4 py-2">Título</th>
-                            <th class="px-4 py-2">Fecha de Creación</th>
-                            <th class="px-4 py-2">Fecha de Publicación</th>
-                            <th class="px-4 py-2">Categoría</th>
-                            <th class="px-4 py-2">Estado</th>
-                            <th class="px-4 py-2">Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($publications as $publication)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $publication->title }}</td>
-                                <td class="border px-4 py-2">
-                                    {{ $publication->fecha_creacion ? $publication->fecha_creacion->format('Y-m-d H:i:s') : 'N/A' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    @if ($publication->fecha_publicacion)
-                                        {{ $publication->fecha_publicacion->format('d/m/Y H:i') }}
-                                    @else
-                                        No programada
-                                    @endif
-                                </td>
-                                <td class="border px-4 py-2">{{ $publication->categoria }}</td>
-                                <td class="border px-4 py-2">
-                                    @switch($publication->estado)
-                                        @case('borrador')
-                                            Borrador
-                                        @break
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
 
                                                 @case('programado')
                                                     <span class="px-2 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">Programado</span>
@@ -117,7 +73,6 @@
                                             <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
                                                class="text-blue-500 hover:text-blue-700 transition duration-200">Editar</a>
 
-<<<<<<< HEAD
                                             <form action="{{ route('publications.destroy', ['id' => $publication->idpublications]) }}"
                                                   method="POST" class="inline-block">
                                                 @csrf
@@ -143,35 +98,6 @@
             </div>
         </div>
     </div>
-=======
-                                        @case('programado')
-                                            Programado
-                                        @break
-                                    @endswitch
-                                </td>
-                                <td class="border px-4 py-2 flex space-x-2">
-                                    <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}"
-                                        class="text-green-500 hover:text-green-700">Vista</a>
-                                    <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
-                                        class="text-blue-500 hover:text-blue-700">Editar</a>
-                                    <form
-                                        action="{{ route('publications.destroy', ['id' => $publication->idpublications]) }}"
-                                        method="POST" class="inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
->>>>>>> bd5f409339445445afd0ce0fa69b1efc79d96bd2
 </body>
 
 </html>
