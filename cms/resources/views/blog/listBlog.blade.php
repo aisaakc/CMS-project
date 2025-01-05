@@ -26,6 +26,10 @@
             <div class="container mx-auto p-6">
                 <h1 class="text-3xl font-bold mb-6 text-gray-800">Publicaciones</h1>
 
+                <div class="mb-4">
+                    <a href="{{ route('publications.create') }}"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
+                </div>
                 <!-- Mostrar publicaciones por categorías -->
                 @foreach ($publicationsByCategory as $category => $categoryPublications)
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $category }}</h2>
