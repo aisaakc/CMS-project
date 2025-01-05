@@ -31,7 +31,7 @@
 
                         <div class="divide-y divide-gray-200">
                             <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                <!-- Mensaje de recordatorio para iniciar sesión -->
+
                                 <div class="text-center text-sm text-gray-600 mb-4">
                                     <p>¿Recordaste tu contraseña?
                                         <a href="{{ route('login') }}"
@@ -39,14 +39,12 @@
                                     </p>
                                 </div>
 
-                                <!-- Input de correo electrónico -->
+
                                 <div class="relative">
                                     <input type="email" id="email" name="email"
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 "
                                         placeholder="Correo Electrónico" value="{{ old('email') }}" />
-                                    @error('email')
-                                        <small class="text-red-500 mt-1"><strong>{{ $message }}</strong></small>
-                                    @enderror
+
                                 </div>
 
                                 <div class="relative mt-6">

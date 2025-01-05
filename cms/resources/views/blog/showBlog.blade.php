@@ -12,7 +12,6 @@
 <body class="font-inter bg-gray-50">
 
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <div class="w-64 h-full bg-gray-900 text-white transition-transform lg:block fixed ">
             <x-side-menu />
         </div>
