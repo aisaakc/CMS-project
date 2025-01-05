@@ -34,26 +34,29 @@
             <!-- Sidebar Menu -->
             <form action="">
                 <nav class="flex flex-col space-y-2 p-4 text-gray-300">
-                    @if(auth()->user()->roles_idroles == 1)
-                        <a href="{{ route('dashboard') }}" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    @if (auth()->user()->roles_idroles == 1)
+                        <a href="{{ route('users.index') }}"
+                            class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                             <i class="fas fa-user-friends"></i>
                             <span>Usuarios</span>
                         </a>
                     @endif
 
-                    @if(auth()->user()->roles_idroles == 1)
-                    <a href="#" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
-                        <i class="fas fa-sitemap"></i>
-                        <span>Páginas</span>
-                    </a>
+                    @if (auth()->user()->roles_idroles == 1)
+                        <a href="{{ route('pages.index') }}"
+                            class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                            <i class="fas fa-sitemap"></i>
+                            <span>Páginas</span>
+                        </a>
                     @endif
-                    <a href="{{ route('publications') }}" class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
+                    <a href="{{ route('publications') }}"
+                        class="flex items-center space-x-2 hover:bg-gray-700 px-4 py-2 rounded transition">
                         <i class="fas fa-blog"></i>
                         <span>Blog</span>
                     </a>
                 </nav>
 
-        </form>
+            </form>
         </div>
 
     </div>

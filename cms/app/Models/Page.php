@@ -14,12 +14,12 @@ class Page extends Model
         'content',
         'slug',
         'status',
-        'author_id',
+        'users_idusers',
     ];
 
     // Relación con el modelo User
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'users_idusers');
     }
 }

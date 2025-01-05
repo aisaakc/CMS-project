@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PublicadorController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\UsersController;
 
 
 Route::get('/', function () {
@@ -87,3 +89,9 @@ Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('pub
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/publicadores', [PublicadorController::class, 'index'])->name('publicadores');
+
+//PAGES
+Route::resource('pages', PageController::class);
+
+//users
+Route::resource('users', UsersController::class);
