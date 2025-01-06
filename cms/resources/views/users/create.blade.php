@@ -32,94 +32,111 @@
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
 
+                        <!-- Nombre -->
                         <div class="mb-4">
                             <label for="first_name" class="block text-gray-700">Nombre</label>
-                            <input type="text" name="first_name" id="first_name" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="w-full px-4 py-2 border rounded-lg @error('first_name') border-red-500 @enderror">
+                            @error('first_name')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Apellido -->
                         <div class="mb-4">
                             <label for="last_name" class="block text-gray-700">Apellido</label>
-                            <input type="text" name="last_name" id="last_name" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="w-full px-4 py-2 border rounded-lg @error('last_name') border-red-500 @enderror">
+                            @error('last_name')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Fecha de nacimiento -->
                         <div class="mb-4">
                             <label for="date_of_birth" class="block text-gray-700">Fecha de Nacimiento</label>
-                            <input type="date" name="date_of_birth" id="date_of_birth" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') }}" class="w-full px-4 py-2 border rounded-lg @error('date_of_birth') border-red-500 @enderror">
+                            @error('date_of_birth')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Cédula -->
                         <div class="mb-4">
                             <label for="cedula" class="block text-gray-700">Cédula</label>
-                            <input type="text" name="cedula" id="cedula" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="text" name="cedula" id="cedula" value="{{ old('cedula') }}" class="w-full px-4 py-2 border rounded-lg @error('cedula') border-red-500 @enderror">
+                            @error('cedula')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Nombre de usuario -->
                         <div class="mb-4">
                             <label for="user_name" class="block text-gray-700">Nombre de Usuario</label>
-                            <input type="text" name="user_name" id="user_name" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="w-full px-4 py-2 border rounded-lg @error('user_name') border-red-500 @enderror">
+                            @error('user_name')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Dirección -->
                         <div class="mb-4">
                             <label for="address" class="block text-gray-700">Dirección</label>
-                            <input type="text" name="address" id="address" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="text" name="address" id="address" value="{{ old('address') }}" class="w-full px-4 py-2 border rounded-lg @error('address') border-red-500 @enderror">
+                            @error('address')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Email -->
                         <div class="mb-4">
                             <label for="email" class="block text-gray-700">Email</label>
-                            <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full px-4 py-2 border rounded-lg @error('email') border-red-500 @enderror">
+                            @error('email')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
-                        <div class="mb-4">
-                            <label for="facebook" class="block text-gray-700">Facebook</label>
-                            <input type="text" name="facebook" id="facebook" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="instagram" class="block text-gray-700">Instagram</label>
-                            <input type="text" name="instagram" id="instagram" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="x" class="block text-gray-700">X</label>
-                            <input type="text" name="x" id="x" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="tiktok" class="block text-gray-700">TikTok</label>
-                            <input type="text" name="tiktok" id="tiktok" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="descripcion" class="block text-gray-700">Descripción</label>
-                            <textarea name="descripcion" id="descripcion" class="w-full px-4 py-2 border rounded-lg"></textarea>
-                        </div>
-
+                        <!-- Contraseña -->
                         <div class="mb-4">
                             <label for="password" class="block text-gray-700">Contraseña</label>
-                            <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg">
+                            <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg @error('password') border-red-500 @enderror">
+                            @error('password')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Nacionalidad -->
                         <div class="mb-4">
                             <label for="nacionalidad_idnacionalidad" class="block text-gray-700">Nacionalidad</label>
-                            <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg">
+                            <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg @error('nacionalidad_idnacionalidad') border-red-500 @enderror">
                                 @foreach($nacionalidades as $nacionalidad)
-                                    <option value="{{ $nacionalidad->idnacionalidad }}">{{ $nacionalidad->nacionalidad }}</option>
+                                    <option value="{{ $nacionalidad->idnacionalidad }}" {{ old('nacionalidad_idnacionalidad') == $nacionalidad->idnacionalidad ? 'selected' : '' }}>{{ $nacionalidad->nacionalidad }}</option>
                                 @endforeach
                             </select>
+                            @error('nacionalidad_idnacionalidad')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Rol -->
                         <div class="mb-4">
                             <label for="roles_idroles" class="block text-gray-700">Rol</label>
-                            <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg" >
-                                @foreach ($roles as $rol )
-                                    <option value="{{ $rol->idroles }}">{{ $rol->name}}</option>
+                            <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg @error('roles_idroles') border-red-500 @enderror">
+                                @foreach($roles as $rol)
+                                    <option value="{{ $rol->idroles }}" {{ old('roles_idroles') == $rol->idroles ? 'selected' : '' }}>{{ $rol->name }}</option>
                                 @endforeach
                             </select>
+                            @error('roles_idroles')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
+                        <!-- Botones -->
                         <div class="mb-4 flex space-x-4">
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Usuario</button>
                             <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
                         </div>
                     </form>
+
                 </div>
             @endauth
         </div>
