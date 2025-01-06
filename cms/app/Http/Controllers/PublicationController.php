@@ -12,13 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class PublicationController extends Controller
 {
 
-    // Método para listar publicaciones
    public function listaBlog(Request $request)
 {
-    // Número de publicaciones por página
-    $perPage = 10;
 
-    // Obtener las publicaciones paginadas
+    $perPage = 5;
+
+
     $publications = Publication::paginate($perPage);
 
     // Convertir las fechas a instancias de Carbon (opcional)

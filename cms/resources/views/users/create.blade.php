@@ -34,37 +34,37 @@
 
                         <div class="mb-4">
                             <label for="first_name" class="block text-gray-700">Nombre</label>
-                            <input type="text" name="first_name" id="first_name" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" name="first_name" id="first_name" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="last_name" class="block text-gray-700">Apellido</label>
-                            <input type="text" name="last_name" id="last_name" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" name="last_name" id="last_name" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="date_of_birth" class="block text-gray-700">Fecha de Nacimiento</label>
-                            <input type="date" name="date_of_birth" id="date_of_birth" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="cedula" class="block text-gray-700">Cédula</label>
-                            <input type="text" name="cedula" id="cedula" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" name="cedula" id="cedula" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="user_name" class="block text-gray-700">Nombre de Usuario</label>
-                            <input type="text" name="user_name" id="user_name" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" name="user_name" id="user_name" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="address" class="block text-gray-700">Dirección</label>
-                            <input type="text" name="address" id="address" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" name="address" id="address" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="email" class="block text-gray-700">Email</label>
-                            <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
@@ -94,12 +94,12 @@
 
                         <div class="mb-4">
                             <label for="password" class="block text-gray-700">Contraseña</label>
-                            <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg">
                         </div>
 
                         <div class="mb-4">
                             <label for="nacionalidad_idnacionalidad" class="block text-gray-700">Nacionalidad</label>
-                            <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg" required>
+                            <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg">
                                 @foreach($nacionalidades as $nacionalidad)
                                     <option value="{{ $nacionalidad->idnacionalidad }}">{{ $nacionalidad->nacionalidad }}</option>
                                 @endforeach
@@ -108,13 +108,12 @@
 
                         <div class="mb-4">
                             <label for="roles_idroles" class="block text-gray-700">Rol</label>
-                            <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg" required>
-                                <option value="1">Administrador</option>
-                                <option value="2">Publicador</option>
+                            <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg" >
+                                @foreach ($roles as $rol )
+                                    <option value="{{ $rol->idroles }}">{{ $rol->name}}</option>
+                                @endforeach
                             </select>
                         </div>
-
-
 
                         <div class="mb-4 flex space-x-4">
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Usuario</button>

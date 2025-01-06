@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Publication;
+use App\Models\Page; // Agregar el modelo Page
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Obtener la cantidad de usuarios con el rol de 'Publisher' (idroles == 2)
-        $publisherCount = User::where('roles_idroles', 2)->count();
 
-        // Obtener la cantidad total de publicaciones creadas
         $publicationCount = Publication::count();
+        $pagesCount = Page::count(); // Contar el número de páginas
 
         // Retornar la vista con las variables
-        return view('vistas.dashboard', compact('publisherCount', 'publicationCount'));
+        return view('vistas.dashboard', compact('publicationCount', 'pagesCount'));
     }
 }
-

@@ -22,49 +22,56 @@
                 <div class="container mx-auto p-6">
                     <h1 class="text-3xl font-bold mb-4">Usuarios</h1>
 
-                    <div class="mb-4">
-                        <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nuevo Usuario</a>
+                    <div class="mb-6">
+                        <a href="{{ route('users.create') }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200">Nuevo Usuario</a>
                     </div>
 
-                    <table class="min-w-full bg-white border border-gray-200">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2">Nombre</th>
-                                <th class="px-4 py-2">Nombre de Usuario</th>
-                                <th class="px-4 py-2">Email</th>
-                                <th class="px-4 py-2">Dirección</th>
-                                <th class="px-4 py-2">Nro de Publicaciones</th>
-                                <th class="px-4 py-2">Rol</th>
-                                <th class="px-4 py-2">Fecha de Nacimiento</th>
-                                <th class="px-4 py-2">Nro de Páginas</th>
-                                <th class="px-4 py-2">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
+                    <!-- Table -->
+                    <div class="overflow-x-auto bg-white shadow-lg rounded-lg border-t-4 border-indigo-500">
+                        <table class="min-w-full table-auto">
+                            <thead class="bg-indigo-50">
                                 <tr>
-                                    <td class="border px-4 py-2">{{ $user->first_name }} {{ $user->last_name }}</td>
-                                    <td class="border px-4 py-2">{{ $user->user_name }}</td>
-                                    <td class="border px-4 py-2">{{ $user->email }}</td>
-                                    <td class="border px-4 py-2">{{ $user->address }}</td>
-                                    <td class="border px-4 py-2">{{ $user->publications->count() }}</td>
-                                    <td class="border px-4 py-2">{{ $user->role->name }}</td>
-                                    <td class="border px-4 py-2">{{ $user->date_of_birth }}</td>
-                                    <td class="border px-4 py-2">{{ $user->nro_de_paginas }}</td>
-                                    <td class="border px-4 py-2 flex space-x-2">
-                                        <a href="{{ route('users.show', $user->idusers) }}" class="text-green-500 hover:text-green-700">Vista</a>
-                                        <a href="{{ route('users.edit', $user->idusers) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
-                                        <form action="{{ route('users.destroy', $user->idusers) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button>
-                                        </form>
-                                    </td>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nombre</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nombre de Usuario</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Email</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Dirección</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nro de Publicaciones</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Rol</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Fecha de Nacimiento</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nro de Páginas</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Acciones</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody class="text-sm">
+                                @foreach ($users as $user)
+                                    <tr class="border-t border-gray-200 hover:bg-gray-100">
+                                        <td class="px-4 py-3">{{ $user->first_name }} {{ $user->last_name }}</td>
+                                        <td class="px-4 py-3">{{ $user->user_name }}</td>
+                                        <td class="px-4 py-3">{{ $user->email }}</td>
+                                        <td class="px-4 py-3">{{ $user->address ?? 'No disponible'  }} </td>
+                                        <td class="px-4 py-3">{{ $user->publications->count() }}</td>
+                                        <td class="px-4 py-3">{{ $user->role->name }}</td>
+                                        <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
+                                        <td class="px-4 py-3">{{ $user->nro_de_paginas ?? 'No disponible' }}</td>
+                                        <td class="px-4 py-3 flex space-x-2">
+                                            <a href="{{ route('users.show', $user->idusers) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
+                                            <a href="{{ route('users.edit', $user->idusers) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
+
+                                            @if($user->roles_idroles === 1)
+                                                <button type="button" class="text-red-600 cursor-not-allowed opacity-50" disabled>Eliminar</button>
+                                            @else
+                                                <form action="{{ route('users.destroy', $user->idusers) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">Eliminar</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
             @endauth
         </div>
     </div>

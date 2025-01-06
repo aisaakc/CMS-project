@@ -85,10 +85,10 @@ Route::post('blog', [PublicationController::class, 'store'])->name('publications
 Route::get('blog/show/{id}', [PublicationController::class, 'show'])->name('publications.show'); // Ruta para visualizar una publicación
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 
-// USUARIOS
+// cantidad
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/publicadores', [PublicadorController::class, 'index'])->name('publicadores');
+
 
 //PAGES
 Route::resource('pages', PageController::class);

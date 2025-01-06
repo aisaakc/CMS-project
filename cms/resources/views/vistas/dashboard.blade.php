@@ -34,26 +34,22 @@
                     </div>
 
                     <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div
-                            class="bg-blue-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-                            <h2 class="text-3xl font-bold mb-4">Cantidad de Publicadores</h2>
+                        <div class="bg-green-800 text-white p-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                            <h2 class="text-3xl font-bold mb-4">Cantidad de Páginas</h2>
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center space-x-4">
-                                    <i class="fas fa-users fa-2x"></i>
-                                    <span class="text-lg font-medium">Publicadores</span>
+                                    <i class="fas fa-file-alt fa-2x"></i>
+                                    <span class="text-lg font-medium">Total Páginas</span>
                                 </div>
-                                <div class="text-4xl font-semibold">{{ $publisherCount }}</div>
+                                <div class="text-4xl font-semibold">{{ $pagesCount }}</div>
                             </div>
                             <div class="h-1 w-16 bg-gray-200 mb-6"></div>
-                            <p class="text-lg">Este es el total de publicadores registrados en el sistema, actualizado en
-                                tiempo real.
-                            </p>
-                            <a href="{{ route('publicadores') }}">
-                                <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-                                    Ver Todos los publicadores
+                            <p class="text-lg">Total de páginas creadas en la plataforma, actualizándose conforme se añaden nuevas.</p>
+                            <a>
+                                <button class="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">
+                                    Ver Todas las páginas
                                 </button>
                             </a>
-
                         </div>
 
                         <div
