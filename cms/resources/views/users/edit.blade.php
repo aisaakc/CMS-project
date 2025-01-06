@@ -30,45 +30,39 @@
                         @csrf
                         @method('PUT')
 
-                        <!-- Grid con dos columnas (adaptable) -->
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-                            <!-- Nombre -->
                             <div class="mb-4">
                                 <label for="first_name" class="block text-gray-700 font-semibold mb-2">Nombre</label>
                                 <input type="text" name="first_name" id="first_name" value="{{ $user->first_name }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Apellido -->
                             <div class="mb-4">
                                 <label for="last_name" class="block text-gray-700 font-semibold mb-2">Apellido</label>
                                 <input type="text" name="last_name" id="last_name" value="{{ $user->last_name }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Fecha de Nacimiento -->
                             <div class="mb-4">
                                 <label for="date_of_birth" class="block text-gray-700 font-semibold mb-2">Fecha de Nacimiento</label>
                                 <input type="date" name="date_of_birth" id="date_of_birth" value="{{ $user->date_of_birth }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Cédula -->
                             <div class="mb-4">
                                 <label for="cedula" class="block text-gray-700 font-semibold mb-2">Cédula</label>
                                 <input type="text" name="cedula" id="cedula" value="{{ $user->cedula }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Nombre de Usuario -->
                             <div class="mb-4">
                                 <label for="user_name" class="block text-gray-700 font-semibold mb-2">Nombre de Usuario</label>
                                 <input type="text" name="user_name" id="user_name" value="{{ $user->user_name }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Dirección -->
                             <div class="mb-4">
                                 <label for="address" class="block text-gray-700 font-semibold mb-2">Dirección</label>
                                 <input type="text" name="address" id="address" value="{{ $user->address }}"
@@ -82,7 +76,6 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             </div>
 
-                            <!-- Redes sociales -->
                             <div class="mb-4">
                                 <label for="facebook" class="block text-gray-700 font-semibold mb-2">Facebook</label>
                                 <input type="text" name="facebook" id="facebook" value="{{ $user->facebook }}"
@@ -107,7 +100,6 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                             </div>
 
-                            <!-- Descripción -->
                             <div class="mb-4 col-span-2">
                                 <label for="descripcion" class="block text-gray-700 font-semibold mb-2">Descripción</label>
                                 <textarea name="descripcion" id="descripcion"
@@ -121,31 +113,31 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                             </div>
 
-                            <!-- Confirmar Contraseña -->
-                            <div class="mb-4">
-                                <label for="password_confirmation" class="block text-gray-700 font-semibold mb-2">Confirmar Contraseña</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            </div>
+
 
                             <!-- Nacionalidad -->
                             <div class="mb-4">
                                 <label for="nacionalidad_idnacionalidad" class="block text-gray-700 font-semibold mb-2">Nacionalidad</label>
-                                <input type="text" name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad"
-                                    value="{{ $user->nacionalidad_idnacionalidad }}"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                                <select name="nacionalidad_idnacionalidad" id="nacionalidad_idnacionalidad" class="w-full px-4 py-2 border rounded-lg @error('nacionalidad_idnacionalidad') border-red-500 @enderror">
+                                    @foreach($nacionalidades as $nacionalidad)
+                                        <option value="{{ $nacionalidad->idnacionalidad }}" {{ old('nacionalidad_idnacionalidad') == $nacionalidad->idnacionalidad ? 'selected' : '' }}>{{ $nacionalidad->nacionalidad }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <!-- Rol -->
                             <div class="mb-4">
-                                <label for="roles_idroles" class="block text-gray-700 font-semibold mb-2">Rol</label>
-                                <select name="roles_idroles" id="roles_idroles"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                                    <option value="1" {{ $user->roles_idroles == 1 ? 'selected' : '' }}>Administrador</option>
-                                    <option value="2" {{ $user->roles_idroles == 2 ? 'selected' : '' }}>Publicador</option>
-                                    <option value="3" {{ $user->roles_idroles == 3 ? 'selected' : '' }}>Visitante</option>
+                                <label for="roles_idroles" class="block text-gray-700">Rol</label>
+                                <select name="roles_idroles" id="roles_idroles" class="w-full px-4 py-2 border rounded-lg @error('roles_idroles') border-red-500 @enderror">
+                                    @foreach($roles as $rol)
+                                        <option value="{{ $rol->idroles }}" {{ old('roles_idroles') == $rol->idroles ? 'selected' : '' }}>{{ $rol->name }}</option>
+                                    @endforeach
                                 </select>
+                                @error('roles_idroles')
+                                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                                @enderror
                             </div>
+
                         </div>
 
                         <!-- Botón de Submit -->
@@ -155,6 +147,7 @@
                                 Actualizar Usuario
                             </button>
                         </div>
+
                     </form>
                 </div>
             @endauth
