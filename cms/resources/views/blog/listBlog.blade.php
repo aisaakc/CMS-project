@@ -32,7 +32,7 @@
                 </div>
                 <!-- Mostrar publicaciones por categorías -->
                 @foreach ($publicationsByCategory as $category => $categoryPublications)
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $category }}</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Categoria: {{ $category }}</h2>
                     <div class="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200 mb-6">
                         <table class="min-w-full table-auto">
                             <thead class="bg-gray-800 text-white">

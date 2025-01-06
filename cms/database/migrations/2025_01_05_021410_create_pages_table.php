@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('content');
             $table->string('slug')->unique();
             $table->string('status')->default('draft'); // 'draft', 'published', 'archived'
-            $table->timestamps();
             $table->foreignId('users_idusers')
                 ->constrained('users', 'idusers')
                 ->onDelete('cascade');

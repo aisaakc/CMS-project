@@ -12,26 +12,26 @@ use Illuminate\Support\Facades\Auth;
 class PublicationController extends Controller
 {
 
-   public function listaBlog(Request $request)
-{
+    public function listaBlog(Request $request)
+    {
+        $perPage = 5;
 
-    $perPage = 5;
+        // Obtener las publicaciones solo del usuario autenticado
+        $publications = Publication::where('users_idusers', Auth::id())->paginate($perPage);
 
+        // Convertir las fechas a instancias de Carbon (opcional)
+        foreach ($publications as $publication) {
+            $publication->fecha_creacion = $publication->fecha_creacion ? Carbon::parse($publication->fecha_creacion) : null;
+            $publication->fecha_publicacion = $publication->fecha_publicacion ? Carbon::parse($publication->fecha_publicacion) : null;
+        }
 
-    $publications = Publication::paginate($perPage);
+        // Agrupar las publicaciones por categoría usando la colección ya paginada
+        $publicationsByCategory = $publications->getCollection()->groupBy('categoria');
 
-    // Convertir las fechas a instancias de Carbon (opcional)
-    foreach ($publications as $publication) {
-        $publication->fecha_creacion = $publication->fecha_creacion ? Carbon::parse($publication->fecha_creacion) : null;
-        $publication->fecha_publicacion = $publication->fecha_publicacion ? Carbon::parse($publication->fecha_publicacion) : null;
+        // Retornar la vista con las publicaciones paginadas y agrupadas por categoría
+        return view('blog.listBlog', compact('publications', 'publicationsByCategory'));
     }
 
-    // Agrupar las publicaciones por categoría usando la colección ya paginada
-    $publicationsByCategory = $publications->getCollection()->groupBy('categoria');
-
-    // Retornar la vista con las publicaciones paginadas y agrupadas por categoría
-    return view('blog.listBlog', compact('publications', 'publicationsByCategory'));
-}
 
 
     // Método para registrar un usuario (sin cambios)

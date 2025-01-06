@@ -14,69 +14,83 @@
 
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 h-full bg-gray-900 text-white transition-transform lg:block fixed ">
+        <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
             <x-side-menu />
         </div>
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
             <!-- Header -->
-            <div class="h-14 text-white flex items-center justify-between  z-20">
+            <div class="flex items-center">
                 <x-profile />
             </div>
 
-            <main class="p-4 space-y-6">
+            <main class="p-8 space-y-6 bg-gray-50">
+                <!-- Formulario Principal -->
                 <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <h1 class="text-3xl font-bold mb-4 col-span-2">Crear Publicación</h1>
-                    <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data"
-                        class="col-span-2">
+                    <h1 class="text-3xl font-semibold text-gray-800 mb-6 col-span-2 text-center">Crear Publicación</h1>
+
+                    <!-- Formulario -->
+                    <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data" class="col-span-2">
                         @csrf
 
-                        <div class="mb-4">
-                            <label for="title" class="block text-gray-700">Título</label>
+                        <!-- Título -->
+                        <div class="mb-6">
+                            <label for="title" class="block text-gray-700 font-medium">Título</label>
                             <input type="text" name="title" id="title"
-                                class="w-full px-4 py-2 border rounded-lg" required>
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Ingresa el título de la publicación" required>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="content" class="block text-gray-700">Contenido</label>
-                            <textarea name="content" id="content" class="summernote w-full px-4 py-2 border rounded-lg" required></textarea>
+                        <!-- Contenido -->
+                        <div class="mb-6">
+                            <label for="content" class="block text-gray-700 font-medium">Contenido</label>
+                            <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
+                                placeholder="Escribe el contenido de la publicación"></textarea>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="fecha_publicacion" class="block text-gray-700">Fecha de Publicación</label>
+                        <!-- Fecha de Publicación -->
+                        <div class="mb-6">
+                            <label for="fecha_publicacion" class="block text-gray-700 font-medium">Fecha de Publicación</label>
                             <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion"
-                                class="w-full px-4 py-2 border rounded-lg" required>
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="estado" class="block text-gray-700">Estado</label>
-                            <select name="estado" id="estado" class="w-full px-4 py-2 border rounded-lg" required>
+                        <!-- Estado -->
+                        <div class="mb-6">
+                            <label for="estado" class="block text-gray-700 font-medium">Estado</label>
+                            <select name="estado" id="estado" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                 <option value="borrador">Borrador</option>
                                 <option value="publicado">Publicado</option>
                                 <option value="programado">Programado</option>
                             </select>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="categoria" class="block text-gray-700">Categoría</label>
+                        <!-- Categoría -->
+                        <div class="mb-6">
+                            <label for="categoria" class="block text-gray-700 font-medium">Categoría</label>
                             <input type="text" name="categoria" id="categoria"
-                                class="w-full px-4 py-2 border rounded-lg" required>
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
+                                placeholder="Ingresa la categoría de la publicación">
                         </div>
 
-                        <div class="mb-4">
-                            <label for="image" class="block text-gray-700">Imagen</label>
+                        <!-- Imagen -->
+                        <div class="mb-6">
+                            <label for="image" class="block text-gray-700 font-medium">Imagen</label>
                             <input type="file" name="image" id="image"
-                                class="w-full px-4 py-2 border rounded-lg">
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
-                        <div class="mb-4">
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear
-                                Publicación</button>
+                        <!-- Botón de Enviar -->
+                        <div class="mb-6">
+                            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                                Crear Publicación
+                            </button>
                         </div>
                     </form>
                 </div>
             </main>
+
         </div>
     </div>
 

@@ -40,7 +40,7 @@
                         </p>
                         <p class="text-lg text-gray-700"><strong>Descripción:</strong> {{ $user->descripcion ?? 'No disponible' }}</p>
                         <p class="text-lg text-gray-700"><strong>Número de Publicaciones:</strong>
-                            <span class="text-green-600">{{ $user->publications->count() }}</span>
+                            <span class="text-green-600">{{ $user->publications->count()  ?? 'No tiene publicaciones'}}</span>
                         </p>
                     </div>
                 </div>

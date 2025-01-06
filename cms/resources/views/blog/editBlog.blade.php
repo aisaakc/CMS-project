@@ -14,13 +14,13 @@
 
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 h-full bg-gray-900 text-white transition-transform lg:block fixed ">
+        <div class="w-64 h-full bg-gray-800 text-white transition-transform lg:block fixed z-10">
             <x-side-menu />
         </div>
 
         <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
 
-            <div class="h-14 text-white flex items-center justify-between  z-20">
+            <div class="flex items-center">
                 <x-profile />
             </div>
 

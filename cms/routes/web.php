@@ -95,4 +95,5 @@ Route::resource('pages', PageController::class);
 
 //users
 Route::resource('users', UsersController::class);
+
 Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.update');

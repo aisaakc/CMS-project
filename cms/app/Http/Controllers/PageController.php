@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -23,24 +25,28 @@ class PageController extends Controller
         return view('pages.create');
     }
 
-    // Guardar nueva página
     public function store(Request $request)
     {
+        // Validar los datos del formulario
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'slug' => 'nullable|string',
             'status' => 'required|string|in:draft,published,archived',
         ]);
 
+        // Crear la página
         $page = new Page();
         $page->title = $request->input('title');
         $page->content = $request->input('content');
-        $page->slug = Str::slug($request->input('title'));
+        $page->slug = $request->input('slug') ?? Str::slug($request->input('title'));
         $page->status = $request->input('status');
-        $page->users_idusers = Auth::id(); // Establecer el ID del usuario autenticado
+        $page->users_idusers = Auth::id();
 
+        // Guardar en la base de datos
         $page->save();
 
+        // Redirigir con un mensaje de éxito
         return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
     }
 
