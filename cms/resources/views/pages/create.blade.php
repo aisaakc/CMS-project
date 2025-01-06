@@ -6,69 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Página</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
 </head>
 
 <body class="font-inter bg-gray-50">
 
     <div class="flex h-screen">
+        <!-- Sidebar -->
         <div class="w-64 h-full bg-gray-900 text-white p-5 space-y-6">
             <x-side-menu />
         </div>
 
+        <!-- Main Content -->
         <div class="flex-1 flex flex-col">
-            @auth
-                <div class="flex items-center space-x-4 mb-12 p-4 bg-white shadow-md">
-                    <x-profile />
-                </div>
-                <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
-                    <h1 class="text-3xl font-bold mb-4">Crear Página</h1>
+            <!-- Profile Section -->
+            <div class="flex items-center space-x-4 mb-12">
+                <x-profile />
+            </div>
 
-                    @if (session('show_message'))
-                        <x-mensaje :message="session('show_message')" />
-                        @php
-                            session()->forget('show_message');
-                        @endphp
-                    @endif
+            <!-- Page Form -->
+            <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
+                <h1 class="text-3xl font-bold mb-4">Crear Página</h1>
 
-                    <form action="{{ route('pages.store') }}" method="POST">
-                        @csrf
+                <form action="{{ route('pages.store') }}" method="POST">
+                    @csrf
 
-                        <div class="mb-4">
-                            <label for="title" class="block text-gray-700">Título</label>
-                            <input type="text" name="title" id="title" class="w-full px-4 py-2 border rounded-lg" required>
+                    <!-- Title -->
+                    <div class="mb-4">
+                        <label for="title" class="block text-gray-700">Título</label>
+                        <input type="text" name="title" id="title" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+
+                    <!-- Slug -->
+                    <div class="mb-4">
+                        <label for="slug" class="block text-gray-700">Slug</label>
+                        <input type="text" name="slug" id="slug" class="w-full px-4 py-2 border rounded-lg" required>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="mb-4">
+                        <label for="content" class="block text-gray-700">Contenido</label>
+                        <div class="border border-gray-300 rounded-lg overflow-hidden">
+                            <textarea name="content" id="content" class="summernote"></textarea>
                         </div>
+                    </div>
 
-                        <div class="mb-4">
-                            <label for="slug" class="block text-gray-700">Slug</label>
-                            <input type="text" name="slug" id="slug" class="w-full px-4 py-2 border rounded-lg" required>
-                        </div>
+                    <!-- Status -->
+                    <div class="mb-4">
+                        <label for="status" class="block text-gray-700">Estado</label>
+                        <select name="status" id="status" class="w-full px-4 py-2 border rounded-lg" required>
+                            <option value="draft">Borrador</option>
+                            <option value="published">Publicado</option>
+                            <option value="archived">Archivado</option>
+                        </select>
+                    </div>
 
-                        <div class="mb-4">
-                            <label for="content" class="block text-gray-700">Contenido</label>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="status" class="block text-gray-700">Estado</label>
-                            <select name="status" id="status" class="w-full px-4 py-2 border rounded-lg" required>
-                                <option value="draft">Borrador</option>
-                                <option value="published">Publicado</option>
-                                <option value="archived">Archivado</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-4 flex space-x-4">
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Página</button>
-                            <a href="{{ route('pages.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
-                        </div>
-                    </form>
-                </div>
-            @endauth
+                    <!-- Actions -->
+                    <div class="mb-4 flex space-x-4">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Página</button>
+                        <a href="{{ route('pages.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 300, // Altura del editor
+                lang: 'es-ES', // Idioma en español
+                placeholder: 'Escribe el contenido de la página aquí...',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+                callbacks: {
+                    onInit: function() {
+                        // Agrega estilos compatibles con TailwindCSS
+                        $('.note-editor').addClass('bg-white border border-gray-300 rounded-lg');
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

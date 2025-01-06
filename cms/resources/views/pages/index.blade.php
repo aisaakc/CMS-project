@@ -30,7 +30,9 @@
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2">Título</th>
+                                <th class="px-4 py-2">Contenido</th>
                                 <th class="px-4 py-2">Slug</th>
+                                <th class="px-4 py-2">Estado</th>
                                 <th class="px-4 py-2">Acciones</th>
                             </tr>
                         </thead>
@@ -38,7 +40,9 @@
                             @foreach ($pages as $page)
                                 <tr>
                                     <td class="border px-4 py-2">{{ $page->title }}</td>
+                                    <td class="border px-4 py-2">{{ $page->content}}</td>
                                     <td class="border px-4 py-2">{{ $page->slug }}</td>
+                                    <td class="border px-4 py-2">{{ $page->status}}</td>
                                     <td class="border px-4 py-2 flex space-x-2">
                                         <a href="{{ route('pages.show', $page->id) }}" class="text-green-500 hover:text-green-700">Vista</a>
                                         <a href="{{ route('pages.edit', $page->id) }}" class="text-blue-500 hover:text-blue-700">Editar</a>

@@ -27,27 +27,15 @@ class PageController extends Controller
 
     public function store(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'slug' => 'nullable|string',
-            'status' => 'required|string|in:draft,published,archived',
+            'slug' => 'required|string|unique:pages',
+            'status' => 'required|in:draft,published,archived',
         ]);
 
-        // Crear la página
-        $page = new Page();
-        $page->title = $request->input('title');
-        $page->content = $request->input('content');
-        $page->slug = $request->input('slug') ?? Str::slug($request->input('title'));
-        $page->status = $request->input('status');
-        $page->users_idusers = Auth::id();
-
-        // Guardar en la base de datos
-        $page->save();
-
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+        Page::create($request->all());
+        return redirect()->route('pages.index')->with('success', 'Page created successfully.');
     }
 
     // Mostrar página específica
