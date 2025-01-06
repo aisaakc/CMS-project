@@ -35,7 +35,9 @@
                         <!-- Nombre -->
                         <div class="mb-4">
                             <label for="first_name" class="block text-gray-700">Nombre</label>
-                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="w-full px-4 py-2 border rounded-lg @error('first_name') border-red-500 @enderror">
+                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}"
+                                   oninput="validateNameInput(this)"
+                                   class="w-full px-4 py-2 border rounded-lg @error('first_name') border-red-500 @enderror">
                             @error('first_name')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
@@ -44,16 +46,20 @@
                         <!-- Apellido -->
                         <div class="mb-4">
                             <label for="last_name" class="block text-gray-700">Apellido</label>
-                            <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="w-full px-4 py-2 border rounded-lg @error('last_name') border-red-500 @enderror">
+                            <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}"
+                                   oninput="validateNameInput(this)"
+                                   class="w-full px-4 py-2 border rounded-lg @error('last_name') border-red-500 @enderror">
                             @error('last_name')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <!-- Fecha de nacimiento -->
                         <div class="mb-4">
                             <label for="date_of_birth" class="block text-gray-700">Fecha de Nacimiento</label>
-                            <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') }}" class="w-full px-4 py-2 border rounded-lg @error('date_of_birth') border-red-500 @enderror">
+                            <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') }}"
+                                   class="w-full px-4 py-2 border rounded-lg @error('date_of_birth') border-red-500 @enderror"
+                                    max="{{ now()->subYears(18)->toDateString() }}" min="{{ now()->subYears(124)->toDateString() }}"
+                                   onchange="checkAge(this)">
                             @error('date_of_birth')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
@@ -62,7 +68,10 @@
                         <!-- Cédula -->
                         <div class="mb-4">
                             <label for="cedula" class="block text-gray-700">Cédula</label>
-                            <input type="text" name="cedula" id="cedula" value="{{ old('cedula') }}" class="w-full px-4 py-2 border rounded-lg @error('cedula') border-red-500 @enderror">
+                            <input type="text" name="cedula" id="cedula" value="{{ old('cedula') }}"
+                                   class="w-full px-4 py-2 border rounded-lg @error('cedula') border-red-500 @enderror"
+                                   oninput="validateCedula(event)"
+                                   maxlength="10">
                             @error('cedula')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
@@ -136,6 +145,42 @@
                             <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
                         </div>
                     </form>
+                    <script>
+                        // Función para permitir solo letras y espacios en los campos de nombre y apellido
+                        function validateNameInput(input) {
+                            // Reemplazar cualquier carácter que no sea letra o espacio
+                            input.value = input.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                        }
+
+                            function checkAge(input) {
+                            const selectedDate = new Date(input.value);
+                            const currentDate = new Date();
+
+                            const age = currentDate.getFullYear() - selectedDate.getFullYear();
+                            const month = currentDate.getMonth() - selectedDate.getMonth();
+                            const day = currentDate.getDate() - selectedDate.getDate();
+
+                            if (age < 18 || (age === 18 && (month < 0 || (month === 0 && day < 0)))) {
+                                alert("Debes tener al menos 18 años para registrarte.");
+                                input.setCustomValidity("Debes tener al menos 18 años para registrarte.");
+                            } else {
+                                input.setCustomValidity("");
+                            }
+                        }
+
+                      // Función para validar la cédula
+    function validateCedula(event) {
+        const input = event.target;
+
+        // Eliminar caracteres no numéricos
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+        // Si la cédula es menor o igual a 0, limpiamos el valor
+        if (parseInt(input.value) <= 0) {
+            input.value = '';
+        }
+    }
+                    </script>
 
                 </div>
             @endauth
