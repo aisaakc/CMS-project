@@ -10,7 +10,7 @@
         <div class="flex-1 flex flex-col">
             @auth
                 <!-- Header -->
-                <div class="flex items-center space-x-4 p-4 bg-white shadow-md sticky top-0 z-10">
+                <div class="flex items-center space-x-4 mb-12">
                     <x-profile />
                 </div>
 

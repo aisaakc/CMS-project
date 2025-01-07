@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PublicadorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VisitanteController;
 
 
 Route::get('/', function () {
@@ -93,7 +94,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //PAGES
 Route::resource('pages', PageController::class);
 
+
 //users
 Route::resource('users', UsersController::class);
 
 Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.update');
+
+//Visitante
+Route::get('/public',[VisitanteController::class, 'index'])->name('public.index');

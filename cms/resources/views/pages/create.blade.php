@@ -29,7 +29,7 @@
             <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
                 <h1 class="text-3xl font-bold mb-4">Crear Página</h1>
 
-                <form action="{{ route('pages.store') }}" method="POST">
+                <form action="{{ route('pages.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Title -->

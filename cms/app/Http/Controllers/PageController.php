@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Page;
 use Carbon\Carbon;
 
@@ -16,20 +17,22 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::all();
+
         return view('pages.index', compact('pages'));
     }
 
     // Mostrar formulario de creación de página
     public function create()
     {
+
         return view('pages.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string',
+            'content' => 'required',
             'slug' => 'required|string|unique:pages',
             'status' => 'required|in:draft,published,archived',
         ]);
@@ -52,11 +55,16 @@ class PageController extends Controller
 
 
     // Mostrar página específica
-    public function show($id)
-    {
-        $page = Page::findOrFail($id);
-        return view('pages.show', compact('page'));
-    }
+   // filepath: /c:/Users/user/Desktop/CMS-project/cms/app/Http/Controllers/PageController.php
+
+        // Método show en el controlador
+public function show($id)
+{
+    $page = Page::with('user')->findOrFail($id);  // Cambié 'users' a 'user' para que coincida con el nombre de la relación
+    return view('pages.show', compact('page'));
+}
+
+
 
     // Mostrar formulario de edición de página
     public function edit($id)

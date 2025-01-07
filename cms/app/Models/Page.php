@@ -20,9 +20,9 @@ class Page extends Model
     // Asegurarte de que se gestionen los timestamps
     public $timestamps = true; // Esto es por defecto, pero puedes agregarlo explícitamente si lo prefieres
 
-    // Relación con el modelo User
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'users_idusers');
-    }
+   // Relación con el modelo User
+   public function user()
+   {
+       return $this->belongsTo(User::class, 'users_idusers'); // 'users_idusers' es la clave foránea
+   }
 }

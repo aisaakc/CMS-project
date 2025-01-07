@@ -14,7 +14,7 @@
                     profesional. Nuestra misión es ser el puente entre el éxito y tus metas.
                 </p>
                 <div class="mt-10">
-                    <a href="#" class="px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-600 hover:text-white hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out">
+                    <a href="{{ route('public.index')}}" class="px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-600 hover:text-white hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out">
                         Descubre nuestros servicios
                     </a>
                 </div>
