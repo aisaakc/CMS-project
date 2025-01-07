@@ -34,9 +34,22 @@ class PageController extends Controller
             'status' => 'required|in:draft,published,archived',
         ]);
 
-        Page::create($request->all());
-        return redirect()->route('pages.index')->with('success', 'Page created successfully.');
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();  // Esto obtiene el ID del usuario actualmente autenticado
+
+        // Crear la nueva página y asignar el ID del usuario
+        Page::create([
+            'title' => $request->input('title'),
+            'slug' => $request->input('slug'),
+            'content' => $request->input('content'),
+            'status' => $request->input('status'),
+            'users_idusers' => $userId,  // Asignar el ID del usuario autenticado
+        ]);
+
+        return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
     }
+
+
 
     // Mostrar página específica
     public function show($id)

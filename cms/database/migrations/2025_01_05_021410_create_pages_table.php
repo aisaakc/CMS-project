@@ -17,11 +17,15 @@ return new class extends Migration
             $table->text('content');
             $table->string('slug')->unique();
             $table->string('status')->default('draft'); // 'draft', 'published', 'archived'
-            $table->foreignId('users_idusers')
+            $table->timestamps();
+            // Valor predeterminado para users_idusers
+            $table->foreignId('users_idusers')->default(1)  // Aquí puedes poner el ID de un usuario predeterminado, si lo deseas
                 ->constrained('users', 'idusers')
                 ->onDelete('cascade');
         });
     }
+
+
     /**
      * Reverse the migrations.
      */

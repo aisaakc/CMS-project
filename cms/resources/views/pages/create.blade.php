@@ -68,6 +68,7 @@
                         <a href="{{ route('pages.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

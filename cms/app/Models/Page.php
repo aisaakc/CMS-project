@@ -17,8 +17,11 @@ class Page extends Model
         'users_idusers',
     ];
 
+    // Asegurarte de que se gestionen los timestamps
+    public $timestamps = true; // Esto es por defecto, pero puedes agregarlo explícitamente si lo prefieres
+
     // Relación con el modelo User
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'users_idusers');
     }
