@@ -66,44 +66,7 @@
 
         </section>
 
-        <h2 class="text-4xl font-bold text-center mt-8">Lo que dicen nuestros clientes</h2>
-        <section class="mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
-                <div class="mb-4">
-                    <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>
-                </div>
-                <h3 class="text-center text-gray-600 text-lg mb-4">
-                    "Gracias a esta plataforma, pude encontrar una oportunidad laboral en una empresa que valora la diversidad, lo que me permitió crecer profesionalmente."
-                </h3>
-                <p class="text-center text-gray-500 text-md mt-4">
-                    - Kevin Garcia
-                </p>
-            </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
-                <div class="mb-4">
-                    <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>
-                </div>
-                <h3 class="text-center text-gray-600 text-lg mb-4">
-                    "Encontré un trabajo en la industria tecnológica, algo que creía inalcanzable para mí en mi región. Gracias a ustedes por hacerme sentir parte de un mercado laboral global."
-                </h3>
-                <p class="text-center text-gray-500 text-md mt-4">
-                    - Felipe Hernandez
-                </p>
-            </div>
-
-            <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300">
-                <div class="mb-4">
-                    <i class="fa-solid fa-quote-left text-gray-600 text-4xl"></i>
-                </div>
-                <h3 class="text-center text-gray-600 text-lg mb-4">
-                    "El acceso a empleos en mi país no era fácil, pero esta plataforma ha abierto muchas puertas y hoy trabajo en una empresa que se alinea con mis valores."
-                </h3>
-                <p class="text-center text-gray-500 text-md mt-4">
-                    - Maria Gomez
-                </p>
-            </div>
-        </section>
 
     </main>
 

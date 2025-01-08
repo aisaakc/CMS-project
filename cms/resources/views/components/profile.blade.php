@@ -2,23 +2,12 @@
     <!-- Barra superior -->
     <header class="h-14 bg-white shadow-md flex items-center justify-between px-6 lg:px-10">
         <!-- Botón para abrir el sidebar en pantallas pequeñas -->
-        <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none hover:text-gray-900 transition-all hidden ">
+        <button id="openSidebar" class="lg:hidden text-gray-700 focus:outline-none hover:text-gray-900 transition-all hidden">
             <i class="fas fa-bars text-xl"></i>
         </button>
 
-        <!-- Formulario de búsqueda centrado -->
-        <form class="flex items-center w-full max-w-md mx-auto">
-            <!-- Campo de búsqueda -->
-            <input type="text" placeholder="Buscar..." class="flex-grow border border-gray-300 rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 hover:border-blue-400 shadow-sm focus:shadow-md focus:border-blue-600 text-gray-700 h-12">
-
-            <!-- Botón de búsqueda -->
-            <button class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-600 hover:to-blue-800 focus:outline-none transition-all duration-300 shadow-lg focus:shadow-xl flex items-center justify-center h-12">
-                <i class="fas fa-search text-lg"></i>
-            </button>
-        </form>
-
-        <!-- Menú de Perfil -->
-        <div class="relative group">
+        <!-- Menú de Perfil (alineado a la derecha) -->
+        <div class="relative group ml-auto">
             <div class="flex items-center space-x-2 cursor-pointer" id="profileMenuToggle">
                 <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
                     <i class="fas fa-user text-gray-700 text-xl"></i>

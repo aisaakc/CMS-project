@@ -55,11 +55,15 @@
                                         <td class="px-4 py-3">{{ $user->nro_de_paginas ?? 'No disponible' }}</td>
                                         <td class="px-4 py-3 flex space-x-2">
                                             <a href="{{ route('users.show', $user->idusers) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
-                                            <a href="{{ route('users.edit', $user->idusers) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
 
+                                            <!-- Edit and Delete Actions -->
                                             @if($user->roles_idroles === 1)
+                                                <!-- User with admin role cannot be edited or deleted -->
+                                                <button type="button" class="text-blue-600 cursor-not-allowed opacity-50" disabled>Editar</button>
                                                 <button type="button" class="text-red-600 cursor-not-allowed opacity-50" disabled>Eliminar</button>
                                             @else
+                                                <a href="{{ route('users.edit', $user->idusers) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
+
                                                 <form action="{{ route('users.destroy', $user->idusers) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
@@ -72,6 +76,7 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
             @endauth
         </div>
     </div>
