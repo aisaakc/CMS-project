@@ -14,12 +14,21 @@ use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
     // Mostrar lista de páginas
-    public function index()
-    {
-        $pages = Page::all();
+    public function index(Request $request)
+{
 
-        return view('pages.index', compact('pages'));
+    $status = $request->query('status', 'all');
+
+    $query = Page::query();
+    if ($status !== 'all') {
+        $query->where('status', $status);
     }
+
+    $pages = $query->paginate(5);
+
+    return view('pages.index', compact('pages', 'status'));
+}
+
 
     // Mostrar formulario de creación de página
     public function create()
@@ -85,7 +94,7 @@ public function show($id)
         $page = Page::findOrFail($id);
         $page->title = $request->input('title');
         $page->content = $request->input('content');
-        $page->slug = Str::slug($request->input('title'));
+        $page->slug = Str::slug($request->input('slug'));
         $page->status = $request->input('status');
         $page->save();
 

@@ -25,14 +25,28 @@
 
             <!-- Page List Section -->
             <div class="container mx-auto p-6">
-                <h1 class="text-3xl font-bold mb-6">Páginas</h1>
+                <h1 class="text-3xl font-bold mb-6">Lista de Páginas</h1>
 
-                <!-- Button to Create New Page -->
-                <div class="mb-6">
-                    <a href="{{ route('pages.create') }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200">Nueva Página</a>
+                <!-- Filtro y Botón de Nueva Página -->
+                <div class="flex items-center justify-between mb-6">
+                    <!-- Filtro por Estado -->
+                    <form method="GET" class="flex items-center">
+                        <label for="status" class="text-lg font-medium text-gray-700 mr-3">Filtrar por Estado:</label>
+                        <select name="status" id="status" class="px-4 py-2 border rounded-lg" onchange="this.form.submit()">
+                            <option value="all" {{ $status === 'all' ? 'selected' : '' }}>Todos</option>
+                            <option value="draft" {{ $status === 'draft' ? 'selected' : '' }}>Borrador</option>
+                            <option value="published" {{ $status === 'published' ? 'selected' : '' }}>Publicado</option>
+                            <option value="archived" {{ $status === 'archived' ? 'selected' : '' }}>Archivado</option>
+                        </select>
+                    </form>
+
+                    <!-- Botón Nueva Página -->
+                    <a href="{{ route('pages.create') }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200">
+                        Nueva Página
+                    </a>
                 </div>
 
-                <!-- Pages Table -->
+                <!-- Tabla de Páginas -->
                 <div class="overflow-x-auto bg-white shadow-lg rounded-lg border-t-4 border-indigo-500">
                     <table class="min-w-full table-auto">
                         <thead class="bg-indigo-50">
@@ -44,11 +58,11 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm">
-                            @foreach ($pages as $page)
+                            @forelse ($pages as $page)
                             <tr class="border-t border-gray-200 hover:bg-gray-100">
                                 <td class="px-4 py-3">{{ $page->title }}</td>
                                 <td class="px-4 py-3">{{ $page->slug }}</td>
-                                <td class="px-4 py-3">{{ $page->status }}</td>
+                                <td class="px-4 py-3">{{ ucfirst($page->status) }}</td>
                                 <td class="px-4 py-3 flex space-x-2">
                                     <a href="{{ route('pages.show', $page->id) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
                                     <a href="{{ route('pages.edit', $page->id) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
@@ -59,9 +73,18 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="4" class="px-4 py-3 text-center text-gray-500">No hay páginas disponibles.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Paginación -->
+                <div class="mt-6">
+                    {{ $pages->appends(['status' => $status])->links() }}
                 </div>
             </div>
             @endauth
