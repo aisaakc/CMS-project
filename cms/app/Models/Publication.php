@@ -26,7 +26,8 @@ class Publication extends Model
         'fecha_publicacion' => 'datetime',
     ];
 
-    public function users()
+    // Relación corregida: Una publicación pertenece a un único usuario
+    public function user()
     {
         return $this->belongsTo(User::class, 'users_idusers');
     }

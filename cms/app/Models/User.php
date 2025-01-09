@@ -13,11 +13,11 @@ class User extends Authenticatable
     protected $casts = [
         'cedula' => 'int',
         'nacionalidad_idnacionalidad' => 'int',
-        'roles_idroles' => 'int'
+        'roles_idroles' => 'int',
     ];
 
     protected $hidden = [
-        'password'
+        'password',
     ];
 
     protected $fillable = [
@@ -35,30 +35,35 @@ class User extends Authenticatable
         'descripcion',
         'password',
         'nacionalidad_idnacionalidad',
-        'roles_idroles'
+        'roles_idroles',
     ];
 
+    // Relación con Nacionalidad
     public function nacionalidad()
     {
         return $this->belongsTo(Nacionalidad::class, 'nacionalidad_idnacionalidad');
     }
 
+    // Relación con Rol
     public function role()
     {
         return $this->belongsTo(Role::class, 'roles_idroles');
     }
 
+    // Relación con Preguntas a través de Respuestas (pivot)
     public function preguntas()
     {
         return $this->belongsToMany(Pregunta::class, 'respuestas', 'users_idusers', 'preguntas_idpreguntas')
             ->withPivot('respuesta');
     }
 
+    // Relación uno-a-muchos con Publicaciones
     public function publications()
     {
         return $this->hasMany(Publication::class, 'users_idusers');
     }
 
+    // Relación uno-a-muchos con Páginas
     public function pages()
     {
         return $this->hasMany(Page::class, 'users_idusers');

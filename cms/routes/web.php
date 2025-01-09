@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicadorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitanteController;
+use App\Http\Controllers\ListController;
 
 
 Route::get('/', function () {
@@ -102,3 +103,9 @@ Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.
 
 //Visitante
 Route::get('/public',[VisitanteController::class, 'index'])->name('public.index');
+
+
+// lista
+
+Route::get('/list-post', [ListController::class, 'listPost'])->name('list-post');
+
