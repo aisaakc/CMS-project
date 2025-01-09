@@ -12,10 +12,9 @@ class ListController extends Controller
     {
 
         $publishers = User::whereHas('role', function ($query) {
-            $query->where('name', 'Publisher'); // Asegúrate de que el nombre del rol sea correcto
+            $query->where('name', 'Publisher');
         })->get();
 
-        // Filtro por publicador
         $publisherId = $request->input('publisher_id');
         $query = Publication::with('user')->whereHas('user.role', function ($query) {
             $query->where('name', 'Publisher');
@@ -35,8 +34,8 @@ class ListController extends Controller
             'Programado' => $scheduledPosts->where('estado', 'programado')->paginate(5, ['*'], 'scheduled_page'),
         ];
 
-        // Retornar la vista con los datos
         return view('vistas.list-post', compact('publishers', 'posts'));
     }
 
 }
+// hacer el edit y destroy

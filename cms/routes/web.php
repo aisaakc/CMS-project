@@ -15,15 +15,15 @@ use App\Http\Controllers\ListController;
 Route::get('/', function () {
     return view('cms.HomePage');
 })->name('HomePage');
-
+//hacer un crud aqui
 Route::get('Blog', function () {
     return view('cms.Blog');
 })->name('Blog');
-
+//hacer un crud aqui
 Route::get('SobreNosostros', function () {
     return view('cms.SobreNosostros');
 })->name('SobreNosostros');
-
+//hacer un crud aqui
 Route::get('Contactanos', function () {
     return view('cms.Contactanos');
 })->name('Contactanos');
