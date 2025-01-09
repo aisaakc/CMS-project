@@ -12,28 +12,31 @@ class ListController extends Controller
     {
 
         $publishers = User::whereHas('role', function ($query) {
-            $query->where('name', 'Publisher');
+            $query->where('name', 'Publisher'); // Asegúrate de que el nombre del rol sea correcto
         })->get();
 
+        // Filtro por publicador
         $publisherId = $request->input('publisher_id');
         $query = Publication::with('user')->whereHas('user.role', function ($query) {
             $query->where('name', 'Publisher');
         });
 
         if ($publisherId) {
-            $query->where('users_idusers', $publisherId); // Cambié 'user_id' por 'users_idusers' para usar el nombre correcto de la columna
+            $query->where('users_idusers', $publisherId);
         }
 
-        // Separar las publicaciones por estado
         $publishedPosts = clone $query;
         $draftPosts = clone $query;
+        $scheduledPosts = clone $query;
 
         $posts = [
             'Publicado' => $publishedPosts->where('estado', 'publicado')->paginate(5, ['*'], 'published_page'),
             'Borrador' => $draftPosts->where('estado', 'borrador')->paginate(5, ['*'], 'draft_page'),
+            'Programado' => $scheduledPosts->where('estado', 'programado')->paginate(5, ['*'], 'scheduled_page'),
         ];
 
         // Retornar la vista con los datos
         return view('vistas.list-post', compact('publishers', 'posts'));
     }
+
 }

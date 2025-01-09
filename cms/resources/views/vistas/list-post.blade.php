@@ -26,7 +26,7 @@
 
                 <!-- Filtro por Publicadores -->
                 <form method="GET" action="{{ route('list-post') }}" class="mb-6">
-                    <label for="publisher_id" class="block text-lg font-medium text-gray-700 mb-2">Filtrar por Publicador:</label>
+                    <label for="publisher_id" class="block text-lg font-medium text-gray-700 mb-2">Publicadores:</label>
                     <select name="publisher_id" id="publisher_id" class="w-full p-2 border border-gray-300 rounded-lg">
                         <option value="">Todos</option>
                         @foreach($publishers as $publisher)
@@ -36,13 +36,12 @@
                         @endforeach
                     </select>
                     <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-                        Filtrar
+                        Buscar publicacion
                     </button>
                 </form>
 
-                <!-- Publicaciones por Estado -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach(['Publicado', 'Borrador'] as $estado)
+                    @foreach(['Publicado', 'Borrador', 'Programado'] as $estado)  <!-- Añadimos Programado aquí -->
                         <div class="col-span-1">
                             <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ $estado }}</h2>
 
@@ -57,13 +56,13 @@
                                 <p class="text-gray-500">No hay publicaciones en estado "{{ $estado }}".</p>
                             @endforelse
 
-                            <!-- Paginación -->
                             <div class="mt-4">
                                 {{ $posts[$estado]->appends(request()->query())->links() }}
                             </div>
                         </div>
                     @endforeach
                 </div>
+
             </div>
         </div>
     </div>
