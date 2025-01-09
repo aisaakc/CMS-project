@@ -6,10 +6,9 @@
             <x-side-menu />
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col">
             @auth
-                <!-- Header -->
+
                 <div class="flex items-center space-x-4 mb-12">
                     <x-profile />
                 </div>
@@ -40,10 +39,19 @@
                         </p>
                         <p class="text-lg text-gray-700"><strong>Descripción:</strong> {{ $user->descripcion ?? 'No disponible' }}</p>
                         <p class="text-lg text-gray-700"><strong>Número de Publicaciones:</strong>
-                            <span class="text-green-600">{{ $user->publications->count()  ?? 'No tiene publicaciones'}}</span>
+                            <span class="text-green-600">{{ $user->publications->count() ?? 'No tiene publicaciones' }}</span>
+                        </p>
+                        <p class="text-lg text-gray-700"><strong>Cantidad de Páginas:</strong>
+                            @if ($user->role->name === 'Publisher')
+                                <span class="text-orange-600">No está autorizado</span>
+                            @else
+                                <span class="text-green-600">{{ $user->pages->count() }}</span>
+                            @endif
                         </p>
                     </div>
                 </div>
+
+
 
                 <!-- Featured Publications -->
                 <div class="container mx-auto p-8 bg-gray-50 mt-8 rounded-lg shadow-lg">

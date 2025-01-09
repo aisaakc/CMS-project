@@ -52,7 +52,16 @@
                                         <td class="px-4 py-3">{{ $user->publications->count() ?? 'No disponible' }}</td>
                                         <td class="px-4 py-3">{{ $user->role->name }}</td>
                                         <td class="px-4 py-3">{{ $user->date_of_birth }}</td>
-                                        <td class="px-4 py-3">{{ $user->nro_de_paginas ?? 'No disponible' }}</td>
+                                        <td class="px-4 py-3">
+                                            @if ($user->roles_idroles === 1)
+                                                {{ $user->pages->count() }} <!-- Muestra la cantidad de páginas creadas -->
+                                            @elseif ($user->roles_idroles === 2)
+                                                No esta autorizado
+                                            @else
+                                                No disponible
+                                            @endif
+                                        </td>
+
                                         <td class="px-4 py-3 flex space-x-2">
                                             <a href="{{ route('users.show', $user->idusers) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
 

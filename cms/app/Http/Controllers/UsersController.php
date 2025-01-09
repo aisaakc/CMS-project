@@ -13,9 +13,10 @@ class UsersController extends Controller
     // Mostrar lista de usuarios
     public function index()
     {
-        $users = User::all();
+        $users = User::with('pages')->get();
         return view('users.index', compact('users'));
     }
+
 
     // Mostrar formulario de creación de usuario
     public function create()
@@ -25,7 +26,6 @@ class UsersController extends Controller
 
         return view('users.create', compact('nacionalidades', 'roles'));
     }
-
 
     // Guardar nuevo usuario
     public function store(Request $request)
@@ -69,19 +69,19 @@ class UsersController extends Controller
     // Mostrar usuario específico
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with(['pages', 'role'])->findOrFail($id); // Cargar también la relación 'role'
         return view('users.show', compact('user'));
     }
 
-    // Mostrar formulario de edición de usuario
-    public function edit($id)
-{
-    $user = User::findOrFail($id);
-    $nacionalidades = Nacionalidad::all();  // Ya lo tienes correctamente
-    $roles = Role::all();  // Asegúrate de obtener los roles
+        // Mostrar formulario de edición de usuario
+        public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $nacionalidades = Nacionalidad::all();  // Ya lo tienes correctamente
+        $roles = Role::all();  // Asegúrate de obtener los roles
 
-    return view('users.edit', compact('user', 'nacionalidades', 'roles')); // Agrega 'roles'
-}
+        return view('users.edit', compact('user', 'nacionalidades', 'roles')); // Agrega 'roles'
+    }
 
 
     // Actualizar usuario

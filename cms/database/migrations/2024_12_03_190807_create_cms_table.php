@@ -53,7 +53,7 @@ return new class extends Migration
             $table->id('idusers'); // unsignedBigInteger por defecto
             $table->string('first_name', 45)->nullable();
             $table->string('last_name', 45)->nullable();
-            $table->string('date_of_birth', 45)->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->integer('cedula')->nullable()->unique();
             $table->string('user_name', 45)->nullable()->unique();
             $table->string('address', 45)->nullable();
@@ -78,7 +78,7 @@ return new class extends Migration
             [
                 'first_name' => 'Isaac',
                 'last_name' => 'Cattoni',
-                'date_of_birth' => '2003-31-12',
+                'date_of_birth' => '2003-12-31',
                 'cedula' => 30551898,
                 'user_name' => 'Admin',
                 'email' => 'isaac.cattoni@gmail.com',
