@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->longText('content');
             $table->string('slug')->unique();
+            $table->string('description');
             $table->enum('status', ['draft', 'published', 'archived']);
             $table->timestamps();
             // Valor predeterminado para users_idusers

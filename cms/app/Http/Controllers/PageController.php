@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -38,42 +39,56 @@ class PageController extends Controller
     }
 
 
-
-public function store(Request $request)
+    public function uploadImage(Request $request)
 {
+    // Validar que el archivo sea una imagen
     $request->validate([
-        'title' => 'required|string',
-        'content' => 'required',
-        'status' => 'required|in:draft,published,archived',
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Tamaño máximo 2MB
     ]);
 
-    // Generar el slug automáticamente a partir del título
-    $slug = Str::slug($request->input('title'));
+    // Almacenar la imagen en la carpeta public
+    $image = $request->file('file');
+    $path = $image->store('images', 'public'); // Guarda la imagen en storage/app/public/images
 
-    // Verificar que el slug sea único en la base de datos
-    $originalSlug = $slug;
-    $counter = 1;
-    while (Page::where('slug', $slug)->exists()) {
-        $slug = $originalSlug . '-' . $counter;
-        $counter++;
-    }
-
-    // Obtener el ID del usuario autenticado
-    $userId = Auth::id();
-
-    // Crear la nueva página y asignar el ID del usuario
-    Page::create([
-        'title' => $request->input('title'),
-        'slug' => $slug,
-        'content' => $request->input('content'),
-        'status' => $request->input('status'),
-        'users_idusers' => $userId,
-    ]);
-
-    return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+    // Retornar la URL pública de la imagen
+    return response()->json(['url' => Storage::url($path)]);
 }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required',
+            'description' => 'required', // Valida el campo de descripción
+            'status' => 'required|in:draft,published,archived',
+        ]);
 
+        // Generar el slug automáticamente a partir del título
+        $slug = Str::slug($request->input('title'));
+
+        // Verificar que el slug sea único en la base de datos
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Page::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
+
+        // Crear la nueva página y asignar el ID del usuario
+        Page::create([
+            'title' => $request->input('title'),
+            'slug' => $slug,
+            'content' => $request->input('content'),
+            'status' => $request->input('status'),
+            'description' => $request->input('description'), // Guarda la descripción
+            'users_idusers' => $userId,
+        ]);
+
+        return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+    }
 
 
     // Mostrar página específica

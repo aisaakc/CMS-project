@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Crear Página</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,6 +48,11 @@
                         </div>
                     </div>
 
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-700">Descripción</label>
+                        <textarea name="description" id="description" rows="4" class="w-full px-4 py-2 border rounded-lg" required></textarea>
+                    </div>
+
                     <!-- Content -->
                     <div class="mb-4">
                         <label for="content" class="block text-gray-700">Contenido</label>
@@ -70,6 +76,56 @@
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Página</button>
                         <a href="{{ route('pages.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
                     </div>
+
+                    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 300, // Altura del editor
+                lang: 'es-ES', // Idioma en español
+                placeholder: 'Escribe el contenido de la página aquí...',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+                callbacks: {
+                    onInit: function() {
+                        // Agrega estilos compatibles con TailwindCSS
+                        $('.note-editor').addClass('bg-white border border-gray-300 rounded-lg');
+                    },
+                    onImageUpload: function(files) {
+                        var data = new FormData();
+                        data.append("file", files[0]);
+
+                        $.ajax({
+                            data: data,
+                            type: "POST",
+                            url: "{{ route('pages.upload-image') }}",  // La URL de tu backend
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Asegúrate de enviar el token CSRF
+                            },
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+                                var image = $('<img>').attr('src', response.url);
+                                $('.summernote').summernote("insertNode", image[0]);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error uploading image: ", error);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
                 </form>
 
                 <script>
@@ -101,32 +157,8 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 300, // Altura del editor
-                lang: 'es-ES', // Idioma en español
-                placeholder: 'Escribe el contenido de la página aquí...',
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']],
-                ],
-                callbacks: {
-                    onInit: function() {
-                        // Agrega estilos compatibles con TailwindCSS
-                        $('.note-editor').addClass('bg-white border border-gray-300 rounded-lg');
-                    }
-                }
-            });
-        });
-    </script>
+
+
 
 </body>
 

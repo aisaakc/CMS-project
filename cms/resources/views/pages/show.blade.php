@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Slug (URL):</h2>
+                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Slug</h2>
                     <p class="text-gray-600 text-lg">
                         <a href="{{ url($page->slug) }}" class="text-indigo-600 hover:underline" target="_blank">
                             {{ url($page->slug) }}
@@ -41,6 +41,11 @@
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold text-gray-700 mb-2">Contenido:</h2>
                     <div class="text-gray-600 text-lg" style="white-space: pre-line;">{!! $page->content !!}</div>
+                </div>
+
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Descripcion</h2>
+                    <div class="text-gray-600 text-lg" style="white-space: pre-line;">{!! $page->description !!}</div>
                 </div>
 
                 <!-- Author Info -->

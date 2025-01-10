@@ -14,6 +14,7 @@ class Page extends Model
         'content',
         'slug',
         'status',
+        'description',
         'users_idusers',
     ];
 

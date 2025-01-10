@@ -94,7 +94,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 //PAGES
 Route::resource('pages', PageController::class);
-
+Route::post('/upload-image', [PageController::class, 'uploadImage'])->name('pages.upload-image');
 
 //users
 Route::resource('users', UsersController::class);
