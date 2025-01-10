@@ -26,6 +26,7 @@
                         <a href="{{ route('users.create') }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200">Nuevo Usuario</a>
                     </div>
 
+
                     <!-- Table -->
                     <div class="overflow-x-auto bg-white shadow-lg rounded-lg border-t-4 border-indigo-500">
                         <table class="min-w-full table-auto">

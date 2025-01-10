@@ -74,6 +74,7 @@ class UsersController extends Controller
     }
 
         // Mostrar formulario de edición de usuario
+        // esto aun no funciona xdddd
         public function edit($id)
     {
         $user = User::findOrFail($id);

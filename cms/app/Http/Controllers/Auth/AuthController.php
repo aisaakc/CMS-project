@@ -346,7 +346,7 @@ public function loginVerify(Request $request)
         ],
     ], [
         'user_name.unique' => 'El nombre de usuario ya está en uso.',
-        'email.unique' => 'El correo electrónico ya está registrado.',
+        'email.unique' => 'El correo electrónico ya está en uso.',
         'email.email' => 'El correo electrónico debe ser una dirección válida.',
     ]);
 
@@ -370,12 +370,24 @@ public function loginVerify(Request $request)
 }
 
 public function destroy()
-   {
+{
     $user = Auth::user();
+
+    // Verificar si el usuario tiene el rol de administrador y es el único administrador
+    if ($user->roles_idroles == 1) { // Verificar si es administrador
+        $adminCount = User::where('roles_idroles', 1)->count(); // Contar administradores
+
+        if ($adminCount <= 1) {
+            return redirect()->back()->with('error', 'No puedes eliminar tu cuenta porque eres el único administrador.');
+        }
+    }
+
+    // Si pasa la verificación, proceder con la eliminación de la cuenta
     $user->delete();
     Auth::logout();
 
     return redirect()->route('login')->with('success', 'Tu cuenta ha sido eliminada correctamente.');
-    }
+}
+
 
 }

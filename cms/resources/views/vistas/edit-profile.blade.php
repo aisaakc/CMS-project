@@ -6,14 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Dashboard</title>
-
-    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -113,7 +107,6 @@
                             </div>
                         </form>
 
-                        @if (Auth::user()->roles_idroles == 2)
                             <div class="mt-6">
                                 <form action="{{ route('delete.account') }}" method="POST" class="w-full">
                                     @csrf
@@ -121,9 +114,14 @@
                                     <button type="submit" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 w-full md:w-auto">
                                         Eliminar Cuenta
                                     </button>
+                                    @if (session('error'))
+                                        <div class="bg-red-500 text-white font-semibold px-4 py-2 rounded-lg mt-4">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                 </form>
                             </div>
-                        @endif
+
                     </div>
 
                     <div class="space-y-6 col-span-1 md:col-span-1">
