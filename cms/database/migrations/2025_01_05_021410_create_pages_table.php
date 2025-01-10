@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('slug')->unique();
-            $table->string('status')->default('draft'); // 'draft', 'published', 'archived'
+            $table->enum('status', ['draft', 'published', 'archived']);
             $table->timestamps();
             // Valor predeterminado para users_idusers
-            $table->foreignId('users_idusers')->default(1)  // Aquí puedes poner el ID de un usuario predeterminado, si lo deseas
+            $table->foreignId('users_idusers')->default(1)
                 ->constrained('users', 'idusers')
                 ->onDelete('cascade');
         });
