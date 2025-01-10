@@ -65,6 +65,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <x-footer />

@@ -104,7 +104,7 @@ Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.
 
 //Visitante
 Route::get('/public',[VisitanteController::class, 'index'])->name('public.index');
-
+Route::get('/{slug}', [VisitanteController::class, 'show'])->name('pages.show');
 
 // lista
 

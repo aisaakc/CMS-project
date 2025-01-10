@@ -20,26 +20,28 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 @foreach($pages as $page)
                     <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition duration-300 ease-in-out">
-                        <h2 class="text-2xl font-semibold text-gray-800">Titulo: {{ $page->title }}</h2>
-                        <p class="text-gray-700 mb-4">{!! $page->content !!}</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <a href="/" class="text-blue-600 hover:text-blue-800 text-sm">Leer más</a>
-                        </div>
+                        <!-- Título -->
+                        <h2 class="text-2xl font-semibold text-gray-800">{{ $page->title }}</h2>
+
+                        <!-- Slug como URL -->
+                        <a href="{{ url($page->slug) }}" class="text-blue-500 hover:underline">
+                            {{ url($page->slug) }}
+                        </a>
+
+                        <!-- Descripción -->
+                        <p class="text-gray-700 mt-4">{{ $page->description }}</p>
                     </div>
                 @endforeach
             </div>
 
+            <!-- Paginación -->
             <div class="mt-8">
                 {{ $pages->links() }}
             </div>
         @endif
     </div>
 
-
-    <!-- Footer fijo -->
+    <!-- Footer -->
     <x-footer class="bg-gray-800 text-white text-center py-4 fixed bottom-0 w-full" />
 </body>
 </html>
-
-
-
