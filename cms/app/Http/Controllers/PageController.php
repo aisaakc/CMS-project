@@ -37,29 +37,42 @@ class PageController extends Controller
         return view('pages.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'content' => 'required',
-            'slug' => 'required|string|unique:pages',
-            'status' => 'required|in:draft,published,archived',
-        ]);
 
-        // Obtener el ID del usuario autenticado
-        $userId = Auth::id();  // Esto obtiene el ID del usuario actualmente autenticado
 
-        // Crear la nueva página y asignar el ID del usuario
-        Page::create([
-            'title' => $request->input('title'),
-            'slug' => $request->input('slug'),
-            'content' => $request->input('content'),
-            'status' => $request->input('status'),
-            'users_idusers' => $userId,  // Asignar el ID del usuario autenticado
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string',
+        'content' => 'required',
+        'status' => 'required|in:draft,published,archived',
+    ]);
 
-        return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+    // Generar el slug automáticamente a partir del título
+    $slug = Str::slug($request->input('title'));
+
+    // Verificar que el slug sea único en la base de datos
+    $originalSlug = $slug;
+    $counter = 1;
+    while (Page::where('slug', $slug)->exists()) {
+        $slug = $originalSlug . '-' . $counter;
+        $counter++;
     }
+
+    // Obtener el ID del usuario autenticado
+    $userId = Auth::id();
+
+    // Crear la nueva página y asignar el ID del usuario
+    Page::create([
+        'title' => $request->input('title'),
+        'slug' => $slug,
+        'content' => $request->input('content'),
+        'status' => $request->input('status'),
+        'users_idusers' => $userId,
+    ]);
+
+    return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+}
+
 
 
 

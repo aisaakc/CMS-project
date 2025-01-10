@@ -24,9 +24,14 @@
                 </div>
 
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Slug:</h2>
-                    <p class="text-gray-600 text-lg">{{ $page->slug }}</p>
+                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Slug (URL):</h2>
+                    <p class="text-gray-600 text-lg">
+                        <a href="{{ url($page->slug) }}" class="text-indigo-600 hover:underline" target="_blank">
+                            {{ url($page->slug) }}
+                        </a>
+                    </p>
                 </div>
+
 
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold text-gray-700 mb-2">Estado:</h2>
@@ -42,7 +47,6 @@
                 <div class="mt-8 p-6 bg-gray-50 rounded-lg shadow-sm">
                     <h2 class="text-xl font-semibold text-gray-700 mb-4">Creado por:</h2>
                     <p class="text-gray-600 text-lg">{{ $page->user->first_name }} {{ $page->user->last_name }}</p>
-                    <p class="text-gray-600 text-lg">{{ $page->user->email }}</p>
                 </div>
 
                 <!-- Action Buttons -->

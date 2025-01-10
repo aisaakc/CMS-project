@@ -41,7 +41,10 @@
                     <!-- Slug -->
                     <div class="mb-4">
                         <label for="slug" class="block text-gray-700">Slug</label>
-                        <input type="text" name="slug" id="slug" class="w-full px-4 py-2 border rounded-lg" required>
+                        <div class="flex items-center">
+                            <span class="text-gray-600">http://127.0.0.1:800/</span>
+                            <input type="text" name="slug" id="slug" class="flex-1 px-4 py-2 border rounded-lg" readonly>
+                        </div>
                     </div>
 
                     <!-- Content -->
@@ -68,6 +71,31 @@
                         <a href="{{ route('pages.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Volver a la lista</a>
                     </div>
                 </form>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const titleInput = document.getElementById('title');
+                        const slugInput = document.getElementById('slug');
+                        const urlPrefix = "https://example.com/";
+
+                        titleInput.addEventListener('input', function () {
+                            const slug = titleInput.value
+                                .toLowerCase()
+                                .trim()
+                                .replace(/[^a-z0-9\s-]/g, '') // Remueve caracteres no permitidos
+                                .replace(/\s+/g, '-')         // Reemplaza espacios por guiones
+                                .replace(/-+/g, '-');         // Remueve guiones repetidos
+                            slugInput.value = slug;
+                        });
+
+                        slugInput.addEventListener('input', function () {
+                            if (!slugInput.value.startsWith(urlPrefix)) {
+                                slugInput.value = urlPrefix + slugInput.value;
+                            }
+                        });
+                    });
+                </script>
+
 
             </div>
         </div>
