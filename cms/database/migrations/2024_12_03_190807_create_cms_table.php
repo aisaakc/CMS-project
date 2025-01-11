@@ -145,6 +145,21 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('respuesta');
         });
+
+        // Tabla de comentarios
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id('idcomments');  // El campo idcomments no debe ser nullable
+            $table->string('full_name')->nullable();
+            $table->string('phone')->nullable();  // Asegúrate de que el campo 'phone' es el adecuado
+            $table->text('coment')->nullable();
+            $table->timestamps();
+
+            $table->foreignId('users_idusers')->nullable()
+                  ->constrained('users', 'idusers')
+                  ->onDelete('cascade');
+        });
+
     }
 
 
@@ -153,6 +168,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('comments');
         Schema::dropIfExists('publications');
         Schema::dropIfExists('respuestas');
         Schema::dropIfExists('password_resets');

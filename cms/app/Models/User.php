@@ -68,4 +68,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Page::class, 'users_idusers');
     }
+        // En el modelo User
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'users_idusers', 'idusers');
+    }
+
 }

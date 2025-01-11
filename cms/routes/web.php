@@ -10,6 +10,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\CommentController;
 
 
 Route::get('/', function () {
@@ -24,9 +25,12 @@ Route::get('SobreNosostros', function () {
     return view('cms.SobreNosostros');
 })->name('SobreNosostros');
 //hacer un crud aqui
-Route::get('Contactanos', function () {
-    return view('cms.Contactanos');
-})->name('Contactanos');
+
+// Ruta para mostrar el formulario
+Route::get('Contactanos', [CommentController::class, 'showForm'])->name('Contactanos');
+
+// Ruta para manejar el envío del formulario
+Route::post('Contactanos', [CommentController::class, 'store'])->name('store.contacto');
 
 
 

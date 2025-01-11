@@ -12,14 +12,22 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div class="bg-white p-10 shadow-xl rounded-lg">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-6">Envíanos un mensaje</h2>
-                    <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                    <form id="contactForm" class="space-y-6" method="POST" action="{{ route('store.contacto') }}">
+                        @csrf <!-- Protección contra CSRF -->
+
                         <div>
-                            <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                            <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"
+                                   class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                                   required oninput="validateName(this)">
                         </div>
                         <div>
-                            <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Tu email" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                            <label for="telefono" class="block text-lg font-medium text-gray-700">Número de Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono"
+                                   class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                                   pattern="^\+?[0-9]{1,4}?[0-9]{7,15}$" required
+                                   oninput="onlyNumbers(this)">
+                            <small class="text-gray-500">Formato: +1234567890</small>
                         </div>
                         <div>
                             <label for="mensaje" class="block text-lg font-medium text-gray-700">Mensaje</label>
@@ -30,10 +38,33 @@
                                 Enviar Mensaje
                             </button>
                         </div>
+                        <div id="successMessage" class="mt-6 text-green-600 font-medium text-center hidden">
+                            ¡Mensaje enviado con éxito!
+                        </div>
+
+                        @if (session('success'))
+                            <div class="mt-6 text-green-600 font-medium text-center">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <script>
+                                                // Función para permitir solo números y el signo '+'
+                        function onlyNumbers(input) {
+                            // Permite números y el signo '+' al principio, elimina todo lo demás
+                            input.value = input.value.replace(/[^0-9+]/g, '');  // Permitir solo números y '+'
+
+                            if (input.value.indexOf('+') > 0) {
+                                input.value = input.value.replace(/\+/g, '');
+                            }
+                        }
+
+                            function validateName(input) {
+                                input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+                            }
+                        </script>
+
                     </form>
-                    <div id="successMessage" class="mt-6 text-green-600 font-medium text-center hidden">
-                        ¡Mensaje enviado con éxito!
-                    </div>
+
                 </div>
 
                 <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white p-10 shadow-xl rounded-lg">
