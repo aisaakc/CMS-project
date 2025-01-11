@@ -11,11 +11,13 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 
 
-Route::get('/', function () {
-    return view('cms.HomePage');
-})->name('HomePage');
+Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
+
+
+
 //hacer un crud aqui
 Route::get('Blog', function () {
     return view('cms.Blog');

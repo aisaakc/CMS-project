@@ -47,7 +47,7 @@
                         <!-- Contenido -->
                         <div class="mb-6">
                             <label for="content" class="block text-gray-700 font-medium">Contenido</label>
-                            <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
+                            <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Escribe el contenido de la publicación">{{ old('content') }}</textarea>
                             @error('content')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -93,11 +93,6 @@
                                 updateFechaLimit();
                             });
                         </script>
-
-
-
-
-
                         <!-- Estado -->
                         <div class="mb-6">
                             <label for="estado" class="block text-gray-700 font-medium">Estado</label>

@@ -25,41 +25,24 @@
             <h2 class="text-4xl font-bold text-gray-800 text-center mb-16">
                 Nuestros Servicios
             </h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-16">
 
-                <div class="bg-white rounded-lg shadow-xl p-8 hover:shadow-2xl transition duration-300">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Consultoría en Desarrollo Profesional</h3>
-                    <p class="text-gray-600">
-                        Ayudamos a los candidatos a desarrollar sus habilidades y optimizar su perfil profesional
-                        para aumentar sus oportunidades en el mercado laboral.
-                    </p>
+            @if($publications->isEmpty())
+                <p class="text-center text-gray-600">No hay publicaciones disponibles en la categoría Servicios.</p>
+            @else
+                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-16">
+                    @foreach($publications as $publication)
+                        <div class="bg-white rounded-lg shadow-xl p-8 hover:shadow-2xl transition duration-300">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-4">{{ $publication->title }}</h3>
+                            <p class="text-gray-600">
+                                {!! $publication->content !!}
+                            </p>
+                        </div>
+                    @endforeach
                 </div>
-
-                <div class="bg-white rounded-lg shadow-xl p-8 hover:shadow-2xl transition duration-300">
-                    <h3 class="text-2xl font-semibold text-blue-600 mb-4">Conexión con Empleadores Líderes</h3>
-                    <p class="text-gray-600">
-                        Facilitamos la conexión entre los mejores talentos y las empresas más destacadas,
-                        mejorando el proceso de contratación para ambas partes.
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-xl p-8 hover:shadow-2xl transition duration-300">
-                    <h3 class="text-2xl font-semibold text-teal-600 mb-4">Entrenamiento y Preparación para Entrevistas</h3>
-                    <p class="text-gray-600">
-                        Preparamos a los candidatos para entrevistas de trabajo mediante simulaciones y asesoramiento
-                        personalizado, ayudando a que se presenten de manera más efectiva y segura.
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-xl p-8 hover:shadow-2xl transition duration-300">
-                    <h3 class="text-2xl font-semibold text-green-600 mb-4">Evaluaciones de Habilidades</h3>
-                    <p class="text-gray-600">
-                        Realizamos evaluaciones de habilidades y competencias para ayudar tanto a candidatos como
-                        a empresas a encontrar el ajuste perfecto entre el perfil profesional y las necesidades del puesto.
-                    </p>
-                </div>
-            </div>
+            @endif
         </section>
+
     </main>
     <x-footer />
+
 </body>
