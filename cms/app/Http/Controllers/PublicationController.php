@@ -53,7 +53,7 @@ class PublicationController extends Controller
     // Método para crear una nueva publicación
     public function store(Request $request)
     {
-        // Validar los datos del formulario
+        // 1. Validar los datos del formulario
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
@@ -63,7 +63,7 @@ class PublicationController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Crear una nueva publicación
+        // 2. Crear una nueva publicación
         $publication = new Publication();
         $publication->title = $request->input('title');
         $publication->content = $request->input('content');
@@ -71,52 +71,50 @@ class PublicationController extends Controller
         $publication->categoria = $request->input('categoria');
         $publication->users_idusers = Auth::id(); // Establecer el ID del usuario autenticado
 
-        // Si se sube una imagen, guardar el campo de la imagen
+        // Procesar la imagen (si se ha subido)
         if ($request->hasFile('image')) {
             $publication->image = $request->file('image')->store('images', 'public');
         }
 
-        // Asignar la fecha y hora de publicación según el estado
-        if ($request->has('fecha_publicacion') && !empty($request->input('fecha_publicacion'))) {
-            // Si el usuario proporciona una fecha y hora, se guarda esa fecha con la hora
-            $publication->fecha_publicacion = Carbon::parse($request->input('fecha_publicacion'));
-        } else {
-            // Si no se selecciona una fecha, asignar la fecha y hora actual
-            $publication->fecha_publicacion = Carbon::now();
+        // 3. Establecer la fecha de publicación a la fecha actual si no se proporciona
+        $fechaPublicacion = $request->input('fecha_publicacion')
+                            ? Carbon::parse($request->input('fecha_publicacion'))
+                            : Carbon::now();
+
+        // 4. Validar para el estado "publicado" que la fecha de publicación debe ser la fecha actual
+        if ($publication->estado === 'publicado' && !$fechaPublicacion->isToday()) {
+            return back()->withErrors([
+                'fecha_publicacion' => 'Por favor ingrese una fecha y/o hora valida'
+            ])->withInput();
         }
 
-        // Validar que la fecha de publicación no sea futura solo si el estado es "publicado"
-        if ($request->input('estado') === 'publicado') {
-            $fechaPublicacion = Carbon::parse($publication->fecha_publicacion);
-            $fechaActual = Carbon::now();
-
-            // Verificar si la fecha de publicación es mayor que la fecha actual
-            if ($fechaPublicacion > $fechaActual) {
-                return back()->withErrors(['fecha_publicacion' => 'No puedes publicar esta publicación, por favor cambia la fecha.'])->withInput();
-            }
+        // 5. Validar que la fecha de publicación no sea futura para los estados "borrador" y "publicado"
+        if (($publication->estado === 'borrador' || $publication->estado === 'publicado') && $fechaPublicacion->isAfter(Carbon::now())) {
+            return back()->withErrors([
+                'fecha_publicacion' => 'Por favor ingrese una fecha y/o hora valida'
+            ])->withInput();
         }
 
-        $publication->fecha_creacion = Carbon::now(); // Establecer la fecha de creación
+        // 6. Establecer las fechas
+        $publication->fecha_publicacion = $fechaPublicacion;
+        $publication->fecha_creacion = Carbon::now();
 
-        // Guardar la nueva publicación
+        // 7. Guardar la publicación en la base de datos
         $publication->save();
 
-        // Redirigir a la lista de publicaciones con un mensaje de éxito
+        // 8. Redirigir con un mensaje de éxito
         return redirect()->route('publications')->with('success', 'Publicación creada correctamente.');
     }
 
-
     public function uploadImage(Request $request)
     {
-        // Validación del archivo de imagen
+
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Guarda la imagen en el almacenamiento público
         $path = $request->file('image')->store('uploads/images', 'public');
 
-        // Retorna la URL completa para que Summernote pueda usarla
         return response()->json(['url' => asset('storage/' . $path)]);
     }
 

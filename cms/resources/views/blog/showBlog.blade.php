@@ -37,7 +37,7 @@
 
                     <!-- Publication Date -->
                     <p class="text-gray-600 mb-4"><strong>Fecha de Publicación:</strong>
-                        {{ $publication->fecha_publicacion->format('Y-m-d') }}</p>
+                        {{ $publication->fecha_publicacion->format('Y-m-d H:i:s') }}</p>
 
                     <!-- Status -->
                     <p class="text-gray-600 mb-4"><strong>Estado:</strong>

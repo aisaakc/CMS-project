@@ -104,14 +104,15 @@ return new class extends Migration
             $table->string('title', 45);
             $table->text('content');
             $table->text('image')->nullable();
-            $table->date('fecha_creacion');
-            $table->date('fecha_publicacion');
+            $table->dateTime('fecha_creacion');  // Cambié 'date' a 'dateTime'
+            $table->dateTime('fecha_publicacion');  // Cambié 'date' a 'dateTime'
             $table->text('categoria');
             $table->enum('estado', ['publicado', 'borrador', 'programado']);
             $table->foreignId('users_idusers')
-                ->constrained('users', 'idusers')
-                ->onDelete('cascade');
+                  ->constrained('users', 'idusers')
+                  ->onDelete('cascade');
         });
+
 
         // Crear tabla de sesiones
         Schema::create('sessions', function (Blueprint $table) {

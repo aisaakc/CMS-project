@@ -29,12 +29,9 @@
                 <!-- Formulario Principal -->
                 <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8">
                     <h1 class="text-3xl font-semibold text-gray-800 mb-6 col-span-2 text-center">Crear Publicación</h1>
-
                     <!-- Formulario -->
                     <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data" class="col-span-2">
                         @csrf
-
-
                         <!-- Título -->
                         <div class="mb-6">
                             <label for="title" class="block text-gray-700 font-medium">Título</label>
@@ -47,30 +44,59 @@
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <!-- Contenido -->
                         <div class="mb-6">
                             <label for="content" class="block text-gray-700 font-medium">Contenido</label>
                             <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
                                 placeholder="Escribe el contenido de la publicación">{{ old('content') }}</textarea>
-
                             @error('content')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
-
-
-
                         <!-- Fecha de Publicación -->
                         <div class="mb-6">
                             <label for="fecha_publicacion" class="block text-gray-700 font-medium">Fecha de Publicación</label>
-                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('fecha_publicacion') border-red-500 @enderror" value="{{ old('fecha_publicacion') }}" required>
-
+                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('fecha_publicacion') }}" required>
                             @error('fecha_publicacion')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                let estadoSelect = document.getElementById('estado');
+                                let fechaInput = document.getElementById('fecha_publicacion');
+
+                                // Función para actualizar el atributo 'min' de la fecha
+                                function updateFechaLimit() {
+                                    let currentDate = new Date();
+                                    let year = currentDate.getFullYear();
+                                    let month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                                    let day = String(currentDate.getDate()).padStart(2, '0');
+                                    let hours = String(currentDate.getHours()).padStart(2, '0');
+                                    let minutes = String(currentDate.getMinutes()).padStart(2, '0');
+                                    let currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+                                    // Si el estado es "programado", se permite una fecha futura
+                                    if (estadoSelect.value === 'programado') {
+                                        fechaInput.removeAttribute('min'); // Permitir cualquier fecha futura
+                                    } else {
+                                        // Si el estado es "borrador" o "publicado", solo se puede seleccionar la fecha actual o pasada
+                                        fechaInput.setAttribute('min', currentDateTime); // Restringir fecha a la actual
+                                    }
+                                }
+
+                                // Actualizar la fecha cuando el estado cambia
+                                estadoSelect.addEventListener('change', updateFechaLimit);
+
+                                // Inicializar con el valor correcto al cargar la página
+                                updateFechaLimit();
+                            });
+                        </script>
+
+
+
+
 
                         <!-- Estado -->
                         <div class="mb-6">
@@ -115,6 +141,7 @@
                                 Crear Publicación
                             </button>
                         </div>
+
                          <!-- Scripts -->
                         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -160,15 +187,11 @@
                             }
                         </script>
                     </form>
-
-
-
                 </div>
             </main>
 
         </div>
     </div>
-
 
 </body>
 

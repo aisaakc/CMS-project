@@ -49,11 +49,11 @@
                                     <tr class="hover:bg-gray-50 transition duration-200 ease-in-out">
                                         <td class="px-6 py-4 text-sm text-gray-800">{{ $publication->title }}</td>
                                         <td class="px-6 py-4 text-sm text-gray-800">
-                                            {{ $publication->fecha_creacion ? $publication->fecha_creacion->format('Y-m-d ') : 'N/A' }}
+                                            {{ $publication->fecha_creacion ? $publication->fecha_creacion->format('Y-m-d H:i:s') : 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-800">
                                             @if ($publication->fecha_publicacion)
-                                                {{ $publication->fecha_publicacion->format('d/m/Y') }}
+                                                {{ $publication->fecha_publicacion->format('d/m/Y H:i:s') }}
                                             @else
                                                 No programada
                                             @endif
