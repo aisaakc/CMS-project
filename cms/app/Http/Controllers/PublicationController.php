@@ -57,18 +57,16 @@ class PublicationController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'fecha_publicacion' => 'required|date',
+            'fecha_publicacion' => 'nullable|date',
             'estado' => 'required|string|in:borrador,publicado,programado',
             'categoria' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
         // Crear una nueva publicación
         $publication = new Publication();
         $publication->title = $request->input('title');
         $publication->content = $request->input('content');
-        $publication->fecha_publicacion = Carbon::parse($request->input('fecha_publicacion'));
-        $publication->fecha_creacion = Carbon::now(); // Establecer la fecha de creación
-
         $publication->estado = $request->input('estado');
         $publication->categoria = $request->input('categoria');
         $publication->users_idusers = Auth::id(); // Establecer el ID del usuario autenticado
@@ -78,12 +76,35 @@ class PublicationController extends Controller
             $publication->image = $request->file('image')->store('images', 'public');
         }
 
+        // Asignar la fecha y hora de publicación según el estado
+        if ($request->has('fecha_publicacion') && !empty($request->input('fecha_publicacion'))) {
+            // Si el usuario proporciona una fecha y hora, se guarda esa fecha con la hora
+            $publication->fecha_publicacion = Carbon::parse($request->input('fecha_publicacion'));
+        } else {
+            // Si no se selecciona una fecha, asignar la fecha y hora actual
+            $publication->fecha_publicacion = Carbon::now();
+        }
+
+        // Validar que la fecha de publicación no sea futura solo si el estado es "publicado"
+        if ($request->input('estado') === 'publicado') {
+            $fechaPublicacion = Carbon::parse($publication->fecha_publicacion);
+            $fechaActual = Carbon::now();
+
+            // Verificar si la fecha de publicación es mayor que la fecha actual
+            if ($fechaPublicacion > $fechaActual) {
+                return back()->withErrors(['fecha_publicacion' => 'No puedes publicar esta publicación, por favor cambia la fecha.'])->withInput();
+            }
+        }
+
+        $publication->fecha_creacion = Carbon::now(); // Establecer la fecha de creación
+
         // Guardar la nueva publicación
         $publication->save();
 
         // Redirigir a la lista de publicaciones con un mensaje de éxito
         return redirect()->route('publications')->with('success', 'Publicación creada correctamente.');
     }
+
 
     public function uploadImage(Request $request)
     {

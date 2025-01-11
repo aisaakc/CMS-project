@@ -34,25 +34,95 @@
                     <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data" class="col-span-2">
                         @csrf
 
+
                         <!-- Título -->
                         <div class="mb-6">
                             <label for="title" class="block text-gray-700 font-medium">Título</label>
                             <input type="text" name="title" id="title"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Ingresa el título de la publicación" required>
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
+                                @error('title') border-red-500 @enderror"
+                                placeholder="Ingresa el título de la publicación" value="{{ old('title') }}" required>
+
+                            @error('title')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Contenido -->
                         <div class="mb-6">
                             <label for="content" class="block text-gray-700 font-medium">Contenido</label>
                             <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
-                                placeholder="Escribe el contenido de la publicación"></textarea>
+                                placeholder="Escribe el contenido de la publicación">{{ old('content') }}</textarea>
+
+                            @error('content')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
+
+
+
+                        <!-- Fecha de Publicación -->
+                        <div class="mb-6">
+                            <label for="fecha_publicacion" class="block text-gray-700 font-medium">Fecha de Publicación</label>
+                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('fecha_publicacion') border-red-500 @enderror" value="{{ old('fecha_publicacion') }}" required>
+
+                            @error('fecha_publicacion')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="mb-6">
+                            <label for="estado" class="block text-gray-700 font-medium">Estado</label>
+                            <select name="estado" id="estado" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('estado') border-red-500 @enderror" required>
+                                <option value="borrador" @if(old('estado') == 'borrador') selected @endif>Borrador</option>
+                                <option value="publicado" @if(old('estado') == 'publicado') selected @endif>Publicado</option>
+                                <option value="programado" @if(old('estado') == 'programado') selected @endif>Programado</option>
+                            </select>
+
+                            @error('estado')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Categoría -->
+                        <div class="mb-6">
+                            <label for="categoria" class="block text-gray-700 font-medium">Categoría</label>
+                            <input type="text" name="categoria" id="categoria"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('categoria') border-red-500 @enderror" value="{{ old('categoria') }}" required
+                                placeholder="Ingresa la categoría de la publicación">
+
+                            @error('categoria')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Imagen -->
+                        <div class="mb-6">
+                            <label for="image" class="block text-gray-700 font-medium">Imagen</label>
+                            <input type="file" name="image" id="image"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                            @error('image')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Botón de Enviar -->
+                        <div class="mb-6">
+                            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                                Crear Publicación
+                            </button>
+                        </div>
+                         <!-- Scripts -->
                         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+
                         <script>
                             $(document).ready(function () {
+                                // Inicializar Summernote
                                 $('.summernote').summernote({
                                     height: 300, // Altura del editor
                                     callbacks: {
@@ -89,48 +159,10 @@
                                 });
                             }
                         </script>
-
-
-
-                        <!-- Fecha de Publicación -->
-                        <div class="mb-6">
-                            <label for="fecha_publicacion" class="block text-gray-700 font-medium">Fecha de Publicación</label>
-                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        </div>
-
-                        <!-- Estado -->
-                        <div class="mb-6">
-                            <label for="estado" class="block text-gray-700 font-medium">Estado</label>
-                            <select name="estado" id="estado" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                <option value="borrador">Borrador</option>
-                                <option value="publicado">Publicado</option>
-                                <option value="programado">Programado</option>
-                            </select>
-                        </div>
-
-                        <!-- Categoría -->
-                        <div class="mb-6">
-                            <label for="categoria" class="block text-gray-700 font-medium">Categoría</label>
-                            <input type="text" name="categoria" id="categoria"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
-                                placeholder="Ingresa la categoría de la publicación">
-                        </div>
-
-                        <!-- Imagen -->
-                        <div class="mb-6">
-                            <label for="image" class="block text-gray-700 font-medium">Imagen</label>
-                            <input type="file" name="image" id="image"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-
-                        <!-- Botón de Enviar -->
-                        <div class="mb-6">
-                            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
-                                Crear Publicación
-                            </button>
-                        </div>
                     </form>
+
+
+
                 </div>
             </main>
 

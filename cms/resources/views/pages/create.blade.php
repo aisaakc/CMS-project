@@ -71,12 +71,6 @@
                         </select>
                     </div>
 
-                    <!-- Fecha de Publicación -->
-                    <div class="mb-4" id="fecha_publicacion_wrapper" style="display: none;">
-                        <label for="fecha_publicacion" class="block text-gray-700">Fecha de Publicación</label>
-                        <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion" class="w-full px-4 py-2 border rounded-lg">
-                        <small class="text-gray-500">Solo requerido si el estado es "Publicado".</small>
-                    </div>
 
                     <!-- Actions -->
                     <div class="mb-4 flex space-x-4">
@@ -120,24 +114,10 @@
                             });
 
                             // Validar la fecha de publicación futura
-                            $('#fecha_publicacion').on('change', function () {
-                                const fechaSeleccionada = new Date($(this).val());
-                                const fechaActual = new Date();
-                                if (fechaSeleccionada > fechaActual) {
-                                    alert('La fecha seleccionada es futura. Solo se puede seleccionar la fecha actual o anteriores.');
-                                    $(this).val('');
-                                }
-                            });
+
                         });
                     </script>
                 </form>
-
-
-
-
-
-
-
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         const titleInput = document.getElementById('title');
@@ -161,8 +141,6 @@
                         });
                     });
                 </script>
-
-
             </div>
         </div>
     </div>

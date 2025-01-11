@@ -103,7 +103,7 @@ return new class extends Migration
             $table->id('idpublications');
             $table->string('title', 45);
             $table->text('content');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->date('fecha_creacion');
             $table->date('fecha_publicacion');
             $table->text('categoria');
