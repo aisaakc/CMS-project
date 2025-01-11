@@ -16,12 +16,12 @@ class Comment extends Model
         'full_name',
         'corero',
         'coment',
+        'correo',
         'users_idusers',
     ];
 
     public function user()
     {
-
         return $this->belongsTo(User::class,'users_idusers' );
     }
 }

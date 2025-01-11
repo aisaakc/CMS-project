@@ -17,18 +17,13 @@
 
                         <div>
                             <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre Completo</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"
-                                   class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                                   required oninput="validateName(this)">
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
                         </div>
                         <div>
-                            <label for="telefono" class="block text-lg font-medium text-gray-700">Número de Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono"
-                                   class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                                   pattern="^\+?[0-9]{1,4}?[0-9]{7,15}$" required
-                                   oninput="onlyNumbers(this)">
-                            <small class="text-gray-500">Formato: +1234567890</small>
+                            <label for="correo" class="block text-lg font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" name="correo" placeholder="Tu email" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
                         </div>
+
                         <div>
                             <label for="mensaje" class="block text-lg font-medium text-gray-700">Mensaje</label>
                             <textarea id="mensaje" name="mensaje" rows="6" placeholder="Tu mensaje" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" required></textarea>
@@ -47,21 +42,6 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <script>
-                                                // Función para permitir solo números y el signo '+'
-                        function onlyNumbers(input) {
-                            // Permite números y el signo '+' al principio, elimina todo lo demás
-                            input.value = input.value.replace(/[^0-9+]/g, '');  // Permitir solo números y '+'
-
-                            if (input.value.indexOf('+') > 0) {
-                                input.value = input.value.replace(/\+/g, '');
-                            }
-                        }
-
-                            function validateName(input) {
-                                input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
-                            }
-                        </script>
 
                     </form>
 

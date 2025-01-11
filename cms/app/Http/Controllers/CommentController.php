@@ -16,30 +16,31 @@ class CommentController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validar los datos del formulario
-    $validatedData = $request->validate([
-        'nombre' => 'required|string|max:255',
-        'telefono' => 'required|string|max:255',  // Validar teléfono como string
-        'mensaje' => 'required|string',
-    ]);
+    {
+        // Verifica qué datos se están recibiendo
+       //dd($request->all()); // Esto imprimirá todos los datos del formulario enviados
 
-    // Preparar los datos para insertar en la tabla de comentarios
-    $commentData = [
-        'full_name' => $validatedData['nombre'],
-        'phone' => $validatedData['telefono'],  // Guardar el número de teléfono
-        'coment' => $validatedData['mensaje'],
-    ];
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'correo' => 'required|email|max:255',  // Validar correctamente el correo
+            'mensaje' => 'required|string',
+        ]);
+
+        // Preparar los datos para insertar en la tabla de comentarios
+        $commentData = [
+            'full_name' => $validatedData['nombre'],
+            'correo' => $validatedData['correo'],  // Guardar el correo correctamente
+            'coment' => $validatedData['mensaje'],
+        ];
 
 
+        // Crear el comentario en la base de datos
+        Comment::create($commentData);
 
-    // Crear el comentario en la base de datos
-    Comment::create($commentData);
-
-    // Redirigir con mensaje de éxito
-    return redirect()->route('Contactanos')->with('success', 'Comentario enviado exitosamente.');
-}
-
+        // Redirigir con mensaje de éxito
+        return redirect()->route('Contactanos')->with('success', 'Comentario enviado exitosamente.');
+    }
 
 
 

@@ -149,9 +149,9 @@ return new class extends Migration
         // Tabla de comentarios
 
         Schema::create('comments', function (Blueprint $table) {
-            $table->id('idcomments');  // El campo idcomments no debe ser nullable
+            $table->id('idcomments')->nullable();
             $table->string('full_name')->nullable();
-            $table->string('phone')->nullable();  // Asegúrate de que el campo 'phone' es el adecuado
+            $table->string('correo')->nullable();
             $table->text('coment')->nullable();
             $table->timestamps();
 
