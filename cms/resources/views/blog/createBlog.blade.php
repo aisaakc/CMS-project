@@ -48,6 +48,49 @@
                             <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
                                 placeholder="Escribe el contenido de la publicación"></textarea>
                         </div>
+                        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('.summernote').summernote({
+                                    height: 300, // Altura del editor
+                                    callbacks: {
+                                        onImageUpload: function (files) {
+                                            if (files.length) {
+                                                uploadImage(files[0]); // Sube la primera imagen seleccionada
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+
+                            function uploadImage(file) {
+                                let formData = new FormData();
+                                formData.append('image', file); // El nombre del campo debe coincidir con el backend
+
+                                $.ajax({
+                                    url: '{{ route("upload.image") }}', // Ruta a tu controlador de subida
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Protege la solicitud con el token CSRF
+                                    },
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (response) {
+                                        // Inserta la imagen en el editor usando la URL devuelta
+                                        $('.summernote').summernote('insertImage', response.url);
+                                    },
+                                    error: function (xhr) {
+                                        console.error("Error al subir la imagen:", xhr.responseText);
+                                        alert('Hubo un error al subir la imagen.');
+                                    }
+                                });
+                            }
+                        </script>
+
+
 
                         <!-- Fecha de Publicación -->
                         <div class="mb-6">
@@ -94,16 +137,7 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 300
-            });
-        });
-    </script>
+
 </body>
 
 </html>

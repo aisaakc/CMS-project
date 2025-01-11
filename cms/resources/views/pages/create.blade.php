@@ -71,6 +71,13 @@
                         </select>
                     </div>
 
+                    <!-- Fecha de Publicación -->
+                    <div class="mb-4" id="fecha_publicacion_wrapper" style="display: none;">
+                        <label for="fecha_publicacion" class="block text-gray-700">Fecha de Publicación</label>
+                        <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion" class="w-full px-4 py-2 border rounded-lg">
+                        <small class="text-gray-500">Solo requerido si el estado es "Publicado".</small>
+                    </div>
+
                     <!-- Actions -->
                     <div class="mb-4 flex space-x-4">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crear Página</button>
@@ -78,55 +85,58 @@
                     </div>
 
                     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 300, // Altura del editor
-                lang: 'es-ES', // Idioma en español
-                placeholder: 'Escribe el contenido de la página aquí...',
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']],
-                ],
-                callbacks: {
-                    onInit: function() {
-                        // Agrega estilos compatibles con TailwindCSS
-                        $('.note-editor').addClass('bg-white border border-gray-300 rounded-lg');
-                    },
-                    onImageUpload: function(files) {
-                        var data = new FormData();
-                        data.append("file", files[0]);
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            // Inicializar Summernote
+                            $('.summernote').summernote({
+                                height: 300,
+                                lang: 'es-ES',
+                                placeholder: 'Escribe el contenido de la página aquí...',
+                                toolbar: [
+                                    ['style', ['style']],
+                                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                                    ['para', ['ul', 'ol', 'paragraph']],
+                                    ['insert', ['link', 'picture', 'video']],
+                                    ['view', ['fullscreen', 'codeview', 'help']],
+                                ],
+                            });
 
-                        $.ajax({
-                            data: data,
-                            type: "POST",
-                            url: "{{ route('pages.upload-image') }}",  // La URL de tu backend
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Asegúrate de enviar el token CSRF
-                            },
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            success: function(response) {
-                                var image = $('<img>').attr('src', response.url);
-                                $('.summernote').summernote("insertNode", image[0]);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("Error uploading image: ", error);
-                            }
+                            // Mostrar/ocultar campo de fecha según el estado
+                            $('#status').on('change', function () {
+                                const status = $(this).val();
+                                const fechaWrapper = $('#fecha_publicacion_wrapper');
+                                const fechaField = $('#fecha_publicacion');
+
+                                if (status === 'published') {
+                                    fechaWrapper.show();
+                                    fechaField.prop('required', true);
+                                } else {
+                                    fechaWrapper.hide();
+                                    fechaField.prop('required', false).val(''); // Ocultar y limpiar valor
+                                }
+                            });
+
+                            // Validar la fecha de publicación futura
+                            $('#fecha_publicacion').on('change', function () {
+                                const fechaSeleccionada = new Date($(this).val());
+                                const fechaActual = new Date();
+                                if (fechaSeleccionada > fechaActual) {
+                                    alert('La fecha seleccionada es futura. Solo se puede seleccionar la fecha actual o anteriores.');
+                                    $(this).val('');
+                                }
+                            });
                         });
-                    }
-                }
-            });
-        });
-    </script>
+                    </script>
                 </form>
+
+
+
+
+
+
 
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {

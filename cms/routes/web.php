@@ -90,6 +90,8 @@ Route::get('blog/create', [PublicationController::class, 'create'])->name('publi
 Route::post('blog', [PublicationController::class, 'store'])->name('publications.store'); // Ruta para almacenar la nueva publicación
 Route::get('blog/show/{id}', [PublicationController::class, 'show'])->name('publications.show'); // Ruta para visualizar una publicación
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
+Route::post('/upload/image', [PublicationController::class, 'uploadImage'])->name('upload.image');
+
 
 // cantidad
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

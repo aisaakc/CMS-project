@@ -85,6 +85,20 @@ class PublicationController extends Controller
         return redirect()->route('publications')->with('success', 'Publicación creada correctamente.');
     }
 
+    public function uploadImage(Request $request)
+    {
+        // Validación del archivo de imagen
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Guarda la imagen en el almacenamiento público
+        $path = $request->file('image')->store('uploads/images', 'public');
+
+        // Retorna la URL completa para que Summernote pueda usarla
+        return response()->json(['url' => asset('storage/' . $path)]);
+    }
+
     // Método para editar una publicación
 
     public function edit($id)
