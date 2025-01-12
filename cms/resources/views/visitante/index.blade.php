@@ -21,18 +21,22 @@
             <p class="text-gray-600">No hay páginas publicadas en este momento.</p>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                @foreach($pages as $page)
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition duration-300 ease-in-out">
-                        <!-- Título -->
-                        <h2 class="text-2xl font-semibold text-gray-800">{{ $page->title }}</h2>
 
-                        <!-- Slug como URL -->
-                        <a href="{{ url($page->slug) }}" class="text-blue-500 hover:underline">
-                            {{ url($page->slug) }}
-                        </a>
-                    </div>
+                   <!-- Dentro de visitante.index.blade.php -->
+@foreach($pages as $page)
+<div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition duration-300 ease-in-out">
+    <!-- Título -->
+    <h2 class="text-2xl font-semibold text-gray-800">{{ $page->title }}</h2>
 
-                @endforeach
+    <!-- Slug como URL -->
+    <a href="{{ route('pages.slug', $page->slug) }}" class="text-blue-500 hover:underline">
+        {{ url($page->slug) }}
+    </a>
+</div>
+@endforeach
+
+
+
             </div>
 
             <!-- Paginación -->
@@ -42,7 +46,7 @@
         @endif
     </div>
 
-
+ <x-footer/>
 </body>
 
 </html>

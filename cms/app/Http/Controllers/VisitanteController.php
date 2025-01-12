@@ -1,5 +1,7 @@
 <?php
 
+// En VisitanteController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\Page;
@@ -14,10 +16,12 @@ class VisitanteController extends Controller
         // Retornamos la vista con las páginas filtradas
         return view('visitante.index', compact('pages'));
     }
-    public function show($slug)
-{
-    $page = Page::where('slug', $slug)->firstOrFail();
-    return view('visitante.show', compact('page'));
+
+    // Método para ver una página por su slug
+    public function viewPage($slug)
+    {
+        $page = Page::where('slug', $slug)->firstOrFail();
+        return view('visitante.show', compact('page'));
+    }
 }
 
-}

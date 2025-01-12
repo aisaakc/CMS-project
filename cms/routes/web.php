@@ -99,6 +99,9 @@ Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.
 
 //Visitante
 Route::get('/public',[VisitanteController::class, 'index'])->name('public.index');
-Route::get('/{slug}', [VisitanteController::class, 'show'])->name('pages.show');
+// En routes/web.php
+
+Route::get('/{slug}', [VisitanteController::class, 'viewPage'])->name('pages.slug');
+
 // lista
 Route::get('/list-post', [ListController::class, 'listPost'])->name('list-post');
