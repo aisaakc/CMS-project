@@ -12,20 +12,20 @@ use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogController;
 
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
 
 
+Route::get('Blog', [BlogController::class, 'showBlog'])->name('Blog');
+
 
 //hacer un crud aqui
-Route::get('Blog', function () {
-    return view('cms.Blog');
-})->name('Blog');
-//hacer un crud aqui
-Route::get('SobreNosostros', function () {
-    return view('cms.SobreNosostros');
-})->name('SobreNosostros');
+use App\Http\Controllers\AboutController;
+
+Route::get('SobreNosostros', [AboutController::class, 'index'])->name('SobreNosostros');
+
 //hacer un crud aqui
 
 // Ruta para mostrar el formulario

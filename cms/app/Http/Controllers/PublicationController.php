@@ -81,12 +81,7 @@ class PublicationController extends Controller
                             ? Carbon::parse($request->input('fecha_publicacion'))
                             : Carbon::now();
 
-        // 4. Validar para el estado "publicado" que la fecha de publicación debe ser la fecha actual
-        if ($publication->estado === 'publicado' && !$fechaPublicacion->isToday()) {
-            return back()->withErrors([
-                'fecha_publicacion' => 'Por favor ingrese una fecha y/o hora valida'
-            ])->withInput();
-        }
+
 
         // 5. Validar que la fecha de publicación no sea futura para los estados "borrador" y "publicado"
         if (($publication->estado === 'borrador' || $publication->estado === 'publicado') && $fechaPublicacion->isAfter(Carbon::now())) {
