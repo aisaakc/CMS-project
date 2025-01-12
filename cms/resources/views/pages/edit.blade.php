@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
 </head>
+
 <body class="font-inter bg-gray-50 min-h-screen flex">
 
     <!-- Sidebar -->
@@ -33,47 +35,30 @@
                 <!-- Title -->
                 <div>
                     <label for="title" class="block text-lg font-medium text-gray-700 mb-2">Título</label>
-                    <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        value="{{ $page->title }}"
+                    <input type="text" name="title" id="title" value="{{ $page->title }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                        placeholder="Ingresa el título de la página"
-                        >
+                        placeholder="Ingresa el título de la página">
                 </div>
 
                 <div>
                     <label for="slug" class="block text-lg font-medium text-gray-700 mb-2">Slug</label>
-                    <input
-                        type="text"
-                        name="slug"
-                        id="slug"
-                        value="{{ $page->slug }}"
+                    <input type="text" name="slug" id="slug" value="{{ $page->slug }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                        placeholder="Ingresa el slug"
-                        >
+                        placeholder="Ingresa el slug">
                 </div>
 
                 <!-- Content -->
                 <div>
                     <label for="content" class="block text-lg font-medium text-gray-700 mb-2">Contenido</label>
-                    <textarea
-                        name="content"
-                        id="content"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                        placeholder="Escribe el contenido de la página"
-                        >{{ $page->content }}</textarea>
+                    <textarea name="content" id="content" class="summernote w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+                        placeholder="Escribe el contenido de la página">{{ $page->content }}</textarea>
                 </div>
 
                 <!-- Status -->
                 <div>
                     <label for="status" class="block text-lg font-medium text-gray-700 mb-2">Estado</label>
-                    <select
-                        name="status"
-                        id="status"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                        >
+                    <select name="status" id="status"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700">
                         <option value="draft" {{ $page->status == 'draft' ? 'selected' : '' }}>Borrador</option>
                         <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Publicado</option>
                         <option value="archived" {{ $page->status == 'archived' ? 'selected' : '' }}>Archivado</option>
@@ -83,11 +68,10 @@
                 <!-- Actions -->
                 <div class="flex justify-end space-x-4">
                     <a href="{{ route('pages.index') }}"
-                       class="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 hover:text-gray-900">
+                        class="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 hover:text-gray-900">
                         Cancelar
                     </a>
-                    <button
-                        type="submit"
+                    <button type="submit"
                         class="px-6 py-3 text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500">
                         Actualizar Página
                     </button>
@@ -96,5 +80,28 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Inicializar Summernote
+            $('.summernote').summernote({
+                height: 300,
+                lang: 'es-ES',
+                placeholder: 'Escribe el contenido de la página aquí...',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+            });
+        });
+    </script>
+
 </body>
+
 </html>
