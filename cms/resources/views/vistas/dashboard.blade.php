@@ -62,11 +62,12 @@
                             <p class="text-lg">Total de publicaciones activas en la plataforma, actualizándose conforme se
                                 añaden nuevas.
                             </p>
-                            <a href="{{ route('list-post')}}">
-                            <button class="mt-4 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">
-                                Ver Todas las publicaciones
-                            </button>
+                            <a href="{{ route('posts.lista') }}">
+                                <button class="mt-4 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">
+                                    Ver Todas las publicaciones
+                                </button>
                             </a>
+
                         </div>
                     </div>
                 @endauth

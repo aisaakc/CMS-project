@@ -5,15 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PublicadorController;
+//use App\Http\Controllers\PublicadorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitanteController;
-use App\Http\Controllers\ListController;
+//use App\Http\Controllers\ListController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PostController;
 
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
@@ -104,4 +105,7 @@ Route::get('/public',[VisitanteController::class, 'index'])->name('public.index'
 Route::get('/{slug}', [VisitanteController::class, 'viewPage'])->name('pages.slug');
 
 // lista
-Route::get('/list-post', [ListController::class, 'listPost'])->name('list-post');
+
+//Route::get('list-post', [ListController::class, 'showPosts'])->name('posts.list');
+Route::get('/posts/lista', [PostController::class, 'index'])->name('posts.lista');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');

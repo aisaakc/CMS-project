@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -25,7 +25,7 @@
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Lista de Publicaciones</h1>
 
                 <!-- Filtro por Publicadores -->
-                <form method="GET" action="{{ route('list-post') }}" class="mb-6">
+                <form method="GET" action="{{ route('posts.lista') }}" class="mb-6">
                     <label for="publisher_id" class="block text-lg font-medium text-gray-700 mb-2">Publicadores:</label>
                     <select name="publisher_id" id="publisher_id" class="w-full p-2 border border-gray-300 rounded-lg">
                         <option value="">Todos</option>
@@ -36,21 +36,21 @@
                         @endforeach
                     </select>
                     <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-                        Buscar publicacion
+                        Buscar publicación
                     </button>
                 </form>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach(['Publicado', 'Borrador', 'Programado'] as $estado)  <!-- Añadimos Programado aquí -->
+                    @foreach(['Publicado', 'Borrador', 'Programado'] as $estado)
                         <div class="col-span-1">
                             <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ $estado }}</h2>
 
                             @forelse($posts[$estado] as $post)
                                 <div class="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition duration-300">
                                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $post->title }}</h3>
-                                    <p class="text-gray-700">{{ Str::limit($post->content, 100) }}</p>
+                                    <p class="text-gray-700"> {!! $post->content !!} </p>
                                     <span class="block text-sm text-gray-500 mt-2">Creado por: {{ $post->user->first_name }} {{ $post->user->last_name }}</span>
-                                    <a href="{{ route('publications.show', $post->idpublications) }}" class="text-blue-600 hover:underline mt-4 block">Leer más</a>
+                                    <a href="{{ route('posts.show', ['id' => $post->idpublications]) }}" class="text-blue-600 hover:underline mt-4 block">Leer más</a>
                                 </div>
                             @empty
                                 <p class="text-gray-500">No hay publicaciones en estado "{{ $estado }}".</p>
@@ -68,4 +68,4 @@
     </div>
 </body>
 
-</html> --}}
+</html>
