@@ -68,18 +68,6 @@
                     <span class="font-medium">Blog</span>
                     </a>
 
-                    @if (auth()->user()->roles_idroles == 1)
-                    <a href="h"
-                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
-                        <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M18 10c0 3.866-3.582 7-8 7a9.283 9.283 0 01-4-.9l-4.39 1.13a.6.6 0 01-.72-.72l1.13-4.39A9.283 9.283 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
-                            </svg>
-                        </div>
-                        <span class="font-medium">Comentarios</span>
-                    </a>
-                    @endif
-
                 </nav>
             </form>
         </div>

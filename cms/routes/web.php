@@ -13,25 +13,17 @@ use App\Http\Controllers\ListController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AboutController;
 
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
 
-
 Route::get('Blog', [BlogController::class, 'showBlog'])->name('Blog');
-
-
-//hacer un crud aqui
-use App\Http\Controllers\AboutController;
 
 Route::get('SobreNosostros', [AboutController::class, 'index'])->name('SobreNosostros');
 
-//hacer un crud aqui
-
-// Ruta para mostrar el formulario
 Route::get('Contactanos', [CommentController::class, 'showForm'])->name('Contactanos');
 
-// Ruta para manejar el envío del formulario
 Route::post('Contactanos', [CommentController::class, 'store'])->name('store.contacto');
 
 

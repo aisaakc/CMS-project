@@ -9,8 +9,11 @@ class BlogController extends Controller
 {
     public function showBlog()
     {
-        // Obtener todas las publicaciones paginadas
-        $publications = Publication::where('estado', 'publicado')->paginate(6); // Mostrar 6 publicaciones por página
+        // Obtener todas las publicaciones con estado 'publicado' o 'programado' y ordenadas por 'fecha_publicacion'
+        $publications = Publication::whereIn('estado', ['publicado', 'programado'])
+            ->orderBy('fecha_publicacion', 'asc') // Ordenar por fecha de publicación ascendente
+            ->paginate(6); // Mostrar 6 publicaciones por página
+
         return view('cms.Blog', compact('publications'));
     }
 

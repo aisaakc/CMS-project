@@ -20,13 +20,14 @@
                             <img src="{{ asset('storage/' . $publication->image) }}" alt="{{ $publication->title }}" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
-
+                                    {{ $publication->title }}
                                 </h2>
                                 <p class="mt-3 text-gray-600">
                                     {!! $publication->content !!}
                                 </p>
                                 <div class="mt-4 flex items-center justify-between text-sm text-gray-500">
-                                    <span>{{ $publication->created_at }}</span>
+                                    <!-- Mostrar la fecha de publicación formateada -->
+                                    <span> Fecha de Publicacion: {{ \Carbon\Carbon::parse($publication->fecha_publicacion)->format('d/m/Y ') }}</span>
                                 </div>
                             </div>
                         </div>
