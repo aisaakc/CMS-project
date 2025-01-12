@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-
 <body class="font-inter bg-gray-50">
 
     <div class="flex h-screen">
@@ -19,18 +17,22 @@
         </div>
 
         <div class="flex-1 flex flex-col bg-gray-100 lg:pl-64 pl-0">
-            <!-- Header -->
             <div class="h-14 text-white flex items-center justify-between z-20">
                 <x-profile />
             </div>
             <div class="container mx-auto p-6">
                 <h1 class="text-3xl font-bold mb-6 text-gray-800">Publicaciones</h1>
 
+                @if(session('success'))
+                    <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg">
+                        <strong>{{ session('success') }}</strong>
+                    </div>
+                @endif
+
                 <div class="mb-4">
-                    <a href="{{ route('publications.create') }}"
-                        class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
+                    <a href="{{ route('publications.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Nueva Publicación</a>
                 </div>
-                <!-- Mostrar publicaciones por categorías -->
+
                 @foreach ($publicationsByCategory as $category => $categoryPublications)
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Categoria: {{ $category }}</h2>
                     <div class="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200 mb-6">
@@ -74,17 +76,13 @@
                                             @endswitch
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-800 flex space-x-4">
-                                            <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}"
-                                                class="text-green-500 hover:text-green-700">Vista</a>
-                                            <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}"
-                                               class="text-blue-500 hover:text-blue-700 transition duration-200">Editar</a>
+                                            <a href="{{ route('publications.show', ['id' => $publication->idpublications]) }}" class="text-green-500 hover:text-green-700">Vista</a>
+                                            <a href="{{ route('publications.edit', ['id' => $publication->idpublications]) }}" class="text-blue-500 hover:text-blue-700 transition duration-200">Editar</a>
 
-                                            <form action="{{ route('publications.destroy', ['id' => $publication->idpublications]) }}"
-                                                  method="POST" class="inline-block">
+                                            <form action="{{ route('publications.destroy', ['id' => $publication->idpublications]) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
-                                                        class="text-red-500 hover:text-red-700 transition duration-200">Eliminar</button>
+                                                <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200">Eliminar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -94,10 +92,8 @@
                     </div>
                 @endforeach
 
-                <!-- Paginación -->
                 <div class="mt-6">
                     <div class="flex justify-center">
-                        <!-- Mostrar la paginación de publicaciones -->
                         {{ $publications->links() }}
                     </div>
                 </div>
@@ -105,5 +101,4 @@
         </div>
     </div>
 </body>
-
 </html>

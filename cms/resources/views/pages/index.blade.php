@@ -46,56 +46,62 @@
                     </form>
                 </div>
 
-                <!-- Mostrar Páginas -->
-                <!-- Mostrar Páginas -->
-<div class="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200 mb-6">
-    <table class="min-w-full table-auto">
-        <thead class="bg-gray-800 text-white">
-            <tr>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Título</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Estado</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-            @foreach ($pages as $page)
-                <tr class="hover:bg-gray-50 transition duration-200 ease-in-out">
-                    <td class="px-6 py-4 text-sm text-gray-800">{{ $page->title }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">
-                        @switch($page->status)
-                            @case('draft')
-                                <span class="px-2 py-1 text-xs font-semibold text-yellow-600 bg-yellow-100 rounded-full">Borrador</span>
-                                @break
-                            @case('published')
-                                <span class="px-2 py-1 text-xs font-semibold text-green-600 bg-green-100 rounded-full">Publicado</span>
-                                @break
-                            @case('archived')
-                                <span class="px-2 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full">Archivado</span>
-                                @break
-                        @endswitch
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-800 flex space-x-4">
-                        <a href="{{ route('pages.show', $page->id) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
-                        <a href="{{ route('pages.edit', $page->id) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
-                        <form action="{{ route('pages.destroy', $page->id) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                <!-- Mostrar el mensaje de éxito -->
+                @if(session('success'))
+                    <div class="bg-green-100 text-green-800 p-4 mb-6 rounded-lg border-l-4 border-green-500">
+                        <p class="font-medium">{{ session('success') }}</p>
+                    </div>
+                @endif
 
-<!-- Mensaje cuando no hay publicaciones -->
-@if($pages->isEmpty())
-    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg">
-        <p class="text-sm font-medium">No se han creado publicaciones.</p>
-    </div>
-@endif
+                <!-- Mostrar Páginas -->
+                <div class="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200 mb-6">
+                    <table class="min-w-full table-auto">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-sm font-semibold">Título</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold">Estado</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($pages as $page)
+                                <tr class="hover:bg-gray-50 transition duration-200 ease-in-out">
+                                    <td class="px-6 py-4 text-sm text-gray-800">{{ $page->title }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-800">
+                                        @switch($page->status)
+                                            @case('draft')
+                                                <span class="px-2 py-1 text-xs font-semibold text-yellow-600 bg-yellow-100 rounded-full">Borrador</span>
+                                                @break
+                                            @case('published')
+                                                <span class="px-2 py-1 text-xs font-semibold text-green-600 bg-green-100 rounded-full">Publicado</span>
+                                                @break
+                                            @case('archived')
+                                                <span class="px-2 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full">Archivado</span>
+                                                @break
+                                        @endswitch
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-800 flex space-x-4">
+                                        <a href="{{ route('pages.show', $page->id) }}" class="text-green-600 hover:text-green-800 transition duration-200">Vista</a>
 
+                                        <a href="{{ route('pages.edit', $page->id) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Editar</a>
+                                        <form action="{{ route('pages.destroy', $page->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mensaje cuando no hay publicaciones -->
+                @if($pages->isEmpty())
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg">
+                        <p class="text-sm font-medium">No se han creado publicaciones.</p>
+                    </div>
+                @endif
 
                 <!-- Paginación -->
                 <div class="mt-6">
@@ -110,8 +116,3 @@
 </body>
 
 </html>
-
-
-
-
-

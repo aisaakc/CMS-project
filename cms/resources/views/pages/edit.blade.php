@@ -44,7 +44,13 @@
                     <label for="slug" class="block text-lg font-medium text-gray-700 mb-2">Slug</label>
                     <input type="text" name="slug" id="slug" value="{{ $page->slug }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                        placeholder="Ingresa el slug">
+                        placeholder="Ingresa el slug" readonly>
+                </div>
+
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700">Descripción</label>
+                    <textarea name="description" id="description" rows="4" class="w-full px-4 py-2 border rounded-lg" required>{{ $page->description }}</textarea>
                 </div>
 
                 <!-- Content -->
@@ -59,9 +65,11 @@
                     <label for="status" class="block text-lg font-medium text-gray-700 mb-2">Estado</label>
                     <select name="status" id="status"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700">
-                        <option value="draft" {{ $page->status == 'draft' ? 'selected' : '' }}>Borrador</option>
-                        <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Publicado</option>
-                        <option value="archived" {{ $page->status == 'archived' ? 'selected' : '' }}>Archivado</option>
+                        @foreach (['draft' => 'Borrador', 'published' => 'Publicado', 'archived' => 'Archivado'] as $value => $label)
+                            <option value="{{ $value }}" {{ $page->status == $value ? 'selected' : '' }}>
+                                {{ $label }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -84,6 +92,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+
     <script>
         $(document).ready(function () {
             // Inicializar Summernote
@@ -98,6 +107,22 @@
                     ['insert', ['link', 'picture', 'video']],
                     ['view', ['fullscreen', 'codeview', 'help']],
                 ],
+            });
+        });
+
+        // Script para generar el slug a partir del título
+        document.addEventListener('DOMContentLoaded', function () {
+            const titleInput = document.getElementById('title');
+            const slugInput = document.getElementById('slug');
+
+            titleInput.addEventListener('input', function () {
+                const slug = titleInput.value
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9\s-]/g, '') // Remueve caracteres no permitidos
+                    .replace(/\s+/g, '-')         // Reemplaza espacios por guiones
+                    .replace(/-+/g, '-');         // Remueve guiones repetidos
+                slugInput.value = slug;
             });
         });
     </script>

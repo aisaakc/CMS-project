@@ -54,41 +54,76 @@ class PageController extends Controller
     return response()->json(['url' => Storage::url($path)]);
 }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'content' => 'required',
-            'description' => 'required', // Valida el campo de descripción
-            'status' => 'required|in:draft,published,archived',
-        ]);
+// Crear una página
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string',
+        'content' => 'required',
+        'description' => 'required', // Valida el campo de descripción
+        'status' => 'required|in:draft,published,archived',
+    ]);
 
-        // Generar el slug automáticamente a partir del título
-        $slug = Str::slug($request->input('title'));
+    // Generar el slug automáticamente a partir del título
+    $slug = Str::slug($request->input('title'));
 
-        // Verificar que el slug sea único en la base de datos
-        $originalSlug = $slug;
-        $counter = 1;
-        while (Page::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $counter;
-            $counter++;
-        }
-
-        // Obtener el ID del usuario autenticado
-        $userId = Auth::id();
-
-        // Crear la nueva página y asignar el ID del usuario
-        Page::create([
-            'title' => $request->input('title'),
-            'slug' => $slug,
-            'content' => $request->input('content'),
-            'status' => $request->input('status'),
-            'description' => $request->input('description'), // Guarda la descripción
-            'users_idusers' => $userId,
-        ]);
-
-        return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+    // Verificar que el slug sea único en la base de datos
+    $originalSlug = $slug;
+    $counter = 1;
+    while (Page::where('slug', $slug)->exists()) {
+        $slug = $originalSlug . '-' . $counter;
+        $counter++;
     }
+
+    // Obtener el ID del usuario autenticado
+    $userId = Auth::id();
+
+    // Crear la nueva página y asignar el ID del usuario
+    Page::create([
+        'title' => $request->input('title'),
+        'slug' => $slug,
+        'content' => $request->input('content'),
+        'status' => $request->input('status'),
+        'description' => $request->input('description'), // Guarda la descripción
+        'users_idusers' => $userId,
+    ]);
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('pages.index')->with('success', 'Página creada correctamente.');
+}
+
+// Actualizar página
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'description' => 'required',
+        'status' => 'required|string|in:draft,published,archived',
+    ]);
+
+    $page = Page::findOrFail($id);
+    $page->title = $request->input('title');
+    $page->content = $request->input('content');
+    $page->slug = Str::slug($request->input('slug'));
+    $page->status = $request->input('status');
+    $page->description = $request->input('description');
+    $page->save();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('pages.index')->with('success', 'Página actualizada correctamente.');
+}
+
+// Eliminar página
+public function destroy($id)
+{
+    $page = Page::findOrFail($id);
+    $page->delete();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('pages.index')->with('success', 'Página eliminada correctamente.');
+}
+
 
         // Método show en el controlador
         public function show($id)
@@ -97,38 +132,11 @@ class PageController extends Controller
             return view('pages.show', compact('page'));
         }
 
-       // Mostrar formulario de edición de página
+
         public function edit($id)
         {
             $page = Page::findOrFail($id);
             return view('pages.edit', compact('page'));
         }
 
-        // Actualizar página
-        public function update(Request $request, $id)
-        {
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-                'status' => 'required|string|in:draft,published,archived',
-            ]);
-
-            $page = Page::findOrFail($id);
-            $page->title = $request->input('title');
-            $page->content = $request->input('content');
-            $page->slug = Str::slug($request->input('slug'));
-            $page->status = $request->input('status');
-            $page->save();
-
-            return redirect()->route('pages.index')->with('success', 'Página actualizada correctamente.');
-        }
-
-        // Eliminar página
-        public function destroy($id)
-        {
-            $page = Page::findOrFail($id);
-            $page->delete();
-
-            return redirect()->route('pages.index')->with('success', 'Página eliminada correctamente.');
-        }
 }
