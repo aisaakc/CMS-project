@@ -20,12 +20,13 @@ Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
 
 Route::get('Blog', [BlogController::class, 'showBlog'])->name('Blog');
 
+
+
 Route::get('SobreNosostros', [AboutController::class, 'index'])->name('SobreNosostros');
 
 Route::get('Contactanos', [CommentController::class, 'showForm'])->name('Contactanos');
 
 Route::post('Contactanos', [CommentController::class, 'store'])->name('store.contacto');
-
 
 
 // AUTH
@@ -66,7 +67,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // Profile
-
 Route::get('edit-profile', function () {
     return view('vistas.edit-profile');
 })->name('edit-profile');
@@ -76,7 +76,6 @@ Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePic
 Route::delete('/delete-account', [AuthController::class, 'destroy'])->name('delete.account');
 
 // PUBLICATIONS
-
 Route::get('blog/listBlog', [PublicationController::class, 'listaBlog'])->name('publications');
 Route::get('blog/{id}/edit', [PublicationController::class, 'edit'])->name('publications.edit');
 Route::put('blog/{id}', [PublicationController::class, 'update'])->name('publications.update'); // Define la ruta publications.update
@@ -86,11 +85,8 @@ Route::get('blog/show/{id}', [PublicationController::class, 'show'])->name('publ
 Route::delete('blog/{id}', [PublicationController::class, 'destroy'])->name('publications.destroy');
 Route::post('/upload/image', [PublicationController::class, 'uploadImage'])->name('upload.image');
 
-
 // cantidad
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
 
 //PAGES
 Route::resource('pages', PageController::class);
@@ -98,15 +94,10 @@ Route::post('/upload-image', [PageController::class, 'uploadImage'])->name('page
 
 //users
 Route::resource('users', UsersController::class);
-
-
 Route::put('/users/{idusers}', [UsersController::class, 'update'])->name('users.update');
 
 //Visitante
 Route::get('/public',[VisitanteController::class, 'index'])->name('public.index');
 Route::get('/{slug}', [VisitanteController::class, 'show'])->name('pages.show');
-
 // lista
-
 Route::get('/list-post', [ListController::class, 'listPost'])->name('list-post');
-

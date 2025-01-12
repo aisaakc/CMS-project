@@ -14,30 +14,55 @@
                     </p>
                 </div>
 
+                <!-- Mostrar publicaciones si existen, o mensaje si no hay -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach($publications as $publication)
+                    @forelse($publications as $publication)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
                             <img src="{{ asset('storage/' . $publication->image) }}" alt="{{ $publication->title }}" class="w-full h-48 object-cover">
                             <div class="p-6">
+                                <!-- Mostrar la categoría de la publicación encima del título -->
+                                @if($publication->category)
+                                    <div class="text-sm font-medium text-indigo-600">
+                                        {{ $publication->category->name }}
+                                    </div>
+                                @endif
+
                                 <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
                                     {{ $publication->title }}
                                 </h2>
                                 <p class="mt-3 text-gray-600">
                                     {!! $publication->content !!}
                                 </p>
-                                <div class="mt-4 flex items-center justify-between text-sm text-gray-500">
-                                    <!-- Mostrar la fecha de publicación formateada -->
-                                    <span> Fecha de Publicacion: {{ \Carbon\Carbon::parse($publication->fecha_publicacion)->format('d/m/Y ') }}</span>
+
+                                <!-- Información del autor y fecha -->
+                                <div class="mt-4 text-sm text-gray-500">
+                                    <p>Publicado por: {{ $publication->user->first_name }} {{ $publication->user->last_name }}</p>
+                                    <p>Fecha de publicación: {{ \Carbon\Carbon::parse($publication->fecha_publicacion)->format('d/m/Y') }}</p>
+                                </div>
+
+                                <!-- Botón de "Leer más" -->
+                                <div class="mt-4">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">
+                                        Leer más
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <!-- Si no hay publicaciones -->
+                        <div class="col-span-3 text-center">
+                            <p class="text-lg text-gray-600">No hay publicaciones disponibles en este momento.</p>
+                            <p class="text-lg text-gray-600">Fecha actual: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
+                        </div>
+                    @endforelse
                 </div>
 
                 <!-- Paginación -->
-                <div class="mt-8">
-                    {{ $publications->links() }}
-                </div>
+                @if($publications->count() > 0)
+                    <div class="mt-8">
+                        {{ $publications->links() }}
+                    </div>
+                @endif
 
             </div>
         </section>

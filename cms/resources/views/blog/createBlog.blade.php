@@ -56,7 +56,7 @@
                         <!-- Fecha de Publicación -->
                         <div class="mb-6">
                             <label for="fecha_publicacion" class="block text-gray-700 font-medium">Fecha de Publicación</label>
-                            <input type="datetime-local" name="fecha_publicacion" id="fecha_publicacion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('fecha_publicacion') }}" required>
+                            <input type="date" name="fecha_publicacion" id="fecha_publicacion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('fecha_publicacion') }}" required>
                             @error('fecha_publicacion')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
