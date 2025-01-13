@@ -109,3 +109,5 @@ Route::get('/{slug}', [VisitanteController::class, 'viewPage'])->name('pages.slu
 //Route::get('list-post', [ListController::class, 'showPosts'])->name('posts.list');
 Route::get('/posts/lista', [PostController::class, 'index'])->name('posts.lista');
 Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('post/{id}', [PostController::class, 'update'])->name('posts.update');

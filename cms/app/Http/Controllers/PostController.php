@@ -54,5 +54,48 @@ class PostController extends Controller
         // Retornar la vista de la publicación con los detalles
         return view('post.show', compact('publication'));
     }
+     // Mostrar el formulario de edición
+     public function edit($id)
+     {
+         // Obtener la publicación por ID
+         $publication = Publication::findOrFail($id);
+
+         // Retornar la vista de edición con la publicación
+         return view('post.edit', compact('publication'));
+     }
+
+     // Actualizar la publicación
+     public function update(Request $request, $id)
+     {
+         // Validar los datos del formulario
+         $validated = $request->validate([
+             'title' => 'required|string|max:255',
+             'content' => 'required|string',
+             'categoria' => 'required|string|max:255',
+             'estado' => 'required|in:publicado,borrador,programado',
+             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         ]);
+
+         // Obtener la publicación por ID
+         $publication = Publication::findOrFail($id);
+
+         // Actualizar los campos de la publicación
+         $publication->title = $validated['title'];
+         $publication->content = $validated['content'];
+         $publication->categoria = $validated['categoria'];
+         $publication->estado = $validated['estado'];
+
+         // Si hay una imagen, subirla y actualizar el campo de la imagen
+         if ($request->hasFile('image')) {
+             $imagePath = $request->file('image')->store('public/images');
+             $publication->image = basename($imagePath);
+         }
+
+         // Guardar los cambios
+         $publication->save();
+
+         // Redirigir de vuelta a la lista de publicaciones
+         return redirect()->route('posts.lista')->with('success', 'Publicación actualizada correctamente');
+     }
 }
 

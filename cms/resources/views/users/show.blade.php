@@ -50,24 +50,21 @@
                         </p>
                     </div>
                 </div>
-
-
-
                 <!-- Featured Publications -->
-                <div class="container mx-auto p-8 bg-gray-50 mt-8 rounded-lg shadow-lg">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Publicaciones Destacadas</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @forelse ($user->publications->take(3) as $publication)
-                            <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $publication->title }}</h3>
-                                <p class="text-gray-600">{{ Str::limit($publication->content, 100) }}</p>
-                                <a href="{{ route('publications.show', $publication->idpublications) }}" class="text-blue-600 hover:underline mt-4 block">Leer más</a>
-                            </div>
-                        @empty
-                            <p class="text-gray-500">No hay publicaciones destacadas disponibles.</p>
-                        @endforelse
+                    <div class="container mx-auto p-8 bg-gray-50 mt-8 rounded-lg shadow-lg">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6">Publicaciones Destacadas</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            @forelse ($randomPublications as $publication)
+                                <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $publication->title }}</h3>
+                                    <p class="text-gray-600">{!! $publication->content !!}</p>
+                                    <a href="{{ route('publications.show', $publication->idpublications) }}" class="text-blue-600 hover:underline mt-4 block">Leer más</a>
+                                </div>
+                            @empty
+                                <p class="text-gray-500">No hay publicaciones destacadas disponibles.</p>
+                            @endforelse
+                        </div>
                     </div>
-                </div>
 
                 <!-- Back to List Button -->
                 <div class="container mx-auto mt-8">

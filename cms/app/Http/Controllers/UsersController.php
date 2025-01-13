@@ -66,12 +66,18 @@ class UsersController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
-    // Mostrar usuario específico
-    public function show($id)
-    {
-        $user = User::with(['pages', 'role'])->findOrFail($id); // Cargar también la relación 'role'
-        return view('users.show', compact('user'));
-    }
+
+        // Mostrar usuario específico
+        public function show($id)
+        {
+            $user = User::with(['pages', 'role', 'publications'])->findOrFail($id); // Asegúrate de cargar las publicaciones
+
+            // Obtener 3 publicaciones aleatorias
+            $randomPublications = $user->publications()->inRandomOrder()->take(3)->get();
+
+            return view('users.show', compact('user', 'randomPublications'));
+        }
+
 
         // Mostrar formulario de edición de usuario
         // esto aun no funciona xdddd

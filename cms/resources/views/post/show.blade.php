@@ -56,6 +56,11 @@
                     <p><strong>Publicado por:</strong> {{ $publication->user->first_name }} {{ $publication->user->last_name }}</p>
                 </div>
 
+                <!-- Enlace para editar la publicación -->
+                <div class="mb-6">
+                    <a href="{{ route('posts.edit', $publication->idpublications) }}" class="text-blue-600 hover:underline">Editar publicación</a>
+                </div>
+
                 <!-- Enlace para volver a la lista de publicaciones -->
                 <a href="{{ route('posts.lista') }}" class="text-blue-600 hover:underline">Volver a la lista</a>
             </div>
