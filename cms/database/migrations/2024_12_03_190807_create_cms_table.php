@@ -101,17 +101,92 @@ return new class extends Migration
 
         Schema::create('publications', function (Blueprint $table) {
             $table->id('idpublications');
-            $table->string('title', 45);
-            $table->text('content');
+            $table->string('title', 45)->nullable();
+            $table->text('content')->nullable();
             $table->text('image')->nullable();
-            $table->dateTime('fecha_creacion');  // Cambié 'date' a 'dateTime'
-            $table->dateTime('fecha_publicacion');  // Cambié 'date' a 'dateTime'
-            $table->text('categoria');
-            $table->enum('estado', ['publicado', 'borrador', 'programado']);
+            $table->date('fecha_creacion')->nullable();  // Cambié 'date' a 'dateTime'
+            $table->date('fecha_publicacion')->nullable();  // Cambié 'date' a 'dateTime'
+            $table->text('categoria')->nullable();
+            $table->enum('estado', ['publicado', 'borrador', 'programado'])->nullable();
             $table->foreignId('users_idusers')
                   ->constrained('users', 'idusers')
                   ->onDelete('cascade');
         });
+
+        DB::table('publications')->insert([
+            [
+                'title' => 'Entrenamiento y Preparación para Entrevistas',
+                'content' => 'Preparamos a los candidatos para entrevistas de trabajo mediante simulaciones y asesoramiento personalizado, ayudando a que se presenten de manera más efectiva y segura.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Servicios',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Entrenamiento y Preparación para Entrevistas',
+                'content' => 'Preparamos a los candidatos para entrevistas de trabajo mediante simulaciones y asesoramiento personalizado, ayudando a que se presenten de manera más efectiva y segura.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Servicios',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Conexión con Empleadores Líderes',
+                'content' => 'Facilitamos la conexión entre los mejores talentos y las empresas más destacadas, mejorando el proceso de contratación para ambas partes.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Servicios',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Consultoría en Desarrollo Profesiona',
+                'content' => 'Ayudamos a los candidatos a desarrollar sus habilidades y optimizar su perfil profesional para aumentar sus oportunidades en el mercado laboral.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Servicios',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Nuestra Misión',
+                'content' => 'Facilitar el acceso a oportunidades laborales en Latinoamérica, conectando a los profesionales con empresas innovadoras que buscan talento diverso y calificado.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Sobre Nosotros',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Nuestro Equipo',
+                'content' => 'Un equipo multicultural comprometido con mejorar la búsqueda de empleo en Latinoamérica, brindando asesoría, herramientas y una plataforma confiable para todos.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Sobre Nosotros',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Nuestra Historia',
+                'content' => 'Desde nuestra creación, hemos ayudado a miles de latinoamericanos a encontrar empleo, apoyados por tecnología de punta y una red de empresas que valoran la diversidad.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Sobre Nosotros',
+                'users_idusers' => 1,
+            ],
+            [
+                'title' => 'Nuestros Valores',
+                'content' => 'La integridad, inclusión, innovación y la accesibilidad son los pilares sobre los cuales construimos nuestras soluciones de empleo.',
+                'fecha_creacion' => '2025-01-11',
+                'fecha_publicacion' => '2025-01-11',
+                'estado' => 'publicado',
+                'categoria' => 'Sobre Nosotros',
+                'users_idusers' => 1,
+            ],
+        ]);
 
 
         // Crear tabla de sesiones
