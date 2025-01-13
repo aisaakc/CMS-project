@@ -111,3 +111,8 @@ Route::get('/posts/lista', [PostController::class, 'index'])->name('posts.lista'
 Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('post/{id}', [PostController::class, 'update'])->name('posts.update');
+
+Route::group(['middleware' => ['auth', 'checkRole:1']], function () {
+    Route::resource('pages', PageController::class);
+    Route::resource('users', UserController::class);
+});
