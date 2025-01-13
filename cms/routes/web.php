@@ -111,3 +111,4 @@ Route::get('/posts/lista', [PostController::class, 'index'])->name('posts.lista'
 Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('post/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');

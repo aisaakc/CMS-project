@@ -6,11 +6,17 @@ namespace App\Http\Controllers;
 use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
+
+        if (Auth::user()->roles_idroles !== 1) {
+            return redirect()->route('login')->with('error', 'No tienes permisos para ver las páginas.');
+        }
         // Obtener todos los publicadores (usuarios con el rol Publisher)
         $publishers = User::whereHas('role', function ($query) {
             $query->where('name', 'Publisher');
@@ -97,5 +103,15 @@ class PostController extends Controller
          // Redirigir de vuelta a la lista de publicaciones
          return redirect()->route('posts.lista')->with('success', 'Publicación actualizada correctamente');
      }
-}
+     public function destroy($id)
+     {
+         // Buscar la publicación por ID
+         $publication = Publication::findOrFail($id);
 
+         // Eliminar la publicación
+         $publication->delete();
+
+         // Redirigir a la lista de publicaciones con un mensaje de éxito
+         return redirect()->route('posts.lista')->with('success', 'Publicación eliminada correctamente');
+     }
+}

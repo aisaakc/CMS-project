@@ -144,42 +144,44 @@
 
                         <script>
                             $(document).ready(function () {
-                                // Inicializar Summernote
-                                $('.summernote').summernote({
-                                    height: 300, // Altura del editor
-                                    callbacks: {
-                                        onImageUpload: function (files) {
-                                            if (files.length) {
-                                                uploadImage(files[0]); // Sube la primera imagen seleccionada
-                                            }
-                                        }
-                                    }
-                                });
-                            });
+    // Inicializar Summernote
+    $('.summernote').summernote({
+        height: 300, // Altura del editor
+        callbacks: {
+            onImageUpload: function (files) {
+                if (files.length) {
+                    uploadImage(files[0]); // Subir la primera imagen seleccionada
+                }
+            }
+        }
+    });
 
-                            function uploadImage(file) {
-                                let formData = new FormData();
-                                formData.append('image', file); // El nombre del campo debe coincidir con el backend
+    // Función para subir la imagen
+    function uploadImage(file) {
+        let formData = new FormData();
+        formData.append('image', file); // El nombre del campo debe coincidir con el backend
 
-                                $.ajax({
-                                    url: '{{ route("upload.image") }}', // Ruta a tu controlador de subida
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Protege la solicitud con el token CSRF
-                                    },
-                                    data: formData,
-                                    contentType: false,
-                                    processData: false,
-                                    success: function (response) {
-                                        // Inserta la imagen en el editor usando la URL devuelta
-                                        $('.summernote').summernote('insertImage', response.url);
-                                    },
-                                    error: function (xhr) {
-                                        console.error("Error al subir la imagen:", xhr.responseText);
-                                        alert('Hubo un error al subir la imagen.');
-                                    }
-                                });
-                            }
+        $.ajax({
+            url: '{{ route("upload.image") }}', // Ruta a tu controlador de subida
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Protege la solicitud con el token CSRF
+            },
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                // Insertar la imagen en el editor usando la URL devuelta
+                $('.summernote').summernote('insertImage', response.url);
+            },
+            error: function (xhr) {
+                console.error("Error al subir la imagen:", xhr.responseText);
+                alert('Hubo un error al subir la imagen.');
+            }
+        });
+    }
+});
+
                         </script>
                     </form>
                 </div>

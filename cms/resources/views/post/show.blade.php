@@ -61,6 +61,15 @@
                     <a href="{{ route('posts.edit', $publication->idpublications) }}" class="text-blue-600 hover:underline">Editar publicación</a>
                 </div>
 
+                <!-- Formulario para eliminar la publicación -->
+                <div class="mb-6">
+                    <form action="{{ route('posts.destroy', $publication->idpublications) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:underline">Eliminar publicación</button>
+                    </form>
+                </div>
+
                 <!-- Enlace para volver a la lista de publicaciones -->
                 <a href="{{ route('posts.lista') }}" class="text-blue-600 hover:underline">Volver a la lista</a>
             </div>

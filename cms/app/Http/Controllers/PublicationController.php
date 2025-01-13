@@ -102,16 +102,19 @@ class PublicationController extends Controller
     }
 
     public function uploadImage(Request $request)
-    {
+{
+    // Validar la imagen
+    $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+    // Subir la imagen al directorio 'uploads/images' en storage
+    $path = $request->file('image')->store('uploads/images', 'public');
 
-        $path = $request->file('image')->store('uploads/images', 'public');
+    // Devolver la URL de la imagen subida
+    return response()->json(['url' => asset('storage/' . $path)]);
+}
 
-        return response()->json(['url' => asset('storage/' . $path)]);
-    }
 
     // Método para editar una publicación
 

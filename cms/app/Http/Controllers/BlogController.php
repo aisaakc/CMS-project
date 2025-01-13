@@ -14,11 +14,12 @@ class BlogController extends Controller
         // excluyendo las categorías 'Sobre Nosotros' y 'Servicios',
         // y cuya fecha de publicación sea menor o igual a la fecha actual,
         // sin incluir las publicaciones futuras.
-        $publications = Publication::whereIn('estado', ['publicado', 'programado'])
-            ->whereNotIn('categoria', ['Sobre Nosotros', 'Servicios']) // Excluir categorías específicas
-            ->where('fecha_publicacion', '<=', Carbon::now()) // Filtrar por fecha pasada o actual
-            ->inRandomOrder() // Orden aleatorio
-            ->paginate(6); // Mostrar 6 publicaciones por página
+        $publications = Publication::with('user') // 'user' si también lo necesitas
+        ->whereIn('estado', ['publicado', 'programado'])
+        ->whereNotIn('categoria', ['Sobre Nosotros', 'Servicios'])  // Filtrar según categorías
+        ->where('fecha_publicacion', '<=', Carbon::now())
+        ->inRandomOrder()
+        ->paginate(6);// Mostrar 6 publicaciones por página
 
         return view('cms.Blog', compact('publications'));
     }

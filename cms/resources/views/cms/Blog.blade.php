@@ -1,3 +1,5 @@
+<!-- resources/views/cms/Blog.blade.php -->
+
 <div class="flex flex-col min-h-screen">
     <x-navbar />
 
@@ -20,13 +22,6 @@
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
                             <img src="{{ asset('storage/' . $publication->image) }}" alt="{{ $publication->title }}" class="w-full h-48 object-cover">
                             <div class="p-6">
-                                <!-- Mostrar la categoría de la publicación encima del título -->
-                                @if($publication->category)
-                                    <div class="text-sm font-medium text-indigo-600">
-                                        {{ $publication->category->name }}
-                                    </div>
-                                @endif
-
                                 <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
                                     {{ $publication->title }}
                                 </h2>
@@ -40,19 +35,21 @@
                                     <p>Fecha de publicación: {{ \Carbon\Carbon::parse($publication->fecha_publicacion)->format('d/m/Y') }}</p>
                                 </div>
 
+                                <!-- Mostrar la categoría de la publicación debajo de la fecha -->
+                                @if($publication->categoria) <!-- Este es el campo que contiene la categoría -->
+                                    <div class="text-sm font-medium text-indigo-600 mt-4">
+                                        Categoría: {{ $publication->categoria }}
+                                    </div>
+                                @endif
+
                                 <!-- Botón de "Leer más" -->
-                                <div class="mt-4">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">
-                                        Leer más
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     @empty
                         <!-- Si no hay publicaciones -->
                         <div class="col-span-3 text-center">
                             <p class="text-lg text-gray-600">No hay publicaciones disponibles en este momento.</p>
-                            <p class="text-lg text-gray-600">Fecha actual: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
                         </div>
                     @endforelse
                 </div>
